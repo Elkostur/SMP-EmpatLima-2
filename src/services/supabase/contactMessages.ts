@@ -3,7 +3,7 @@ import type { ContactMessage } from '../../../types'; // Jalur diperbarui
 
 export const getContactMessages = async (): Promise<ContactMessage[]> => {
     const { data, error } = await supabase
-        .from('contact_messages')
+        .from('public.contact_messages')
         .select('*')
         .order('created_at', { ascending: false });
     
@@ -20,7 +20,7 @@ export const getContactMessages = async (): Promise<ContactMessage[]> => {
 
 export const addContactMessage = async (data: Omit<ContactMessage, 'id' | 'createdAt'>): Promise<ContactMessage> => {
     const { data: newItem, error } = await supabase
-        .from('contact_messages')
+        .from('public.contact_messages')
         .insert({
             name: data.name,
             email: data.email,
@@ -43,7 +43,7 @@ export const addContactMessage = async (data: Omit<ContactMessage, 'id' | 'creat
 
 export const deleteContactMessage = async (id: string): Promise<void> => {
     const { error } = await supabase
-        .from('contact_messages')
+        .from('public.contact_messages')
         .delete()
         .eq('id', id);
     

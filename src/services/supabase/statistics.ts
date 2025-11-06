@@ -3,7 +3,7 @@ import type { Statistic } from '../../../types'; // Jalur diperbarui
 
 export const getStatistics = async (): Promise<Statistic[]> => {
     const { data, error } = await supabase
-        .from('statistics')
+        .from('public.statistics')
         .select('*')
         .order('id', { ascending: true });
 
@@ -18,7 +18,7 @@ export const getStatistics = async (): Promise<Statistic[]> => {
 export const updateStatistics = async (updatedStats: Statistic[]): Promise<Statistic[]> => {
     const updates = updatedStats.map(stat =>
         supabase
-            .from('statistics')
+            .from('public.statistics')
             .update({ value: stat.value, label: stat.label })
             .eq('id', stat.id)
             .select()
