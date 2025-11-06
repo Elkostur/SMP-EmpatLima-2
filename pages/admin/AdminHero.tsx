@@ -1,7 +1,6 @@
-
 import React, { useState, useEffect, useCallback } from 'react';
 import type { HeroImage } from '../../types';
-import { getHeroImages, addHeroImage, updateHeroImage, deleteHeroImage, uploadImage } from '../../services/firebase';
+import { getHeroImages, addHeroImage, updateHeroImage, deleteHeroImage, uploadImage } from '../../services/supabase'; // Diperbarui untuk menggunakan Supabase
 import ConfirmationModal from '../../components/ConfirmationModal';
 import useTitle from '../../hooks/useTitle';
 
