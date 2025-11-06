@@ -16,8 +16,19 @@ const AdminContactInfo: React.FC = () => {
     const fetchInfo = useCallback(async () => {
         setIsLoading(true);
         const data = await getContactInfo();
-        setInfo(data);
-        setPreviewUrl(data?.mapImageUrl || null);
+        // Inisialisasi dengan nilai default kosong jika tidak ada data yang ditemukan
+        if (data) {
+            setInfo(data);
+            setPreviewUrl(data.mapImageUrl || null);
+        } else {
+            setInfo({
+                address: '',
+                phone: '',
+                email: '',
+                mapImageUrl: '', // URL gambar default kosong
+            });
+            setPreviewUrl(null);
+        }
         setIsLoading(false);
     }, []);
 
@@ -38,14 +49,14 @@ const AdminContactInfo: React.FC = () => {
     };
     
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        if (!info) return;
+        if (!info) return; // Seharusnya tidak terjadi dengan inisialisasi default
         const { name, value } = e.target;
         setInfo({ ...info, [name]: value });
     };
 
     const handleSave = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (!info) return;
+        if (!info) return; // Seharusnya tidak terjadi dengan inisialisasi default
         
         setIsSaving(true);
         setUploadProgress(0);
@@ -54,21 +65,23 @@ const AdminContactInfo: React.FC = () => {
         if (imageFile) {
             const newImageUrl = await uploadImage(imageFile, setUploadProgress);
             updatedInfo.mapImageUrl = newImageUrl;
+        } else if (!updatedInfo.mapImageUrl) {
+            // Jika tidak ada gambar yang diunggah dan tidak ada gambar yang sudah ada, gunakan placeholder
+            updatedInfo.mapImageUrl = `https://picsum.photos/seed/${Date.now()}/600/400`;
         }
 
         await updateContactInfo(updatedInfo);
         setIsSaving(false);
         alert('Contact info updated successfully!');
-        fetchInfo();
+        fetchInfo(); // Ambil ulang untuk memastikan data terbaru dan hapus imageFile/previewUrl jika diperlukan
     };
 
     if (isLoading) {
         return <p className="dark:text-gray-300">Loading contact info...</p>;
     }
     
-    if (!info) {
-        return <p className="dark:text-gray-300">Could not load content.</p>;
-    }
+    // Formulir akan selalu dirender sekarang, bahkan jika info awalnya null
+    // State `info` akan memiliki nilai default kosong jika tidak ada data yang ditemukan.
 
     return (
         <div>
@@ -77,25 +90,25 @@ const AdminContactInfo: React.FC = () => {
             <form onSubmit={handleSave} className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md space-y-6">
                 <div>
                     <label htmlFor="address" className="block text-gray-700 dark:text-gray-200 font-bold mb-2">Address</label>
-                    <textarea id="address" name="address" value={info.address} onChange={handleInputChange} className="w-full p-2 border rounded h-24 bg-white text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white" />
+                    <textarea id="address" name="address" value={info?.address || ''} onChange={handleInputChange} className="w-full p-2 border rounded h-24 bg-white text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white" />
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                         <label htmlFor="phone" className="block text-gray-700 dark:text-gray-200 font-bold mb-2">Phone</label>
-                        <input id="phone" type="text" name="phone" value={info.phone} onChange={handleInputChange} className="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white" />
+                        <input id="phone" type="text" name="phone" value={info?.phone || ''} onChange={handleInputChange} className="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white" />
                     </div>
                     <div>
                         <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-200 font-bold mb-2">Email</label>
-                        <input id="email" type="email" name="email" value={info.email} onChange={handleInputChange} className="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white" />
+                        <input id="email" type="email" name="email" value={info?.email || ''} onChange={handleInputChange} className="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white" />
                     </div>
                 </div>
                 <div>
                     <label className="block text-gray-700 dark:text-gray-200 font-bold mb-2">Map Location Image</label>
                     <input type="file" accept="image/*" onChange={handleFileChange} className="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100 dark:file:bg-gray-700 dark:file:text-emerald-400 dark:hover:file:bg-gray-600"/>
-                    {previewUrl && (
+                    {(previewUrl || info?.mapImageUrl) && (
                          <div className="mt-4">
                             <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">Image Preview:</p>
-                            <img src={previewUrl} alt="Map Preview" className="w-64 h-auto object-cover rounded-md" />
+                            <img src={previewUrl || info?.mapImageUrl || ''} alt="Map Preview" className="w-64 h-auto object-cover rounded-md" />
                         </div>
                     )}
                 </div>

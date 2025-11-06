@@ -16,8 +16,28 @@ const AdminAboutPage: React.FC = () => {
     const fetchContent = useCallback(async () => {
         setIsLoading(true);
         const data = await getAboutPageContent();
-        setContent(data);
-        setPreviewUrl(data?.principalWelcome.imageUrl || null);
+        if (data) {
+            setContent(data);
+            setPreviewUrl(data.principalWelcome.imageUrl || null);
+        } else {
+            // Konten default jika tidak ada yang ada
+            setContent({
+                vision: '',
+                mission: '',
+                coreValues: [
+                    { title: 'Nilai 1', description: 'Deskripsi nilai 1' },
+                    { title: 'Nilai 2', description: 'Deskripsi nilai 2' },
+                    { title: 'Nilai 3', description: 'Deskripsi nilai 3' },
+                ],
+                principalWelcome: {
+                    text: '',
+                    imageUrl: '',
+                    name: '',
+                    title: '',
+                },
+            });
+            setPreviewUrl(null);
+        }
         setIsLoading(false);
     }, []);
 
@@ -84,6 +104,9 @@ const AdminAboutPage: React.FC = () => {
         if (imageFile) {
             const newImageUrl = await uploadImage(imageFile, setUploadProgress);
             updatedContent.principalWelcome.imageUrl = newImageUrl;
+        } else if (!updatedContent.principalWelcome.imageUrl) {
+            // Jika tidak ada gambar yang diunggah dan tidak ada gambar yang sudah ada, gunakan placeholder
+            updatedContent.principalWelcome.imageUrl = `https://picsum.photos/seed/${Date.now()}/400/400`;
         }
 
         await updateAboutPageContent(updatedContent);
@@ -96,9 +119,8 @@ const AdminAboutPage: React.FC = () => {
         return <p className="dark:text-gray-300">Loading page content...</p>;
     }
     
-    if (!content) {
-        return <p className="dark:text-gray-300">Could not load content.</p>;
-    }
+    // Formulir akan selalu dirender sekarang, bahkan jika content awalnya null
+    // State `content` akan memiliki nilai default kosong jika tidak ada data yang ditemukan.
 
     return (
         <div>
@@ -110,11 +132,11 @@ const AdminAboutPage: React.FC = () => {
                     <h2 className="text-2xl font-semibold mb-4 text-emerald-green dark:text-emerald-400">Visi & Misi</h2>
                     <div>
                         <label className="block text-gray-700 dark:text-gray-200 font-bold mb-2">Visi</label>
-                        <textarea name="vision" value={content.vision} onChange={handleInputChange} className="w-full p-2 border rounded h-24 bg-white text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white" />
+                        <textarea name="vision" value={content?.vision || ''} onChange={handleInputChange} className="w-full p-2 border rounded h-24 bg-white text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white" />
                     </div>
                      <div className="mt-4">
                         <label className="block text-gray-700 dark:text-gray-200 font-bold mb-2">Misi</label>
-                        <textarea name="mission" value={content.mission} onChange={handleInputChange} className="w-full p-2 border rounded h-32 bg-white text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white" />
+                        <textarea name="mission" value={content?.mission || ''} onChange={handleInputChange} className="w-full p-2 border rounded h-32 bg-white text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white" />
                     </div>
                 </div>
 
@@ -123,22 +145,22 @@ const AdminAboutPage: React.FC = () => {
                     <h2 className="text-2xl font-semibold mb-4 text-emerald-green dark:text-emerald-400">Sambutan Kepala Sekolah</h2>
                     <div>
                         <label className="block text-gray-700 dark:text-gray-200 font-bold mb-2">Nama Kepala Sekolah</label>
-                        <input type="text" name="name" value={content.principalWelcome.name} onChange={handlePrincipalChange} className="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white" />
+                        <input type="text" name="name" value={content?.principalWelcome.name || ''} onChange={handlePrincipalChange} className="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white" />
                     </div>
                     <div className="mt-4">
                         <label className="block text-gray-700 dark:text-gray-200 font-bold mb-2">Jabatan</label>
-                        <input type="text" name="title" value={content.principalWelcome.title} onChange={handlePrincipalChange} className="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white" />
+                        <input type="text" name="title" value={content?.principalWelcome.title || ''} onChange={handlePrincipalChange} className="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white" />
                     </div>
                     <div className="mt-4">
                         <label className="block text-gray-700 dark:text-gray-200 font-bold mb-2">Teks Sambutan</label>
-                        <textarea name="text" value={content.principalWelcome.text} onChange={handlePrincipalChange} className="w-full p-2 border rounded h-40 bg-white text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white" />
+                        <textarea name="text" value={content?.principalWelcome.text || ''} onChange={handlePrincipalChange} className="w-full p-2 border rounded h-40 bg-white text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white" />
                     </div>
                     <div className="mt-4">
                         <label className="block text-gray-700 dark:text-gray-200 font-bold mb-2">Foto Kepala Sekolah</label>
                          <input type="file" accept="image/*" onChange={handleFileChange} className="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100 dark:file:bg-gray-700 dark:file:text-emerald-400 dark:hover:file:bg-gray-600"/>
-                        {previewUrl && (
+                        {(previewUrl || content?.principalWelcome.imageUrl) && (
                              <div className="mt-4">
-                                <img src={previewUrl} alt="Image Preview" className="w-32 h-32 object-cover rounded-full" />
+                                <img src={previewUrl || content?.principalWelcome.imageUrl || ''} alt="Image Preview" className="w-32 h-32 object-cover rounded-full" />
                             </div>
                         )}
                     </div>
@@ -148,7 +170,7 @@ const AdminAboutPage: React.FC = () => {
                 <div className="border-b dark:border-gray-700 pb-8">
                      <h2 className="text-2xl font-semibold mb-4 text-emerald-green dark:text-emerald-400">Nilai-Nilai Inti</h2>
                      <div className="space-y-4">
-                        {content.coreValues.map((value, index) => (
+                        {content?.coreValues.map((value, index) => (
                             <div key={index} className="bg-gray-50 dark:bg-gray-700 p-4 rounded-md border dark:border-gray-600 flex flex-col md:flex-row gap-4">
                                 <div className="flex-1">
                                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Title</label>
