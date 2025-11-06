@@ -1,9 +1,8 @@
-
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
-import { getPostById } from '../../services/firebase';
+import { getPostById } from '../../services/supabase'; // Diperbarui untuk menggunakan Supabase
 import type { Post } from '../../types';
 import useTitle from '../../hooks/useTitle';
 

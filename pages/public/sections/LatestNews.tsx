@@ -1,6 +1,5 @@
-
 import React, { useState, useEffect } from 'react';
-import { getPosts } from '../../../services/firebase';
+import { getPosts } from '../../../services/supabase'; // Diperbarui untuk menggunakan Supabase
 import type { Post } from '../../../types';
 import { Link } from 'react-router-dom';
 

@@ -1,7 +1,6 @@
-
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import type { Post } from '../../types';
-import { getPosts, addPost, updatePost, deletePost, uploadImage } from '../../services/firebase';
+import { getPosts, addPost, updatePost, deletePost, uploadImage } from '../../services/supabase'; // Diperbarui untuk menggunakan Supabase
 import ConfirmationModal from '../../components/ConfirmationModal';
 import useTitle from '../../hooks/useTitle';
 
@@ -39,6 +38,7 @@ const PostForm: React.FC<{
         if (imageFile) {
             finalImageUrl = await uploadImage(imageFile, setUploadProgress);
         } else if (!post) {
+            // Jika ini adalah postingan baru dan tidak ada gambar yang diunggah, gunakan placeholder
             finalImageUrl = `https://picsum.photos/seed/${Date.now()}/800/600`;
         }
 
