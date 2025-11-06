@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import App from './App'; // Mengimpor kembali komponen App
 
 const rootElement = document.getElementById('root');
 if (!rootElement) {
@@ -9,6 +10,6 @@ if (!rootElement) {
 const root = ReactDOM.createRoot(rootElement);
 root.render(
   <React.StrictMode>
-    <div>Hello World!</div>
+    <App /> {/* Merender komponen App */}
   </React.StrictMode>
 );
