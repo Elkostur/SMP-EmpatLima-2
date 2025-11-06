@@ -1,7 +1,6 @@
-
 import React, { useState, useEffect, useCallback } from 'react';
 import type { ContactMessage } from '../../types';
-import { getContactMessages, deleteContactMessage } from '../../services/firebase';
+import { getContactMessages, deleteContactMessage } from '../../services/supabase'; // Diperbarui untuk menggunakan Supabase
 import ConfirmationModal from '../../components/ConfirmationModal';
 import useTitle from '../../hooks/useTitle';
 
