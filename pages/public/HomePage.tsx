@@ -180,10 +180,10 @@ const HomePage: React.FC = () => {
       <main className="flex-grow">
         <CarouselHeroSection />
         <PrincipalWelcome />
+        <FacilitiesSection /> {/* Dipindahkan ke sini */}
         <LatestNews />
         <LatestAchievements />
         <GallerySection />
-        <FacilitiesSection />
         <TeamSection />
         <Statistics />
         <FaqSection />
