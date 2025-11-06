@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import ThemeToggle from './ThemeToggle';
@@ -25,7 +24,7 @@ const Header: React.FC = () => {
             <NavLink to="/" end className={({isActive}) => isActive ? `${desktopNavLinkClass} ${desktopActiveNavLinkClass}`: desktopNavLinkClass}>Home</NavLink>
             <NavLink to="/posts" className={({isActive}) => isActive ? `${desktopNavLinkClass} ${desktopActiveNavLinkClass}`: desktopNavLinkClass}>Berita</NavLink>
             <NavLink to="/galleries" className={({isActive}) => isActive ? `${desktopNavLinkClass} ${desktopActiveNavLinkClass}`: desktopNavLinkClass}>Galeri</NavLink>
-            <NavLink to="/staff" className={({isActive}) => isActive ? `${desktopNavLinkClass} ${desktopActiveNavLinkClass}`: desktopNavLinkClass}>Staf</NavLink>
+            <NavLink to="/staff" className={({isActive}) => isActive ? `${desktopNavLinkClass} ${desktopActiveNavLinkClass}`: desktopNavLinkClass}>Guru</NavLink>
             <NavLink to="/extracurriculars" className={({isActive}) => isActive ? `${desktopNavLinkClass} ${desktopActiveNavLinkClass}`: desktopNavLinkClass}>Ekstrakurikuler</NavLink>
             <NavLink to="/achievements" className={({isActive}) => isActive ? `${desktopNavLinkClass} ${desktopActiveNavLinkClass}`: desktopNavLinkClass}>Prestasi</NavLink>
             <NavLink to="/ppdb" className={({isActive}) => isActive ? `${desktopNavLinkClass} ${desktopActiveNavLinkClass}`: desktopNavLinkClass}>PPDB</NavLink>
@@ -53,7 +52,7 @@ const Header: React.FC = () => {
               <NavLink to="/" end className={({isActive}) => isActive ? `${mobileNavLinkClass} ${mobileActiveNavLinkClass}`: mobileNavLinkClass} onClick={() => setIsMobileMenuOpen(false)}>Home</NavLink>
               <NavLink to="/posts" className={({isActive}) => isActive ? `${mobileNavLinkClass} ${mobileActiveNavLinkClass}`: mobileNavLinkClass} onClick={() => setIsMobileMenuOpen(false)}>Berita</NavLink>
               <NavLink to="/galleries" className={({isActive}) => isActive ? `${mobileNavLinkClass} ${mobileActiveNavLinkClass}`: mobileNavLinkClass} onClick={() => setIsMobileMenuOpen(false)}>Galeri</NavLink>
-              <NavLink to="/staff" className={({isActive}) => isActive ? `${mobileNavLinkClass} ${mobileActiveNavLinkClass}`: mobileNavLinkClass} onClick={() => setIsMobileMenuOpen(false)}>Staf</NavLink>
+              <NavLink to="/staff" className={({isActive}) => isActive ? `${mobileNavLinkClass} ${mobileActiveNavLinkClass}`: mobileNavLinkClass} onClick={() => setIsMobileMenuOpen(false)}>Guru</NavLink>
               <NavLink to="/extracurriculars" className={({isActive}) => isActive ? `${mobileNavLinkClass} ${mobileActiveNavLinkClass}`: mobileNavLinkClass} onClick={() => setIsMobileMenuOpen(false)}>Ekstrakurikuler</NavLink>
               <NavLink to="/achievements" className={({isActive}) => isActive ? `${mobileNavLinkClass} ${mobileActiveNavLinkClass}`: mobileNavLinkClass} onClick={() => setIsMobileMenuOpen(false)}>Prestasi</NavLink>
               <NavLink to="/ppdb" className={({isActive}) => isActive ? `${mobileNavLinkClass} ${mobileActiveNavLinkClass}`: mobileNavLinkClass} onClick={() => setIsMobileMenuOpen(false)}>PPDB</NavLink>
