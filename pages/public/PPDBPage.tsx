@@ -1,9 +1,8 @@
-
 import React, { useState } from 'react';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import useTitle from '../../hooks/useTitle';
-import { addRegistration } from '../../services/firebase';
+import { addRegistration } from '../../services/supabase'; // Diperbarui untuk menggunakan Supabase
 
 const RegistrationForm: React.FC = () => {
   const [formData, setFormData] = useState({
