@@ -1,6 +1,9 @@
 export interface User {
   uid: string;
   email: string | null;
+  firstName?: string | null;
+  lastName?: string | null;
+  avatarUrl?: string | null;
 }
 
 export interface Post {

@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useAuth } from '../hooks/useAuth';
 import { useNavigate, Link } from 'react-router-dom';
@@ -20,8 +19,8 @@ const LoginPage: React.FC = () => {
         try {
             await auth.login(email, password);
             navigate('/admin');
-        } catch (err) {
-            setError('Failed to log in. Please check your credentials.');
+        } catch (err: any) {
+            setError(err.message || 'Failed to log in. Please check your credentials.');
             setLoading(false);
         }
     };
