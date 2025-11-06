@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import type { ContactInfo } from '../../types';
-import { getContactInfo, updateContactInfo, uploadImage } from '../../services/supabase'; // Diperbarui untuk menggunakan Supabase
+import { getContactInfo, updateContactInfo } from '../../services/supabase/contactInfo'; // Diperbarui untuk menggunakan Supabase
+import { uploadImage } from '../../services/supabase/storage';
 import useTitle from '../../hooks/useTitle';
 
 const AdminContactInfo: React.FC = () => {
@@ -84,7 +85,7 @@ const AdminContactInfo: React.FC = () => {
                         <input id="phone" type="text" name="phone" value={info.phone} onChange={handleInputChange} className="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white" />
                     </div>
                     <div>
-                        <label htmlFor="email" className="block text-gray-700 dark:text-gray-200 font-bold mb-2">Email</label>
+                        <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-200 font-bold mb-2">Email</label>
                         <input id="email" type="email" name="email" value={info.email} onChange={handleInputChange} className="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white" />
                     </div>
                 </div>

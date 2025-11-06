@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getAchievements } from '../../../services/supabase'; // Diperbarui untuk menggunakan Supabase
+import { getAchievements } from '../../../services/supabase/achievements'; // Diperbarui untuk menggunakan Supabase
 import type { Achievement } from '../../../types';
 import { Link } from 'react-router-dom';
 

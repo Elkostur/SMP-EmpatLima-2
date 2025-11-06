@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import type { StaffMember } from '../../types';
-import { getStaff, addStaffMember, updateStaffMember, deleteStaffMember, uploadImage } from '../../services/supabase'; // Diperbarui untuk menggunakan Supabase
+import { getStaff, addStaffMember, updateStaffMember, deleteStaffMember } from '../../services/supabase/staff'; // Diperbarui untuk menggunakan Supabase
+import { uploadImage } from '../../services/supabase/storage';
 import ConfirmationModal from '../../components/ConfirmationModal';
 import useTitle from '../../hooks/useTitle';
 

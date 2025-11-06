@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getStaff } from '../../../services/supabase'; // Diperbarui untuk menggunakan Supabase
+import { getStaff } from '../../../services/supabase/staff'; // Diperbarui untuk menggunakan Supabase
 import type { StaffMember } from '../../../types';
 import { Link } from 'react-router-dom';
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getFaqs } from '../../../services/supabase'; // Diperbarui untuk menggunakan Supabase
+import { getFaqs } from '../../../services/supabase/faqs'; // Diperbarui untuk menggunakan Supabase
 import type { FaqItem } from '../../../types';
 
 const AccordionItem: React.FC<{

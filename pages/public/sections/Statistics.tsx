@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getStatistics } from '../../../services/supabase'; // Diperbarui untuk menggunakan Supabase
+import { getStatistics } from '../../../services/supabase/statistics'; // Diperbarui untuk menggunakan Supabase
 import type { Statistic } from '../../../types';
 
 const StatItem: React.FC<{ value: string; label: string }> = ({ value, label }) => (

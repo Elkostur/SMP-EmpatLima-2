@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import type { Post } from '../../types';
-import { getPosts, addPost, updatePost, deletePost, uploadImage } from '../../services/supabase'; // Diperbarui untuk menggunakan Supabase
+import { getPosts, addPost, updatePost, deletePost } from '../../services/supabase/posts'; // Diperbarui untuk menggunakan Supabase
+import { uploadImage } from '../../services/supabase/storage';
 import ConfirmationModal from '../../components/ConfirmationModal';
 import useTitle from '../../hooks/useTitle';
 

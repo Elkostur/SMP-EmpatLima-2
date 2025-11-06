@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getGalleries } from '../../../services/supabase'; // Diperbarui untuk menggunakan Supabase
+import { getGalleries } from '../../../services/supabase/galleries'; // Diperbarui untuk menggunakan Supabase
 import type { GalleryItem } from '../../../types';
 import { Link } from 'react-router-dom';
 

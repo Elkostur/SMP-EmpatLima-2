@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
-import { getExtracurriculars } from '../../services/supabase'; // Diperbarui untuk menggunakan Supabase
+import { getExtracurriculars } from '../../services/supabase/extracurriculars'; // Diperbarui untuk menggunakan Supabase
 import type { Extracurricular } from '../../types';
 import useTitle from '../../hooks/useTitle';
 

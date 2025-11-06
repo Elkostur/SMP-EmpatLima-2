@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
-import { getAboutPageContent } from '../../services/supabase'; // Diperbarui untuk menggunakan Supabase
+import { getAboutPageContent } from '../../services/supabase/aboutPageContent'; // Diperbarui untuk menggunakan Supabase
 import type { AboutPageContent } from '../../types';
 import useTitle from '../../hooks/useTitle';
 

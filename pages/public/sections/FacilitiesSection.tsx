@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getFacilities } from '../../../services/supabase'; // Diperbarui untuk menggunakan Supabase
+import { getFacilities } from '../../../services/supabase/facilities'; // Diperbarui untuk menggunakan Supabase
 import type { Facility } from '../../../types';
 
 const FacilityCard: React.FC<{ item: Facility }> = ({ item }) => (

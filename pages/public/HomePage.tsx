@@ -9,7 +9,8 @@ import FacilitiesSection from './sections/FacilitiesSection';
 import FaqSection from './sections/FaqSection';
 import LatestAchievements from './sections/LatestAchievements';
 import { Link } from 'react-router-dom';
-import { getHeroImages, getAboutPageContent } from '../../services/supabase'; // Diperbarui untuk menggunakan Supabase
+import { getHeroImages } from '../../services/supabase/heroImages'; // Diperbarui untuk menggunakan Supabase
+import { getAboutPageContent } from '../../services/supabase/aboutPageContent';
 import type { HeroImage, AboutPageContent } from '../../types';
 import useTitle from '../../hooks/useTitle';
 

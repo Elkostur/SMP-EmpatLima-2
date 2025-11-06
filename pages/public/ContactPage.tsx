@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import useTitle from '../../hooks/useTitle';
-import { addContactMessage, getContactInfo } from '../../services/supabase'; // Diperbarui untuk menggunakan Supabase
+import { addContactMessage } from '../../services/supabase/contactMessages'; // Diperbarui untuk menggunakan Supabase
+import { getContactInfo } from '../../services/supabase/contactInfo';
 import type { ContactInfo } from '../../types';
 
 const ContactForm: React.FC = () => {
