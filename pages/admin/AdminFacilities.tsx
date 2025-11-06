@@ -1,7 +1,6 @@
-
 import React, { useState, useEffect, useCallback } from 'react';
 import type { Facility } from '../../types';
-import { getFacilities, addFacility, updateFacility, deleteFacility, uploadImage } from '../../services/firebase';
+import { getFacilities, addFacility, updateFacility, deleteFacility, uploadImage } from '../../services/supabase'; // Diperbarui untuk menggunakan Supabase
 import ConfirmationModal from '../../components/ConfirmationModal';
 import useTitle from '../../hooks/useTitle';
 
