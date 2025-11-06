@@ -1,7 +1,6 @@
-
 import React, { useState, useEffect, useCallback } from 'react';
 import type { AboutPageContent } from '../../types';
-import { getAboutPageContent, updateAboutPageContent, uploadImage } from '../../services/firebase';
+import { getAboutPageContent, updateAboutPageContent, uploadImage } from '../../services/supabase'; // Diperbarui untuk menggunakan Supabase
 import useTitle from '../../hooks/useTitle';
 
 const AdminAboutPage: React.FC = () => {
@@ -17,7 +16,7 @@ const AdminAboutPage: React.FC = () => {
         setIsLoading(true);
         const data = await getAboutPageContent();
         setContent(data);
-        setPreviewUrl(data.principalWelcome.imageUrl);
+        setPreviewUrl(data?.principalWelcome.imageUrl || null);
         setIsLoading(false);
     }, []);
 

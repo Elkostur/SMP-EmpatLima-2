@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useCallback } from 'react';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
@@ -10,7 +9,7 @@ import FacilitiesSection from './sections/FacilitiesSection';
 import FaqSection from './sections/FaqSection';
 import LatestAchievements from './sections/LatestAchievements';
 import { Link } from 'react-router-dom';
-import { getHeroImages, getAboutPageContent } from '../../services/firebase';
+import { getHeroImages, getAboutPageContent } from '../../services/supabase'; // Diperbarui untuk menggunakan Supabase
 import type { HeroImage, AboutPageContent } from '../../types';
 import useTitle from '../../hooks/useTitle';
 
@@ -99,7 +98,7 @@ const PrincipalWelcome: React.FC = () => {
     const fetchContent = async () => {
       try {
         const data = await getAboutPageContent();
-        setContent(data.principalWelcome);
+        setContent(data?.principalWelcome || null);
       } catch (error) {
         console.error("Failed to fetch principal's welcome content", error);
       } finally {
