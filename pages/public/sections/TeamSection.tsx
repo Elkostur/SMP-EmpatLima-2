@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { getStaff } from '../../../services/supabase/staff'; // Diperbarui untuk menggunakan Supabase
-import type { StaffMember } from '../../../types';
+import { getStaff } from '../../../src/services/supabase/staff';
+import type { StaffMember } from '../../../types'; // Jalur diperbarui
 import { Link } from 'react-router-dom';
 
 const TeamSection: React.FC = () => {

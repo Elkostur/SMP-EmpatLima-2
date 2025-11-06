@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { getAchievements } from '../../../services/supabase/achievements'; // Diperbarui untuk menggunakan Supabase
-import type { Achievement } from '../../../types';
+import { getAchievements } from '../../../src/services/supabase/achievements';
+import type { Achievement } from '../../../types'; // Jalur diperbarui
 import { Link } from 'react-router-dom';
 
 const AchievementCard: React.FC<{ item: Achievement }> = ({ item }) => (
@@ -12,6 +12,7 @@ const AchievementCard: React.FC<{ item: Achievement }> = ({ item }) => (
                  {new Date(item.date).toLocaleDateString('id-ID', { year: 'numeric', month: 'long' })}
             </p>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed">{item.description.substring(0, 100)}...</p>
+            <Link to={`/achievements/${item.id}`} className="text-emerald-green dark:text-emerald-400 font-semibold mt-4 inline-block hover:underline">Read More &rarr;</Link>
         </div>
     </div>
 );
