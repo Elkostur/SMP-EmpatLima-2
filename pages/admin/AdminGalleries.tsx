@@ -1,7 +1,6 @@
-
 import React, { useState, useEffect, useCallback } from 'react';
 import type { GalleryItem } from '../../types';
-import { getGalleries, addGalleryItem, updateGalleryItem, deleteGalleryItem, uploadImage } from '../../services/firebase';
+import { getGalleries, addGalleryItem, updateGalleryItem, deleteGalleryItem, uploadImage } from '../../services/supabase'; // Diperbarui untuk menggunakan Supabase
 import ConfirmationModal from '../../components/ConfirmationModal';
 import useTitle from '../../hooks/useTitle';
 

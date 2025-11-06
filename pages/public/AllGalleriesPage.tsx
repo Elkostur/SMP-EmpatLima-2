@@ -1,8 +1,7 @@
-
 import React, { useState, useEffect } from 'react';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
-import { getGalleries } from '../../services/firebase';
+import { getGalleries } from '../../services/supabase'; // Diperbarui untuk menggunakan Supabase
 import type { GalleryItem } from '../../types';
 import useTitle from '../../hooks/useTitle';
 
