@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import type { Extracurricular } from '../../types';
-import { getExtracurriculars, addExtracurricular, updateExtracurricular, deleteExtracurricular } from '../src/services/supabase/extracurriculars'; // Jalur diperbarui
-import { uploadImage } from '../src/services/supabase/storage'; // Jalur diperbarui
+import { getExtracurriculars, addExtracurricular, updateExtracurricular, deleteExtracurricular } from '../../src/services/supabase/extracurriculars'; // Jalur diperbarui
+import { uploadImage } from '../../src/services/supabase/storage'; // Jalur diperbarui
 import ConfirmationModal from '../../components/ConfirmationModal';
 import useTitle from '../../hooks/useTitle';
 

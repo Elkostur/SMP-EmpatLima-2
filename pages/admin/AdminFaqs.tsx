@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import type { FaqItem } from '../../types';
-import { getFaqs, addFaq, updateFaq, deleteFaq } from '../src/services/supabase/faqs'; // Jalur diperbarui
+import { getFaqs, addFaq, updateFaq, deleteFaq } from '../../src/services/supabase/faqs'; // Jalur diperbarui
 import ConfirmationModal from '../../components/ConfirmationModal';
 import useTitle from '../../hooks/useTitle';
 

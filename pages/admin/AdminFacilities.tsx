@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import type { Facility } from '../../types';
-import { getFacilities, addFacility, updateFacility, deleteFacility } from '../src/services/supabase/facilities'; // Jalur diperbarui
-import { uploadImage } from '../src/services/supabase/storage'; // Jalur diperbarui
+import { getFacilities, addFacility, updateFacility, deleteFacility } from '../../src/services/supabase/facilities'; // Jalur diperbarui
+import { uploadImage } from '../../src/services/supabase/storage'; // Jalur diperbarui
 import ConfirmationModal from '../../components/ConfirmationModal';
 import useTitle from '../../hooks/useTitle';
 

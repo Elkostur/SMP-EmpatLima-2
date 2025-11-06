@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import type { Achievement } from '../../types';
-import { getAchievements, addAchievement, updateAchievement, deleteAchievement } from '../src/services/supabase/achievements'; // Jalur diperbarui
-import { uploadImage } from '../src/services/supabase/storage'; // Jalur diperbarui
+import { getAchievements, addAchievement, updateAchievement, deleteAchievement } from '../../src/services/supabase/achievements'; // Jalur diperbarui
+import { uploadImage } from '../../src/services/supabase/storage'; // Jalur diperbarui
 import ConfirmationModal from '../../components/ConfirmationModal';
 import useTitle from '../../hooks/useTitle';
 

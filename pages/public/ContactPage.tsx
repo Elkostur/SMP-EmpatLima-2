@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import useTitle from '../../hooks/useTitle';
-import { addContactMessage } from '../src/services/supabase/contactMessages'; // Jalur diperbarui
-import { getContactInfo } from '../src/services/supabase/contactInfo'; // Jalur diperbarui
+import { addContactMessage } from '../../src/services/supabase/contactMessages'; // Jalur diperbarui
+import { getContactInfo } from '../../src/services/supabase/contactInfo'; // Jalur diperbarui
 import type { ContactInfo } from '../../types';
 
 const ContactForm: React.FC = () => {

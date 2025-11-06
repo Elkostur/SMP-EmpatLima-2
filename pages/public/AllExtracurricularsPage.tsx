@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
-import { getExtracurriculars } from '../src/services/supabase/extracurriculars'; // Jalur diperbarui
+import { getExtracurriculars } from '../../src/services/supabase/extracurriculars'; // Jalur diperbarui
 import type { Extracurricular } from '../../types';
 import useTitle from '../../hooks/useTitle';
 

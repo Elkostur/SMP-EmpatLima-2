@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import type { HeroImage } from '../../types';
-import { getHeroImages, addHeroImage, updateHeroImage, deleteHeroImage } from '../src/services/supabase/heroImages'; // Jalur diperbarui
-import { uploadImage } from '../src/services/supabase/storage'; // Jalur diperbarui
+import { getHeroImages, addHeroImage, updateHeroImage, deleteHeroImage } from '../../src/services/supabase/heroImages'; // Jalur diperbarui
+import { uploadImage } from '../../src/services/supabase/storage'; // Jalur diperbarui
 import ConfirmationModal from '../../components/ConfirmationModal';
 import useTitle from '../../hooks/useTitle';
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import type { ContactMessage } from '../../types';
-import { getContactMessages, deleteContactMessage } from '../src/services/supabase/contactMessages'; // Jalur diperbarui
+import { getContactMessages, deleteContactMessage } from '../../src/services/supabase/contactMessages'; // Jalur diperbarui
 import ConfirmationModal from '../../components/ConfirmationModal';
 import useTitle from '../../hooks/useTitle';
 

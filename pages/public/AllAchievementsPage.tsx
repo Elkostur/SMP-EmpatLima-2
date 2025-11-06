@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
-import { getAchievements } from '../src/services/supabase/achievements'; // Jalur diperbarui
+import { getAchievements } from '../../src/services/supabase/achievements'; // Jalur diperbarui
 import type { Achievement } from '../../types';
 import useTitle from '../../hooks/useTitle';
 

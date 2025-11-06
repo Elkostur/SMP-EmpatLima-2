@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import type { Statistic } from '../../types';
-import { getStatistics, updateStatistics } from '../src/services/supabase/statistics'; // Jalur diperbarui
+import { getStatistics, updateStatistics } from '../../src/services/supabase/statistics'; // Jalur diperbarui
 import useTitle from '../../hooks/useTitle';
 
 const AdminStatistics: React.FC = () => {
