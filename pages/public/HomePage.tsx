@@ -9,8 +9,8 @@ import FacilitiesSection from './sections/FacilitiesSection';
 import FaqSection from './sections/FaqSection';
 import LatestAchievements from './sections/LatestAchievements';
 import { Link } from 'react-router-dom';
-import { getHeroImages } from '../src/services/supabase/heroImages'; // Jalur diperbarui
-import { getAboutPageContent } from '../src/services/supabase/aboutPageContent'; // Jalur diperbarui
+import { getHeroImages } from '../../src/services/supabase/heroImages'; // Jalur diperbarui
+import { getAboutPageContent } from '../../src/services/supabase/aboutPageContent'; // Jalur diperbarui
 import type { HeroImage, AboutPageContent } from '../../types';
 import useTitle from '../../hooks/useTitle';
 

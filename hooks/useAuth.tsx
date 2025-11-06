@@ -1,6 +1,6 @@
 import React, { createContext, useState, useContext, useEffect, useCallback, type ReactNode } from 'react';
 import type { User } from '../types';
-import { supabase } from './src/integrations/supabase/client'; // Jalur diperbarui
+import { supabase } from '../src/integrations/supabase/client'; // Jalur diperbarui
 
 interface AuthContextType {
   user: User | null;

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { getStatistics } from '../../../src/services/supabase/statistics'; // Jalur diperbarui
-import type { Statistic } from '../../types';
+import { getStatistics } from '../../../src/services/supabase/statistics';
+import type { Statistic } from '../../../types'; // Jalur diperbarui
 
 const StatItem: React.FC<{ value: string; label: string }> = ({ value, label }) => (
     <div className="text-center">

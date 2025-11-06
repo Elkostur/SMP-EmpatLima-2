@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import type { StaffMember } from '../../types';
-import { getStaff, addStaffMember, updateStaffMember, deleteStaffMember } from '../src/services/supabase/staff'; // Jalur diperbarui
-import { uploadImage } from '../src/services/supabase/storage'; // Jalur diperbarui
+import { getStaff, addStaffMember, updateStaffMember, deleteStaffMember } from '../../src/services/supabase/staff'; // Jalur diperbarui
+import { uploadImage } from '../../src/services/supabase/storage'; // Jalur diperbarui
 import ConfirmationModal from '../../components/ConfirmationModal';
 import useTitle from '../../hooks/useTitle';
 

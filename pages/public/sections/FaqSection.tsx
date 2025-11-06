@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { getFaqs } from '../../../src/services/supabase/faqs'; // Jalur diperbarui
-import type { FaqItem } from '../../types';
+import { getFaqs } from '../../../src/services/supabase/faqs';
+import type { FaqItem } from '../../../types'; // Jalur diperbarui
 
 const AccordionItem: React.FC<{
   item: FaqItem;

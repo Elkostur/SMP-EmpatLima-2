@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
-import { getPosts } from '../src/services/supabase/posts'; // Jalur diperbarui
+import { getPosts } from '../../src/services/supabase/posts'; // Jalur diperbarui
 import type { Post } from '../../types';
 import useTitle from '../../hooks/useTitle';
 
