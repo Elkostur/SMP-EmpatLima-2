@@ -10,7 +10,7 @@ const AllGalleriesPage: React.FC = () => {
     const [loading, setLoading] = useState(true);
     const [isLightboxOpen, setIsLightboxOpen] = useState(false);
     const [selectedImageIndex, setSelectedImageIndex] = useState(0);
-    useTitle('Galeri Foto | SMP "Empat Lima" 2 Kedungprin');
+    useTitle('Galeri Foto | SMP "Empat Lima" 2 Kedungpring');
 
     useEffect(() => {
         const fetchItems = async () => {

@@ -92,7 +92,7 @@ const AllStaffPage: React.FC = () => {
     const [principal, setPrincipal] = useState<StaffMember | null>(null);
     const [loading, setLoading] = useState(true);
     const [selectedStaff, setSelectedStaff] = useState<StaffMember | null>(null);
-    useTitle('Staf & Guru | SMP "Empat Lima" 2 Kedungprin');
+    useTitle('Staf & Guru | SMP "Empat Lima" 2 Kedungpring');
 
     useEffect(() => {
         const fetchStaff = async () => {

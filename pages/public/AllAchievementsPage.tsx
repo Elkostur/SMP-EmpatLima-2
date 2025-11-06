@@ -21,7 +21,7 @@ const AchievementCard: React.FC<{ item: Achievement }> = ({ item }) => (
 const AllAchievementsPage: React.FC = () => {
     const [items, setItems] = useState<Achievement[]>([]);
     const [loading, setLoading] = useState(true);
-    useTitle('Prestasi | SMP "Empat Lima" 2 Kedungprin');
+    useTitle('Prestasi | SMP "Empat Lima" 2 Kedungpring');
 
     useEffect(() => {
         const fetchItems = async () => {

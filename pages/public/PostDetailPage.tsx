@@ -11,7 +11,7 @@ const PostDetailPage: React.FC = () => {
     const [loading, setLoading] = useState(true);
     const { postId } = useParams<{ postId: string }>();
     
-    useTitle(post ? `${post.title} | SMP "Empat Lima" 2 Kedungprin` : 'Detail Berita');
+    useTitle(post ? `${post.title} | SMP "Empat Lima" 2 Kedungpring` : 'Detail Berita');
 
     useEffect(() => {
         const fetchPost = async () => {

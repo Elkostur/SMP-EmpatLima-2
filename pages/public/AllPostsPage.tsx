@@ -62,7 +62,7 @@ const AllPostsPage: React.FC = () => {
     const [loading, setLoading] = useState(true);
     const [currentPage, setCurrentPage] = useState(1);
     const [postsPerPage] = useState(6);
-    useTitle('Semua Berita | SMP "Empat Lima" 2 Kedungprin');
+    useTitle('Semua Berita | SMP "Empat Lima" 2 Kedungpring');
 
     useEffect(() => {
         const fetchPosts = async () => {

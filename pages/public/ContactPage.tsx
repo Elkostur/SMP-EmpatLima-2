@@ -130,7 +130,7 @@ const ContactInfoSection: React.FC = () => {
 };
 
 const ContactPage: React.FC = () => {
-    useTitle('Kontak | SMP "Empat Lima" 2 Kedungprin');
+    useTitle('Kontak | SMP "Empat Lima" 2 Kedungpring');
     return (
         <div className="flex flex-col min-h-screen bg-gray-50 dark:bg-black">
             <Header />

@@ -120,7 +120,7 @@ const RegistrationForm: React.FC = () => {
 }
 
 const PPDBPage: React.FC = () => {
-  useTitle('PPDB | SMP "Empat Lima" 2 Kedungprin');
+  useTitle('PPDB | SMP "Empat Lima" 2 Kedungpring');
   return (
     <div className="flex flex-col min-h-screen bg-gray-50 dark:bg-black">
       <Header />

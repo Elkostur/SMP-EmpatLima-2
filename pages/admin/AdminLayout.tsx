@@ -105,7 +105,7 @@ const AdminLayout: React.FC = () => {
                         <Outlet />
                     </main>
                     <footer className="bg-gray-100 dark:bg-black p-4 text-center text-sm text-gray-500 dark:text-gray-400">
-                        © {new Date().getFullYear()} Admin Panel | SMP "Empat Lima" 2 Kedungprin
+                        © {new Date().getFullYear()} Admin Panel | SMP "Empat Lima" 2 Kedungpring
                     </footer>
                 </div>
             </div>

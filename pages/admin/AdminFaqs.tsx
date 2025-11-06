@@ -127,6 +127,9 @@ const AdminFaqs: React.FC = () => {
                             ))}
                         </tbody>
                     </table>
+                     {items.length === 0 && (
+                        <p className="text-center text-gray-500 py-8">No FAQs found.</p>
+                    )}
                 </div>
             )}
             

@@ -8,7 +8,7 @@ import useTitle from '../../hooks/useTitle';
 const AboutPage: React.FC = () => {
   const [content, setContent] = useState<AboutPageContent | null>(null);
   const [loading, setLoading] = useState(true);
-  useTitle('Tentang Kami | SMP "Empat Lima" 2 Kedungprin');
+  useTitle('Tentang Kami | SMP "Empat Lima" 2 Kedungpring');
 
   useEffect(() => {
     const fetchContent = async () => {
@@ -56,7 +56,7 @@ const AboutPage: React.FC = () => {
       <main className="flex-grow">
         <div className="relative bg-emerald-green text-white py-20 text-center">
           <div className="container mx-auto px-6 relative z-10">
-            <h1 className="text-5xl font-extrabold">Tentang SMP "Empat Lima" 2 Kedungprin</h1>
+            <h1 className="text-5xl font-extrabold">Tentang SMP "Empat Lima" 2 Kedungpring</h1>
             <p className="mt-4 text-xl max-w-3xl mx-auto">Membangun masa depan bangsa dengan pondasi iman, ilmu, dan amal.</p>
           </div>
         </div>

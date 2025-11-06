@@ -29,7 +29,7 @@ const Footer: React.FC = () => {
           {/* Section 1: School Name / Branding */}
           <div>
             <h3 className="text-xl font-bold text-emerald-green dark:text-emerald-400 mb-4">
-              SMP "Empat Lima" 2 Kedungprin
+              SMP "Empat Lima" 2 Kedungpring
             </h3>
             <p className="text-gray-400 text-sm">
               Membangun masa depan bangsa dengan pondasi iman, ilmu, dan amal.
@@ -101,7 +101,7 @@ const Footer: React.FC = () => {
 
         {/* Copyright */}
         <div className="text-center text-sm text-gray-500 dark:text-gray-400">
-          <p>&copy; {new Date().getFullYear()} SMP "Empat Lima" 2 Kedungprin. All Rights Reserved.</p>
+          <p>&copy; {new Date().getFullYear()} SMP "Empat Lima" 2 Kedungpring. All Rights Reserved.</p>
           <p className="mt-1">A Modern Scaffolding Project</p>
         </div>
       </div>

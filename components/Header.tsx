@@ -16,7 +16,7 @@ const Header: React.FC = () => {
       <nav className="container mx-auto px-6 py-4">
         <div className="flex justify-between items-center">
           <Link to="/" className="text-xl font-bold text-emerald-green dark:text-emerald-400" onClick={() => setIsMobileMenuOpen(false)}>
-            SMP "Empat Lima" 2 Kedungprin
+            SMP "Empat Lima" 2 Kedungpring
           </Link>
           
           {/* Desktop Nav */}

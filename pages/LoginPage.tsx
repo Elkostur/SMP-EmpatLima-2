@@ -10,7 +10,7 @@ const LoginPage: React.FC = () => {
     const [loading, setLoading] = useState(false);
     const auth = useAuth();
     const navigate = useNavigate();
-    useTitle('Admin Login | SMP "Empat Lima" 2 Kedungprin');
+    useTitle('Admin Login | SMP "Empat Lima" 2 Kedungpring');
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();

@@ -173,7 +173,7 @@ const PrincipalWelcome: React.FC = () => {
 
 
 const HomePage: React.FC = () => {
-  useTitle('Beranda | SMP "Empat Lima" 2 Kedungprin');
+  useTitle('Beranda | SMP "Empat Lima" 2 Kedungpring');
   return (
     <div className="flex flex-col min-h-screen">
       <Header />

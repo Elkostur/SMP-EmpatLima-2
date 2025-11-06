@@ -52,7 +52,7 @@ const AllExtracurricularsPage: React.FC = () => {
     const [items, setItems] = useState<Extracurricular[]>([]);
     const [loading, setLoading] = useState(true);
     const [selectedItem, setSelectedItem] = useState<Extracurricular | null>(null);
-    useTitle('Ekstrakurikuler | SMP "Empat Lima" 2 Kedungprin');
+    useTitle('Ekstrakurikuler | SMP "Empat Lima" 2 Kedungpring');
 
     useEffect(() => {
         const fetchItems = async () => {
