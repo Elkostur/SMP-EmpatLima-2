@@ -1,0 +1,5 @@
+{
+  "name": "SMP-EmpatLima-2",
+  "description": "A full-stack blog scaffolding inspired by Astro, built with React and Tailwind CSS. It includes placeholders for Firebase Firestore and Authentication for a complete backend integration.",
+  "requestFramePermissions": []
+}
