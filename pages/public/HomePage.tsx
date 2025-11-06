@@ -180,12 +180,12 @@ const HomePage: React.FC = () => {
       <main className="flex-grow">
         <CarouselHeroSection />
         <PrincipalWelcome />
-        <FacilitiesSection /> 
+        <FacilitiesSection />
+        <Statistics /> 
+        <TeamSection />
         <LatestNews />
         <LatestAchievements />
         <GallerySection />
-        <TeamSection />
-        <Statistics />
         <FaqSection />
       </main>
       <Footer />
