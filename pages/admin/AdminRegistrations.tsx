@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import type { Registration } from '../../types';
-import { getRegistrations, deleteRegistration } from '../../services/supabase/registrations'; // Diperbarui untuk menggunakan Supabase
+import { getRegistrations, deleteRegistration } from '../src/services/supabase/registrations'; // Jalur diperbarui
 import ConfirmationModal from '../../components/ConfirmationModal';
 import useTitle from '../../hooks/useTitle';
 

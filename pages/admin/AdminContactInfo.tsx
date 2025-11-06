@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import type { ContactInfo } from '../../types';
-import { getContactInfo, updateContactInfo } from '../../services/supabase/contactInfo'; // Diperbarui untuk menggunakan Supabase
-import { uploadImage } from '../../services/supabase/storage';
+import { getContactInfo, updateContactInfo } from '../src/services/supabase/contactInfo'; // Jalur diperbarui
+import { uploadImage } from '../src/services/supabase/storage'; // Jalur diperbarui
 import useTitle from '../../hooks/useTitle';
 
 const AdminContactInfo: React.FC = () => {

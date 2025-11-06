@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
-import { getPostById } from '../../services/supabase/posts'; // Diperbarui untuk menggunakan Supabase
+import { getPostById } from '../src/services/supabase/posts'; // Jalur diperbarui
 import type { Post } from '../../types';
 import useTitle from '../../hooks/useTitle';
 

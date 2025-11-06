@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import type { AboutPageContent } from '../../types';
-import { getAboutPageContent, updateAboutPageContent } from '../../services/supabase/aboutPageContent'; // Diperbarui untuk menggunakan Supabase
-import { uploadImage } from '../../services/supabase/storage';
+import { getAboutPageContent, updateAboutPageContent } from '../src/services/supabase/aboutPageContent'; // Jalur diperbarui
+import { uploadImage } from '../src/services/supabase/storage'; // Jalur diperbarui
 import useTitle from '../../hooks/useTitle';
 
 const AdminAboutPage: React.FC = () => {

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
-import { getStaff } from '../../services/supabase/staff'; // Diperbarui untuk menggunakan Supabase
+import { getStaff } from '../src/services/supabase/staff'; // Jalur diperbarui
 import type { StaffMember } from '../../types';
 import useTitle from '../../hooks/useTitle';
 
