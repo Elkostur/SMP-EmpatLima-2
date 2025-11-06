@@ -182,8 +182,8 @@ const HomePage: React.FC = () => {
         <PrincipalWelcome />
         <FacilitiesSection /> 
         <TeamSection />
-        <LatestNews />
         <LatestAchievements />
+        <LatestNews />
         <GallerySection />
         <Statistics />
         <FaqSection />
