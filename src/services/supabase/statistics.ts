@@ -15,21 +15,31 @@ export const getStatistics = async (): Promise<Statistic[]> => {
     }));
 };
 
-export const updateStatistics = async (updatedStats: Statistic[]): Promise<Statistic[]> => {
-    const updates = updatedStats.map(stat =>
-        supabase
-            .from('statistics')
-            .update({ value: stat.value, label: stat.label })
-            .eq('id', stat.id)
-            .select()
-            .single()
-    );
+export const updateStatistics = async (clientStats: Omit<Statistic, 'id'>[]): Promise<Statistic[]> => {
+    // First, delete all existing statistics
+    const { error: deleteError } = await supabase
+        .from('statistics')
+        .delete()
+        .neq('id', '00000000-0000-0000-0000-000000000000'); // Delete all rows (using a dummy ID to ensure it's not empty)
 
-    const results = await Promise.all(updates);
-    const errors = results.filter(r => r.error).map(r => r.error);
-    if (errors.length > 0) {
-        throw new Error(`Failed to update some statistics: ${errors.map(e => e.message).join(', ')}`);
-    }
+    if (deleteError) throw new Error(`Failed to clear existing statistics: ${deleteError.message}`);
 
-    return getStatistics();
+    // Then, insert all current statistics from the client
+    const insertData = clientStats.map(stat => ({
+        value: stat.value,
+        label: stat.label,
+    }));
+
+    const { data, error: insertError } = await supabase
+        .from('statistics')
+        .insert(insertData)
+        .select('*');
+
+    if (insertError) throw new Error(`Failed to insert new statistics: ${insertError.message}`);
+
+    return data.map(item => ({
+        id: item.id,
+        value: item.value,
+        label: item.label,
+    }));
 };
