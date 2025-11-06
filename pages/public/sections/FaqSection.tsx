@@ -1,6 +1,5 @@
-
 import React, { useState, useEffect } from 'react';
-import { getFaqs } from '../../../services/firebase';
+import { getFaqs } from '../../../services/supabase'; // Diperbarui untuk menggunakan Supabase
 import type { FaqItem } from '../../../types';
 
 const AccordionItem: React.FC<{
