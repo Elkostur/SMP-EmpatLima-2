@@ -4,8 +4,8 @@ import { useNavigate, Link } from 'react-router-dom';
 import useTitle from '../hooks/useTitle';
 
 const LoginPage: React.FC = () => {
-    const [email, setEmail] = useState('admin@example.com');
-    const [password, setPassword] = useState('password');
+    const [email, setEmail] = useState(''); // Mengubah nilai awal menjadi string kosong
+    const [password, setPassword] = useState(''); // Mengubah nilai awal menjadi string kosong
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
     const auth = useAuth();
