@@ -63,7 +63,6 @@ const LoginPage: React.FC = () => {
                             {loading ? 'Signing In...' : 'Sign In'}
                         </button>
                     </div>
-                     <p className="text-center text-xs text-gray-500 mt-4">Use admin@example.com / password</p>
                 </form>
                 <div className="text-center mt-6">
                     <Link to="/" className="text-sm text-emerald-green dark:text-emerald-400 hover:underline">&larr; Back to Home</Link>
