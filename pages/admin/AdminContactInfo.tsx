@@ -1,7 +1,6 @@
-
 import React, { useState, useEffect, useCallback } from 'react';
 import type { ContactInfo } from '../../types';
-import { getContactInfo, updateContactInfo, uploadImage } from '../../services/firebase';
+import { getContactInfo, updateContactInfo, uploadImage } from '../../services/supabase'; // Diperbarui untuk menggunakan Supabase
 import useTitle from '../../hooks/useTitle';
 
 const AdminContactInfo: React.FC = () => {
@@ -17,7 +16,7 @@ const AdminContactInfo: React.FC = () => {
         setIsLoading(true);
         const data = await getContactInfo();
         setInfo(data);
-        setPreviewUrl(data.mapImageUrl);
+        setPreviewUrl(data?.mapImageUrl || null);
         setIsLoading(false);
     }, []);
 
