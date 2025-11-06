@@ -1,6 +1,6 @@
 import { supabase } from '../../integrations/supabase/client';
 import { uploadImage } from './storage';
-import type { Registration } from '../../types';
+import type { Registration } from '../../../types'; // Jalur diperbarui
 
 export const getRegistrations = async (): Promise<Registration[]> => {
     const { data, error } = await supabase

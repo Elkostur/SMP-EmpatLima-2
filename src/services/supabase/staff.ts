@@ -1,5 +1,5 @@
 import { supabase } from '../../integrations/supabase/client';
-import type { StaffMember } from '../../types';
+import type { StaffMember } from '../../../types'; // Jalur diperbarui
 
 export const getStaff = async (): Promise<StaffMember[]> => {
     const { data, error } = await supabase

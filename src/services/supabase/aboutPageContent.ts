@@ -1,5 +1,5 @@
 import { supabase } from '../../integrations/supabase/client';
-import type { AboutPageContent } from '../../types';
+import type { AboutPageContent } from '../../../types'; // Jalur diperbarui
 
 export const getAboutPageContent = async (): Promise<AboutPageContent | null> => {
     const { data, error } = await supabase

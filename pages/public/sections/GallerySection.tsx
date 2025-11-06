@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { getGalleries } from '../../../src/services/supabase/galleries';
-import type { GalleryItem } from '../../../types'; // Jalur diperbarui
+import { getGalleries } from '../../../src/services/supabase/galleries'; // Jalur diperbarui
+import type { GalleryItem } from '../../types';
 import { Link } from 'react-router-dom';
 
 const GallerySection: React.FC = () => {

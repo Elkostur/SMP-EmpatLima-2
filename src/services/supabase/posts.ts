@@ -1,5 +1,5 @@
 import { supabase } from '../../integrations/supabase/client';
-import type { Post } from '../../types';
+import type { Post } from '../../../types'; // Jalur diperbarui
 
 export const getPosts = async (): Promise<Post[]> => {
     const { data, error } = await supabase

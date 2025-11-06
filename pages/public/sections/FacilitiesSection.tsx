@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { getFacilities } from '../../../src/services/supabase/facilities';
-import type { Facility } from '../../../types'; // Jalur diperbarui
+import { getFacilities } from '../../../src/services/supabase/facilities'; // Jalur diperbarui
+import type { Facility } from '../../types';
 
 const FacilityCard: React.FC<{ item: Facility }> = ({ item }) => (
     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 flex flex-col">

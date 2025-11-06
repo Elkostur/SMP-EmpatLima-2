@@ -1,5 +1,5 @@
 import { supabase } from '../../integrations/supabase/client';
-import type { HeroImage } from '../../types';
+import type { HeroImage } from '../../../types'; // Jalur diperbarui
 
 export const getHeroImages = async (): Promise<HeroImage[]> => {
     const { data, error } = await supabase

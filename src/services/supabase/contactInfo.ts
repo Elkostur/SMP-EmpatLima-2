@@ -1,6 +1,6 @@
 import { supabase } from '../../integrations/supabase/client';
 import { uploadImage } from './storage';
-import type { ContactInfo } from '../../types';
+import type { ContactInfo } from '../../../types'; // Jalur diperbarui
 
 export const getContactInfo = async (): Promise<ContactInfo | null> => {
     const { data, error } = await supabase

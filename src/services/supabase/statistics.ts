@@ -1,5 +1,5 @@
 import { supabase } from '../../integrations/supabase/client';
-import type { Statistic } from '../../types';
+import type { Statistic } from '../../../types'; // Jalur diperbarui
 
 export const getStatistics = async (): Promise<Statistic[]> => {
     const { data, error } = await supabase

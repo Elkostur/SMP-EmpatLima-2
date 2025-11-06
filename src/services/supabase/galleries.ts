@@ -1,5 +1,5 @@
 import { supabase } from '../../integrations/supabase/client';
-import type { GalleryItem } from '../../types';
+import type { GalleryItem } from '../../../types'; // Jalur diperbarui
 
 export const getGalleries = async (): Promise<GalleryItem[]> => {
     const { data, error } = await supabase

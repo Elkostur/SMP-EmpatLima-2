@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { getAchievements } from '../../../src/services/supabase/achievements';
-import type { Achievement } from '../../../types'; // Jalur diperbarui
+import { getAchievements } from '../../../src/services/supabase/achievements'; // Jalur diperbarui
+import type { Achievement } from '../../types';
 import { Link } from 'react-router-dom';
 
 const AchievementCard: React.FC<{ item: Achievement }> = ({ item }) => (

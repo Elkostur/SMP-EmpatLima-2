@@ -1,6 +1,6 @@
 import { supabase } from '../../integrations/supabase/client';
 import { uploadImage } from './storage';
-import type { Achievement } from '../../types';
+import type { Achievement } from '../../../types'; // Jalur diperbarui
 
 export const getAchievements = async (): Promise<Achievement[]> => {
     const { data, error } = await supabase

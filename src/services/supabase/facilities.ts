@@ -1,5 +1,5 @@
 import { supabase } from '../../integrations/supabase/client';
-import type { Facility } from '../../types';
+import type { Facility } from '../../../types'; // Jalur diperbarui
 
 export const getFacilities = async (): Promise<Facility[]> => {
     const { data, error } = await supabase

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../hooks/useAuth';
-import { getPosts } from '../../services/supabase/posts'; // Diperbarui untuk menggunakan Supabase
-import { getGalleries } from '../../services/supabase/galleries';
-import { getStaff } from '../../services/supabase/staff';
+import { getPosts } from '../src/services/supabase/posts'; // Jalur diperbarui
+import { getGalleries } from '../src/services/supabase/galleries'; // Jalur diperbarui
+import { getStaff } from '../src/services/supabase/staff'; // Jalur diperbarui
 import useTitle from '../../hooks/useTitle';
 
 const StatCard: React.FC<{ title: string; value: string | number; icon: string; isLoading: boolean }> = ({ title, value, icon, isLoading }) => (

@@ -1,5 +1,5 @@
 import { supabase } from '../../integrations/supabase/client';
-import type { Extracurricular } from '../../types';
+import type { Extracurricular } from '../../../types'; // Jalur diperbarui
 
 export const getExtracurriculars = async (): Promise<Extracurricular[]> => {
     const { data, error } = await supabase

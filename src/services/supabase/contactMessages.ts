@@ -1,5 +1,5 @@
 import { supabase } from '../../integrations/supabase/client';
-import type { ContactMessage } from '../../types';
+import type { ContactMessage } from '../../../types'; // Jalur diperbarui
 
 export const getContactMessages = async (): Promise<ContactMessage[]> => {
     const { data, error } = await supabase

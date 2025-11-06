@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { getStaff } from '../../../src/services/supabase/staff';
-import type { StaffMember } from '../../../types'; // Jalur diperbarui
+import { getStaff } from '../../../src/services/supabase/staff'; // Jalur diperbarui
+import type { StaffMember } from '../../types';
 import { Link } from 'react-router-dom';
 
 const TeamSection: React.FC = () => {

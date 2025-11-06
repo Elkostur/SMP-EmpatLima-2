@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { getPosts } from '../../../src/services/supabase/posts';
-import type { Post } from '../../../types'; // Jalur diperbarui
+import { getPosts } from '../../../src/services/supabase/posts'; // Jalur diperbarui
+import type { Post } from '../../types';
 import { Link } from 'react-router-dom';
 
 const PostCard: React.FC<{ post: Post }> = ({ post }) => (

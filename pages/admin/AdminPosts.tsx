@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import type { Post } from '../../types';
-import { getPosts, addPost, updatePost, deletePost } from '../../services/supabase/posts'; // Diperbarui untuk menggunakan Supabase
-import { uploadImage } from '../../services/supabase/storage';
+import { getPosts, addPost, updatePost, deletePost } from '../src/services/supabase/posts'; // Jalur diperbarui
+import { uploadImage } from '../src/services/supabase/storage'; // Jalur diperbarui
 import ConfirmationModal from '../../components/ConfirmationModal';
 import useTitle from '../../hooks/useTitle';
 
@@ -100,7 +100,6 @@ const AdminPosts: React.FC = () => {
     const [editingPost, setEditingPost] = useState<Post | null>(null);
     const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
     const [itemToDelete, setItemToDelete] = useState<Post | null>(null);
-    const [searchQuery, setSearchQuery] = useState('');
     useTitle('Manage Posts | Admin Panel');
     
     const fetchPosts = useCallback(async () => {

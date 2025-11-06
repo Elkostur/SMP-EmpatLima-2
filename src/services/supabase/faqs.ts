@@ -1,5 +1,5 @@
 import { supabase } from '../../integrations/supabase/client';
-import type { FaqItem } from '../../types';
+import type { FaqItem } from '../../../types'; // Jalur diperbarui
 
 export const getFaqs = async (): Promise<FaqItem[]> => {
     const { data, error } = await supabase
