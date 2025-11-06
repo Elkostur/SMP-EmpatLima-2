@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { HashRouter, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './hooks/useAuth';
@@ -29,6 +28,7 @@ import AdminContactMessages from './pages/admin/AdminContactMessages';
 import AllAchievementsPage from './pages/public/AllAchievementsPage';
 import AdminAchievements from './pages/admin/AdminAchievements';
 import AdminContactInfo from './pages/admin/AdminContactInfo';
+import AdminAddUser from './pages/admin/AdminAddUser'; // Import the new component
 
 function App() {
   return (
@@ -65,6 +65,7 @@ function App() {
               <Route path="registrations" element={<AdminRegistrations />} />
               <Route path="messages" element={<AdminContactMessages />} />
               <Route path="contact-info" element={<AdminContactInfo />} />
+              <Route path="add-user" element={<AdminAddUser />} /> {/* New route for adding admin users */}
             </Route>
           </Routes>
         </HashRouter>

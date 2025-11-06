@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../hooks/useAuth';
 import { Navigate, Outlet, NavLink, useNavigate } from 'react-router-dom';
@@ -55,6 +54,7 @@ const AdminLayout: React.FC = () => {
             <NavLink to="/admin/messages" onClick={() => setSidebarOpen(false)} className={({isActive}) => `${navLinkClasses} ${isActive ? activeNavLinkClasses : ''}`}>Pesan Kontak</NavLink>
             <NavLink to="/admin/contact-info" onClick={() => setSidebarOpen(false)} className={({isActive}) => `${navLinkClasses} ${isActive ? activeNavLinkClasses : ''}`}>Info Kontak</NavLink>
             <NavLink to="/admin/about" onClick={() => setSidebarOpen(false)} className={({isActive}) => `${navLinkClasses} ${isActive ? activeNavLinkClasses : ''}`}>Edit Halaman Tentang</NavLink>
+            <NavLink to="/admin/add-user" onClick={() => setSidebarOpen(false)} className={({isActive}) => `${navLinkClasses} ${isActive ? activeNavLinkClasses : ''}`}>Add Admin User</NavLink> {/* New link */}
         </nav>
         <div className="p-4 border-t border-gray-700">
             <p className="text-sm text-gray-400">Logged in as</p>
