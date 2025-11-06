@@ -4,7 +4,7 @@ import type { ContactInfo } from '../../../types'; // Jalur diperbarui
 
 export const getContactInfo = async (): Promise<ContactInfo | null> => {
     const { data, error } = await supabase
-        .from('public.contact_info')
+        .from('contact_info')
         .select('*')
         .eq('id', 'contact_info_singleton')
         .single();
@@ -25,7 +25,7 @@ export const getContactInfo = async (): Promise<ContactInfo | null> => {
 
 export const updateContactInfo = async (data: Partial<ContactInfo>): Promise<ContactInfo> => {
     const { data: existing, error: fetchError } = await supabase
-        .from('public.contact_info')
+        .from('contact_info')
         .select('id')
         .eq('id', 'contact_info_singleton')
         .single();
@@ -38,7 +38,7 @@ export const updateContactInfo = async (data: Partial<ContactInfo>): Promise<Con
     let result;
     if (existing) {
         const { data: updatedData, error } = await supabase
-            .from('public.contact_info')
+            .from('contact_info')
             .update({
                 address: data.address,
                 phone: data.phone,
@@ -52,7 +52,7 @@ export const updateContactInfo = async (data: Partial<ContactInfo>): Promise<Con
         result = updatedData;
     } else {
         const { data: insertedData, error } = await supabase
-            .from('public.contact_info')
+            .from('contact_info')
             .insert({
                 id: 'contact_info_singleton',
                 address: data.address,
