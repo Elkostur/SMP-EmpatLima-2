@@ -52,17 +52,30 @@ const AdminRegistrations: React.FC = () => {
             'Telepon',
             'Email'
         ];
-        // Map the data to match the headers and ensure correct property names
+        
+        // Explicit mapping from header text to data property key
+        const keyMap: Record<string, keyof Registration | 'createdAt'> = {
+            'Tanggal Pendaftaran': 'createdAt',
+            'Nama Lengkap Siswa': 'fullName',
+            'Tanggal Lahir': 'birthDate',
+            'Asal Sekolah': 'previousSchool',
+            'Nama Orang Tua/Wali': 'parentName',
+            'Telepon': 'phone',
+            'Email': 'email',
+        };
+
+        // Map the data to ensure correct property names are used by exportToCsv
         const dataToExport = registrations.map(reg => ({
-            createdAt: reg.createdAt, // Will be formatted in exportToCsv
+            createdAt: reg.createdAt,
             fullName: reg.fullName,
-            birthDate: reg.birthDate, // Will be formatted in exportToCsv
+            birthDate: reg.birthDate,
             previousSchool: reg.previousSchool,
             parentName: reg.parentName,
             phone: reg.phone,
             email: reg.email,
         }));
-        exportToCsv('PPDB_Registrations', dataToExport, headers);
+        
+        exportToCsv('PPDB_Registrations', dataToExport, headers, keyMap);
     };
 
     return (

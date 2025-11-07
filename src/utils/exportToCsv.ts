@@ -1,4 +1,4 @@
-export const exportToCsv = (filename: string, data: any[], headers: string[]) => {
+export const exportToCsv = (filename: string, data: any[], headers: string[], keyMap: Record<string, string>) => {
   if (!data || data.length === 0) {
     alert('Tidak ada data untuk diekspor.');
     return;
@@ -9,19 +9,18 @@ export const exportToCsv = (filename: string, data: any[], headers: string[]) =>
 
   for (const row of data) {
     const values = headers.map(header => {
-      let value;
+      const key = keyMap[header]; // Use the explicit key from keyMap
+      let value = row[key];
+
       // Special handling for 'Tanggal Pendaftaran' and 'Tanggal Lahir'
-      if (header === 'Tanggal Pendaftaran' && row.createdAt instanceof Date) {
-        value = row.createdAt.toLocaleDateString('id-ID');
-      } else if (header === 'Tanggal Lahir' && row.birthDate) {
-        value = new Date(row.birthDate).toLocaleDateString('id-ID');
-      } else {
-        // Generic mapping for other headers
-        const key = Object.keys(row).find(k => k.toLowerCase().includes(header.toLowerCase().replace(/ /g, '')));
-        value = key ? row[key] : '';
+      if (header === 'Tanggal Pendaftaran' && value instanceof Date) {
+        value = value.toLocaleDateString('id-ID');
+      } else if (header === 'Tanggal Lahir' && value) {
+        value = new Date(value).toLocaleDateString('id-ID');
       }
-      // Escape commas and double quotes for CSV format
-      const stringValue = String(value).replace(/"/g, '""');
+      
+      // Ensure value is not undefined/null and escape commas and double quotes for CSV format
+      const stringValue = String(value || '').replace(/"/g, '""');
       return `"${stringValue}"`;
     });
     csvRows.push(values.join(','));
