@@ -1,5 +1,4 @@
 import { supabase } from '../../integrations/supabase/client';
-// import { uploadDocument } from './storage'; // Removed
 import type { Registration } from '../../../types';
 
 export const getRegistrations = async (): Promise<Registration[]> => {
@@ -18,50 +17,41 @@ export const getRegistrations = async (): Promise<Registration[]> => {
         phone: item.phone,
         email: item.email,
         createdAt: new Date(item.created_at),
-        // documentUrl: item.document_url, // Removed
     }));
 };
 
-export const addRegistration = async (
-    data: Omit<Registration, 'id' | 'createdAt'>,
-    // documentFile?: File | null // Removed
-): Promise<Registration> => {
-    // let documentUrl: string | undefined = undefined;
-    // if (documentFile) {
-    //     // Menggunakan fungsi uploadDocument yang baru dan lebih aman
-    //     documentUrl = await uploadDocument(documentFile); 
-    // }
+// Fungsi addRegistration dihapus karena formulir pendaftaran publik telah dihapus.
+// export const addRegistration = async (
+//     data: Omit<Registration, 'id' | 'createdAt'>,
+// ): Promise<Registration> => {
+//     const { data: { user } } = await supabase.auth.getUser();
 
-    const { data: { user } } = await supabase.auth.getUser();
-
-    const { data: newItem, error } = await supabase
-        .from('registrations')
-        .insert({
-            user_id: user ? user.id : null,
-            full_name: data.fullName,
-            birth_date: data.birthDate,
-            previous_school: data.previousSchool,
-            parent_name: data.parentName,
-            phone: data.phone,
-            email: data.email,
-            // document_url: documentUrl, // Removed
-        })
-        .select()
-        .single();
+//     const { data: newItem, error } = await supabase
+//         .from('registrations')
+//         .insert({
+//             user_id: user ? user.id : null,
+//             full_name: data.fullName,
+//             birth_date: data.birthDate,
+//             previous_school: data.previousSchool,
+//             parent_name: data.parentName,
+//             phone: data.phone,
+//             email: data.email,
+//         })
+//         .select()
+//         .single();
     
-    if (error) throw new Error(error.message);
-    return {
-        id: newItem.id,
-        fullName: newItem.full_name,
-        birthDate: newItem.birth_date,
-        previousSchool: newItem.previous_school,
-        parentName: newItem.parent_name,
-        phone: newItem.phone,
-        email: newItem.email,
-        createdAt: new Date(newItem.created_at),
-        // documentUrl: newItem.document_url, // Removed
-    };
-};
+//     if (error) throw new Error(error.message);
+//     return {
+//         id: newItem.id,
+//         fullName: newItem.full_name,
+//         birthDate: newItem.birth_date,
+//         previousSchool: newItem.previous_school,
+//         parentName: newItem.parent_name,
+//         phone: newItem.phone,
+//         email: newItem.email,
+//         createdAt: new Date(newItem.created_at),
+//     };
+// };
 
 export const deleteRegistration = async (id: string): Promise<void> => {
     const { error } = await supabase
