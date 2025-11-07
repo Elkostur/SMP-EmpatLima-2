@@ -25,7 +25,7 @@ const StaffDetailModal: React.FC<{ member: StaffMember; onClose: () => void; }> 
 
     return (
         <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4 transition-opacity duration-300" onClick={onClose}>
-            <div className="bg-white dark:bg-gray-900 rounded-lg shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto relative" onClick={(e) => e.stopPropagation()}>
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto relative" onClick={(e) => e.stopPropagation()}>
                 <button onClick={onClose} className="absolute top-4 right-4 text-gray-500 hover:text-gray-800 dark:text-gray-400 dark:hover:text-white text-3xl font-bold">&times;</button>
                 
                 <div className="p-8">
@@ -38,7 +38,7 @@ const StaffDetailModal: React.FC<{ member: StaffMember; onClose: () => void; }> 
                         </div>
                     </div>
 
-                    <div className="border-t dark:border-gray-800 pt-6">
+                    <div className="border-t dark:border-gray-700 pt-6">
                         <h3 className="text-xl font-bold mb-4 text-gray-800 dark:text-gray-200">Data Diri</h3>
                         <dl className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4">
                             {member.nuptk && <DetailItem label="NUPTK" value={member.nuptk} />}
@@ -57,7 +57,7 @@ const StaffDetailModal: React.FC<{ member: StaffMember; onClose: () => void; }> 
 
 
 const StaffCard: React.FC<{ member: StaffMember, onClick: () => void }> = ({ member, onClick }) => (
-    <div onClick={onClick} className="bg-white dark:bg-gray-900 rounded-lg shadow-md text-center p-6 transform hover:-translate-y-2 transition-all duration-300 group hover:shadow-xl cursor-pointer">
+    <div onClick={onClick} className="bg-white dark:bg-gray-800 rounded-lg shadow-md text-center p-6 transform hover:-translate-y-2 transition-all duration-300 group hover:shadow-xl cursor-pointer">
         <img src={member.imageUrl} alt={member.name} className="w-32 h-32 rounded-full mx-auto mb-4 object-cover ring-4 ring-gray-200 dark:ring-gray-700 group-hover:ring-emerald-400 transition-all duration-300" />
         <h3 className="text-xl font-bold text-gray-800 dark:text-gray-100">{member.name}</h3>
         <p className="text-emerald-600 dark:text-emerald-400 font-semibold mb-2">{member.position}</p>
@@ -71,7 +71,7 @@ const StaffCard: React.FC<{ member: StaffMember, onClick: () => void }> = ({ mem
 );
 
 const PrincipalCard: React.FC<{ member: StaffMember, onClick: () => void }> = ({ member, onClick }) => (
-    <div onClick={onClick} className="bg-white dark:bg-gray-900 rounded-lg shadow-xl p-8 md:p-12 cursor-pointer hover:shadow-2xl transition-shadow duration-300">
+    <div onClick={onClick} className="bg-white dark:bg-gray-800 rounded-lg shadow-xl p-8 md:p-12 cursor-pointer hover:shadow-2xl transition-shadow duration-300">
         <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
             <img 
                 src={member.imageUrl} 
@@ -119,7 +119,7 @@ const AllStaffPage: React.FC = () => {
         <div className="flex flex-col min-h-screen bg-gray-50 dark:bg-black">
             <Header />
             <main className="flex-grow">
-                <div className="py-16 bg-gray-100 dark:bg-black">
+                <div className="py-16 bg-gray-100 dark:bg-gray-900">
                     <div className="container mx-auto px-6">
                         <div className="text-center mb-16">
                             <h1 className="text-4xl md:text-5xl font-extrabold text-emerald-green dark:text-emerald-400">Tim Pendidik Kami</h1>

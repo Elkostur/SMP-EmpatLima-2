@@ -19,7 +19,7 @@ const ExtracurricularDetailModal: React.FC<{ item: Extracurricular; onClose: () 
 
     return (
         <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4 transition-opacity duration-300" onClick={onClose}>
-            <div className="bg-white dark:bg-gray-900 rounded-lg shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto relative" onClick={(e) => e.stopPropagation()}>
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto relative" onClick={(e) => e.stopPropagation()}>
                 <button onClick={onClose} className="absolute top-4 right-4 text-gray-500 hover:text-gray-800 dark:text-gray-400 dark:hover:text-white text-3xl font-bold">&times;</button>
                 
                 <img src={item.imageUrl} alt={item.name} className="w-full h-64 object-cover rounded-t-lg" />
@@ -35,7 +35,7 @@ const ExtracurricularDetailModal: React.FC<{ item: Extracurricular; onClose: () 
 
 
 const ExtracurricularCard: React.FC<{ item: Extracurricular; onClick: () => void; }> = ({ item, onClick }) => (
-    <div onClick={onClick} className="bg-white dark:bg-gray-900 rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 flex flex-col cursor-pointer group">
+    <div onClick={onClick} className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 flex flex-col cursor-pointer group">
         <div className="relative h-56">
              <img src={item.imageUrl} alt={item.name} className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
@@ -75,7 +75,7 @@ const AllExtracurricularsPage: React.FC = () => {
         <div className="flex flex-col min-h-screen bg-gray-50 dark:bg-black">
             <Header />
             <main className="flex-grow">
-                <div className="py-16 bg-white dark:bg-black">
+                <div className="py-16 bg-white dark:bg-gray-800">
                     <div className="container mx-auto px-6">
                         <h1 className="text-4xl font-bold text-center mb-12 text-emerald-green dark:text-emerald-400">Ekstrakurikuler</h1>
                         {loading ? (

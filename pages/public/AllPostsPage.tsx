@@ -7,7 +7,7 @@ import type { Post } from '../../types';
 import useTitle from '../../hooks/useTitle';
 
 const PostCard: React.FC<{ post: Post }> = ({ post }) => (
-    <div className="bg-white dark:bg-gray-900 rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 flex flex-col">
+    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 flex flex-col">
         <img src={post.imageUrl} alt={post.title} className="w-full h-56 object-cover" loading="lazy" />
         <div className="p-6 flex flex-col flex-grow">
             <h3 className="text-xl font-bold mb-2 text-gray-800 dark:text-gray-100">{post.title}</h3>
@@ -31,7 +31,7 @@ const Pagination: React.FC<{totalPages: number, currentPage: number, onPageChang
             <button
                 onClick={() => onPageChange(currentPage - 1)}
                 disabled={currentPage === 1}
-                className="px-4 py-2 bg-white dark:bg-gray-800 dark:text-gray-200 dark:border-gray-700 border rounded-md disabled:opacity-50 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                className="px-4 py-2 bg-white dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 border rounded-md disabled:opacity-50 hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors"
             >
                 Previous
             </button>
@@ -40,7 +40,7 @@ const Pagination: React.FC<{totalPages: number, currentPage: number, onPageChang
                     <button
                         key={number}
                         onClick={() => onPageChange(number)}
-                        className={`px-4 py-2 border rounded-md transition-colors ${currentPage === number ? 'bg-emerald-green text-white border-emerald-green dark:bg-emerald-500 dark:border-emerald-500' : 'bg-white dark:bg-gray-800 dark:text-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700'}`}
+                        className={`px-4 py-2 border rounded-md transition-colors ${currentPage === number ? 'bg-emerald-green text-white border-emerald-green dark:bg-emerald-500 dark:border-emerald-500' : 'bg-white dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-600'}`}
                     >
                         {number}
                     </button>
@@ -49,7 +49,7 @@ const Pagination: React.FC<{totalPages: number, currentPage: number, onPageChang
             <button
                 onClick={() => onPageChange(currentPage + 1)}
                 disabled={currentPage === totalPages}
-                className="px-4 py-2 bg-white dark:bg-gray-800 dark:text-gray-200 dark:border-gray-700 border rounded-md disabled:opacity-50 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                className="px-4 py-2 bg-white dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 border rounded-md disabled:opacity-50 hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors"
             >
                 Next
             </button>
@@ -88,7 +88,7 @@ const AllPostsPage: React.FC = () => {
         <div className="flex flex-col min-h-screen bg-gray-50 dark:bg-black">
             <Header />
             <main className="flex-grow">
-                <div className="py-16 bg-white dark:bg-black">
+                <div className="py-16 bg-white dark:bg-gray-800">
                     <div className="container mx-auto px-6">
                         <h1 className="text-4xl font-bold text-center mb-12 text-emerald-green dark:text-emerald-400">Semua Berita</h1>
                         {loading ? (

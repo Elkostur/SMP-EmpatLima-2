@@ -8,7 +8,7 @@ const AccordionItem: React.FC<{
   onClick: () => void;
 }> = ({ item, isOpen, onClick }) => {
   return (
-    <div className="border-b border-gray-200 dark:border-gray-800">
+    <div className="border-b border-gray-200 dark:border-gray-700">
       <button
         onClick={onClick}
         className="w-full flex justify-between items-center text-left py-5 px-6 focus:outline-none"
@@ -53,13 +53,13 @@ const FaqSection: React.FC = () => {
     };
 
     return (
-        <section id="faq" className="py-16 bg-white dark:bg-black">
+        <section id="faq" className="py-16 bg-white dark:bg-gray-800">
             <div className="container mx-auto px-6">
                 <h2 className="text-3xl font-bold text-center mb-10 text-gray-800 dark:text-gray-100">Frequently Asked Questions</h2>
                 {loading ? (
                     <p className="text-center dark:text-gray-300">Loading FAQs...</p>
                 ) : (
-                    <div className="max-w-3xl mx-auto bg-white dark:bg-gray-900 rounded-lg shadow-md">
+                    <div className="max-w-3xl mx-auto bg-white dark:bg-gray-900/50 rounded-lg shadow-md">
                         {items.map((item, index) => (
                             <AccordionItem 
                                 key={item.id}
