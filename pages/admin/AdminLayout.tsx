@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../hooks/useAuth';
 import { Navigate, Outlet, NavLink, useNavigate } from 'react-router-dom';
+import { AdminUIProvider } from '../../src/hooks/useAdminUI'; // Import AdminUIProvider
 
 const AdminLayout: React.FC = () => {
     const { user, isLoading, logout } = useAuth();
@@ -67,7 +68,7 @@ const AdminLayout: React.FC = () => {
     );
 
     return (
-        <div className="relative min-h-screen md:flex bg-gray-100 dark:bg-black">
+        <div className="relative min-h-screen md:flex bg-gray-100 dark:bg-gray-900"> {/* Changed dark:bg-black to dark:bg-gray-900 */}
             {/* Mobile overlay */}
             {sidebarOpen && (
                 <div 
@@ -102,9 +103,11 @@ const AdminLayout: React.FC = () => {
                 
                 <div className="flex-1 flex flex-col">
                     <main className="flex-1 p-4 md:p-8 overflow-y-auto">
-                        <Outlet />
+                        <AdminUIProvider> {/* Wrap Outlet with AdminUIProvider */}
+                            <Outlet />
+                        </AdminUIProvider>
                     </main>
-                    <footer className="bg-gray-100 dark:bg-black p-4 text-center text-sm text-gray-500 dark:text-gray-400">
+                    <footer className="bg-gray-100 dark:bg-gray-900 p-4 text-center text-sm text-gray-500 dark:text-gray-400"> {/* Changed dark:bg-black to dark:bg-gray-900 */}
                         © {new Date().getFullYear()} Admin Panel | SMP "Empat Lima" 2 Kedungpring
                     </footer>
                 </div>
