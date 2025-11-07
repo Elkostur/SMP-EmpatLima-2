@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { getGalleries } from '../../../src/services/supabase/galleries';
-import type { GalleryItem } from '../../../types'; // Jalur diperbarui
+import type { GalleryItem } from '../../../types';
 import { Link } from 'react-router-dom';
 
 const GallerySection: React.FC = () => {
@@ -35,7 +35,7 @@ const GallerySection: React.FC = () => {
                     className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-12"
                 >
                     {items.map((item, index) => (
-                        <div key={item.id} className={`overflow-hidden rounded-lg shadow-md ${index === 0 ? 'col-span-2 row-span-2' : ''}`}>
+                        <div key={item.id} className={`overflow-hidden rounded-lg shadow-md transform active:scale-[0.98] active:shadow-xl transition-all duration-300 ${index === 0 ? 'col-span-2 row-span-2' : ''}`}>
                             <img src={item.imageUrl} alt={item.title} className="w-full h-full object-cover transform hover:scale-110 transition-transform duration-500" />
                         </div>
                     ))}

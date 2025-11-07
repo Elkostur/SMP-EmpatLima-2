@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
-import { getExtracurriculars } from '../../src/services/supabase/extracurriculars'; // Jalur diperbarui
+import { getExtracurriculars } from '../../src/services/supabase/extracurriculars';
 import type { Extracurricular } from '../../types';
 import useTitle from '../../hooks/useTitle';
 
@@ -35,7 +35,7 @@ const ExtracurricularDetailModal: React.FC<{ item: Extracurricular; onClose: () 
 
 
 const ExtracurricularCard: React.FC<{ item: Extracurricular; onClick: () => void; }> = ({ item, onClick }) => (
-    <div onClick={onClick} className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 flex flex-col cursor-pointer group">
+    <div onClick={onClick} className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 active:scale-[0.98] active:shadow-2xl transition-transform duration-300 flex flex-col cursor-pointer group">
         <div className="relative h-56">
              <img src={item.imageUrl} alt={item.name} className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>

@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { getPosts } from '../../../src/services/supabase/posts';
-import type { Post } from '../../../types'; // Jalur diperbarui
+import type { Post } from '../../../types';
 import { Link } from 'react-router-dom';
 
 const PostCard: React.FC<{ post: Post }> = ({ post }) => (
-    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
+    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 active:scale-[0.98] active:shadow-2xl transition-transform duration-300">
         <img src={post.imageUrl} alt={post.title} className="w-full h-48 object-cover" loading="lazy" />
         <div className="p-6">
             <h3 className="text-xl font-bold mb-2 text-gray-800 dark:text-gray-100">{post.title}</h3>

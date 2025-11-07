@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { getFacilities } from '../../../src/services/supabase/facilities';
-import type { Facility } from '../../../types'; // Jalur diperbarui
+import type { Facility } from '../../../types';
 
 const FacilityCard: React.FC<{ item: Facility }> = ({ item }) => (
-    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 flex flex-col">
+    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 active:scale-[0.98] active:shadow-2xl transition-transform duration-300 flex flex-col">
         <div className="relative h-56">
             <img src={item.imageUrl} alt={item.name} className="w-full h-full object-cover" />
         </div>

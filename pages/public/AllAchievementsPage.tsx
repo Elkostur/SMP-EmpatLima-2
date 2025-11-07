@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
-import { getAchievements } from '../../src/services/supabase/achievements'; // Jalur diperbarui
+import { getAchievements } from '../../src/services/supabase/achievements';
 import type { Achievement } from '../../types';
 import useTitle from '../../hooks/useTitle';
 
 const AchievementCard: React.FC<{ item: Achievement }> = ({ item }) => (
-    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 flex flex-col">
+    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 active:scale-[0.98] active:shadow-2xl transition-transform duration-300 flex flex-col">
         {item.imageUrl && <img src={item.imageUrl} alt={item.title} className="w-full h-56 object-cover" loading="lazy" />}
         <div className="p-6 flex flex-col flex-grow">
             <h3 className="text-xl font-bold mb-2 text-gray-800 dark:text-gray-100">{item.title}</h3>

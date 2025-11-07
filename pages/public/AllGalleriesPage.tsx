@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
-import { getGalleries } from '../../src/services/supabase/galleries'; // Jalur diperbarui
+import { getGalleries } from '../../src/services/supabase/galleries';
 import type { GalleryItem } from '../../types';
 import useTitle from '../../hooks/useTitle';
 
@@ -57,7 +57,7 @@ const AllGalleriesPage: React.FC = () => {
                         ) : (
                         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                             {items.map((item, index) => (
-                                <div key={item.id} onClick={() => openLightbox(index)} className="group cursor-pointer relative overflow-hidden rounded-lg shadow-md aspect-w-1 aspect-h-1">
+                                <div key={item.id} onClick={() => openLightbox(index)} className="group cursor-pointer relative overflow-hidden rounded-lg shadow-md aspect-w-1 aspect-h-1 transform active:scale-[0.98] active:shadow-xl transition-all duration-300">
                                     <img src={item.imageUrl} alt={item.title} className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500" />
                                      <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-all duration-300 flex items-end p-4">
                                         <h3 className="text-white text-lg font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-300">{item.title}</h3>

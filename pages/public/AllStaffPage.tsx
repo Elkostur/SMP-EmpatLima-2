@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
-import { getStaff } from '../../src/services/supabase/staff'; // Jalur diperbarui
+import { getStaff } from '../../src/services/supabase/staff';
 import type { StaffMember } from '../../types';
 import useTitle from '../../hooks/useTitle';
 
@@ -57,7 +57,7 @@ const StaffDetailModal: React.FC<{ member: StaffMember; onClose: () => void; }> 
 
 
 const StaffCard: React.FC<{ member: StaffMember, onClick: () => void }> = ({ member, onClick }) => (
-    <div onClick={onClick} className="bg-white dark:bg-gray-800 rounded-lg shadow-md text-center p-6 transform hover:-translate-y-2 transition-all duration-300 group hover:shadow-xl cursor-pointer">
+    <div onClick={onClick} className="bg-white dark:bg-gray-800 rounded-lg shadow-md text-center p-6 transform hover:-translate-y-2 active:scale-[0.98] active:shadow-2xl transition-all duration-300 group hover:shadow-xl cursor-pointer">
         <img src={member.imageUrl} alt={member.name} className="w-32 h-32 rounded-full mx-auto mb-4 object-cover ring-4 ring-gray-200 dark:ring-gray-700 group-hover:ring-emerald-400 transition-all duration-300" />
         <h3 className="text-xl font-bold text-gray-800 dark:text-gray-100">{member.name}</h3>
         <p className="text-emerald-600 dark:text-emerald-400 font-semibold mb-2">{member.position}</p>
@@ -71,7 +71,7 @@ const StaffCard: React.FC<{ member: StaffMember, onClick: () => void }> = ({ mem
 );
 
 const PrincipalCard: React.FC<{ member: StaffMember, onClick: () => void }> = ({ member, onClick }) => (
-    <div onClick={onClick} className="bg-white dark:bg-gray-800 rounded-lg shadow-xl p-8 md:p-12 cursor-pointer hover:shadow-2xl transition-shadow duration-300">
+    <div onClick={onClick} className="bg-white dark:bg-gray-800 rounded-lg shadow-xl p-8 md:p-12 cursor-pointer hover:shadow-2xl active:scale-[0.99] active:shadow-3xl transition-all duration-300">
         <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
             <img 
                 src={member.imageUrl} 
