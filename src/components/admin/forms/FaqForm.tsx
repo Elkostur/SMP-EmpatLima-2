@@ -34,7 +34,7 @@ const FaqForm: React.FC<FaqFormProps> = ({ item, onSave, onCancel, onDataChange 
         const faqData = { question, answer };
         let savedItem: FaqItem;
 
-        if (item) {
+        if (item && item.id) { // Changed condition: check for item.id
             savedItem = await updateFaq(item.id, faqData);
         } else {
             savedItem = await addFaq(faqData);
@@ -47,7 +47,7 @@ const FaqForm: React.FC<FaqFormProps> = ({ item, onSave, onCancel, onDataChange 
     return (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
             <div className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-xl w-full max-w-2xl">
-                <h2 className="text-2xl font-bold mb-6 text-gray-800 dark:text-gray-100">{item ? 'Edit FAQ' : 'Create New FAQ'}</h2>
+                <h2 className="text-2xl font-bold mb-6 text-gray-800 dark:text-gray-100">{item && item.id ? 'Edit FAQ' : 'Create New FAQ'}</h2>
                 <form onSubmit={handleSubmit}>
                     <div className="mb-4">
                         <label className="block text-gray-700 dark:text-gray-200 font-bold mb-2">Question</label>

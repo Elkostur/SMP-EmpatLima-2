@@ -60,14 +60,14 @@ const AchievementForm: React.FC<AchievementFormProps> = ({ item, onSave, onCance
 
         if (imageFile) {
             finalImageUrl = await uploadImage(imageFile, setUploadProgress);
-        } else if (!item) {
+        } else if (!item?.id) { // Changed condition: check for item.id
             finalImageUrl = `https://picsum.photos/seed/${Date.now()}/800/600`;
         }
 
         const achievementData = { title, description, date, imageUrl: finalImageUrl };
         let savedItem: Achievement;
 
-        if (item) {
+        if (item && item.id) { // Changed condition: check for item.id
             savedItem = await updateAchievement(item.id, achievementData);
         } else {
             savedItem = await addAchievement(achievementData);
@@ -80,7 +80,7 @@ const AchievementForm: React.FC<AchievementFormProps> = ({ item, onSave, onCance
     return (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
             <div className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-xl w-full max-w-2xl max-h-full overflow-y-auto">
-                <h2 className="text-2xl font-bold mb-6">{item ? 'Edit Achievement' : 'Create New Achievement'}</h2>
+                <h2 className="text-2xl font-bold mb-6">{item && item.id ? 'Edit Achievement' : 'Create New Achievement'}</h2>
                 <form onSubmit={handleSubmit}>
                     <div className="space-y-4">
                         <div>

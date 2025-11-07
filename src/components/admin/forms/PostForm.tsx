@@ -53,7 +53,7 @@ const PostForm: React.FC<PostFormProps> = ({ item, onSave, onCancel, onDataChang
 
         if (imageFile) {
             finalImageUrl = await uploadImage(imageFile, setUploadProgress);
-        } else if (!item) {
+        } else if (!item?.id) { // Changed condition: check for item.id
             // Jika ini adalah postingan baru dan tidak ada gambar yang diunggah, gunakan placeholder
             finalImageUrl = `https://picsum.photos/seed/${Date.now()}/800/600`;
         }
@@ -61,7 +61,7 @@ const PostForm: React.FC<PostFormProps> = ({ item, onSave, onCancel, onDataChang
         const postData = { title, content, imageUrl: finalImageUrl };
         let savedItem: Post;
 
-        if (item) {
+        if (item && item.id) { // Changed condition: check for item.id
             savedItem = await updatePost(item.id, postData);
         } else {
             savedItem = await addPost(postData as Omit<Post, 'id' | 'createdAt'>);
@@ -74,7 +74,7 @@ const PostForm: React.FC<PostFormProps> = ({ item, onSave, onCancel, onDataChang
     return (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
             <div className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-xl w-full max-w-2xl max-h-full overflow-y-auto">
-                <h2 className="text-2xl font-bold mb-6">{item ? 'Edit Post' : 'Create New Post'}</h2>
+                <h2 className="text-2xl font-bold mb-6">{item && item.id ? 'Edit Post' : 'Create New Post'}</h2>
                 <form onSubmit={handleSubmit}>
                     <div className="space-y-6">
                         <div>

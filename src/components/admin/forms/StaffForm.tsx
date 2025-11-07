@@ -95,14 +95,14 @@ const StaffForm: React.FC<StaffFormProps> = ({ item, onSave, onCancel, onDataCha
 
         if (imageFile) {
             finalImageUrl = await uploadImage(imageFile, setUploadProgress);
-        } else if (!item) {
+        } else if (!item?.id) { // Changed condition: check for item.id
             finalImageUrl = `https://picsum.photos/seed/${Date.now()}/400/400`;
         }
 
         const staffData = { name, position, bio, nuptk, address, religion, email, phone, imageUrl: finalImageUrl || '' };
         let savedItem: StaffMember;
 
-        if (item) {
+        if (item && item.id) { // Changed condition: check for item.id
             savedItem = await updateStaffMember(item.id, staffData);
         } else {
             savedItem = await addStaffMember(staffData);
@@ -115,7 +115,7 @@ const StaffForm: React.FC<StaffFormProps> = ({ item, onSave, onCancel, onDataCha
     return (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
             <div className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-xl w-full max-w-2xl max-h-full overflow-y-auto">
-                <h2 className="text-2xl font-bold mb-6 text-gray-800 dark:text-gray-100">{item ? 'Edit Staff Member' : 'Add New Staff'}</h2>
+                <h2 className="text-2xl font-bold mb-6 text-gray-800 dark:text-gray-100">{item && item.id ? 'Edit Staff Member' : 'Add New Staff'}</h2>
                 <form onSubmit={handleSubmit}>
                     <div className="space-y-4">
                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

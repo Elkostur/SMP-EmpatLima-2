@@ -46,14 +46,14 @@ const GalleryForm: React.FC<GalleryFormProps> = ({ item, onSave, onCancel, onDat
 
         if (imageFile) {
             finalImageUrl = await uploadImage(imageFile, setUploadProgress);
-        } else if (!item) {
+        } else if (!item?.id) { // Changed condition: check for item.id
             finalImageUrl = `https://picsum.photos/seed/${Date.now()}/600/400`;
         }
 
         const galleryData = { title, imageUrl: finalImageUrl };
         let savedItem: GalleryItem;
 
-        if (item) {
+        if (item && item.id) { // Changed condition: check for item.id
             savedItem = await updateGalleryItem(item.id, galleryData);
         } else {
             savedItem = await addGalleryItem(galleryData as Omit<GalleryItem, 'id' | 'createdAt'>);
@@ -66,7 +66,7 @@ const GalleryForm: React.FC<GalleryFormProps> = ({ item, onSave, onCancel, onDat
     return (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
             <div className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-xl w-full max-w-lg">
-                <h2 className="text-2xl font-bold mb-6 text-gray-800 dark:text-gray-100">{item ? 'Edit Gallery Item' : 'Add New Item'}</h2>
+                <h2 className="text-2xl font-bold mb-6 text-gray-800 dark:text-gray-100">{item && item.id ? 'Edit Gallery Item' : 'Add New Item'}</h2>
                 <form onSubmit={handleSubmit}>
                     <div className="mb-4">
                         <label className="block text-gray-700 dark:text-gray-200 font-bold mb-2">Title</label>

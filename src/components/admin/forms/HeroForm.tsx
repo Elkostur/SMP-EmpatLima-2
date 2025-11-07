@@ -53,14 +53,14 @@ const HeroForm: React.FC<HeroFormProps> = ({ item, onSave, onCancel, onDataChang
 
         if (imageFile) {
             finalImageUrl = await uploadImage(imageFile, setUploadProgress);
-        } else if (!item) {
+        } else if (!item?.id) { // Changed condition: check for item.id
             finalImageUrl = `https://picsum.photos/seed/${Date.now()}/1920/1080`;
         }
 
         const heroData = { title, subtitle, imageUrl: finalImageUrl };
         let savedItem: HeroImage;
 
-        if (item) {
+        if (item && item.id) { // Changed condition: check for item.id
             savedItem = await updateHeroImage(item.id, heroData);
         } else {
             savedItem = await addHeroImage(heroData as Omit<HeroImage, 'id'>);
@@ -73,7 +73,7 @@ const HeroForm: React.FC<HeroFormProps> = ({ item, onSave, onCancel, onDataChang
     return (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
             <div className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-xl w-full max-w-2xl max-h-full overflow-y-auto">
-                <h2 className="text-2xl font-bold mb-6 text-gray-800 dark:text-gray-100">{item ? 'Edit Hero Image' : 'Add New Hero Image'}</h2>
+                <h2 className="text-2xl font-bold mb-6 text-gray-800 dark:text-gray-100">{item && item.id ? 'Edit Hero Image' : 'Add New Hero Image'}</h2>
                 <form onSubmit={handleSubmit}>
                     <div className="space-y-4">
                         <div>
