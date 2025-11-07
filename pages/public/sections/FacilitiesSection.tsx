@@ -39,7 +39,7 @@ const FacilitiesSection: React.FC = () => {
         <section 
             ref={sectionRef}
             id="facilities" 
-            className={`py-16 bg-gray-100 dark:bg-gray-900 transition-all duration-700 ease-out opacity-0 ${isVisible ? 'animate-fadeInUp' : ''}`}
+            className={`py-16 bg-gray-100 dark:bg-gray-900 transition-all duration-700 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}
         >
             <div className="container mx-auto px-6">
                 <h2 className="text-3xl font-bold text-center mb-10 text-gray-800 dark:text-gray-100">Fasilitas Sekolah</h2>
