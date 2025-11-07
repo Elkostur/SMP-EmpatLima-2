@@ -7,7 +7,10 @@ export const getContactMessages = async (): Promise<ContactMessage[]> => {
         .select('*')
         .order('created_at', { ascending: false });
     
-    if (error) throw new Error(error.message);
+    if (error) {
+        console.error("Error fetching contact messages:", error);
+        throw new Error(error.message);
+    }
     return data.map(item => ({
         id: item.id,
         name: item.name,
@@ -30,7 +33,10 @@ export const addContactMessage = async (data: Omit<ContactMessage, 'id' | 'creat
         .select()
         .single();
     
-    if (error) throw new Error(error.message);
+    if (error) {
+        console.error("Supabase error adding contact message:", error); // Logging kesalahan Supabase yang lebih detail
+        throw new Error(error.message);
+    }
     return {
         id: newItem.id,
         name: newItem.name,
@@ -47,5 +53,8 @@ export const deleteContactMessage = async (id: string): Promise<void> => {
         .delete()
         .eq('id', id);
     
-    if (error) throw new Error(error.message);
+    if (error) {
+        console.error("Error deleting contact message:", error);
+        throw new Error(error.message);
+    }
 };

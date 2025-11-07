@@ -31,9 +31,9 @@ const ContactForm: React.FC = () => {
       setFormData({
         name: '', email: '', subject: '', message: ''
       });
-    } catch (err) {
-      setError('Gagal mengirim pesan. Silakan coba lagi.');
-      console.error(err);
+    } catch (err: any) {
+      setError(`Gagal mengirim pesan: ${err.message || 'Terjadi kesalahan tidak dikenal.'}`); // Pesan kesalahan yang lebih spesifik
+      console.error("Error submitting contact form:", err); // Logging kesalahan untuk debugging
     } finally {
       setLoading(false);
     }
