@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { getGalleries } = from '../../../src/services/supabase/galleries';
+import { getGalleries } from '../../../src/services/supabase/galleries';
 import type { GalleryItem } from '../../../types'; // Jalur diperbarui
 import { Link } from 'react-router-dom';
 import useIntersectionObserver from '../../../src/hooks/useIntersectionObserver'; // Import hook
