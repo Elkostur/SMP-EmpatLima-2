@@ -4,6 +4,7 @@ import { getStaff, deleteStaffMember } from '../../src/services/supabase/staff';
 import ConfirmationModal from '../../components/ConfirmationModal';
 import useTitle from '../../hooks/useTitle';
 import { useAdminUI } from '../../src/hooks/useAdminUI'; // Import useAdminUI
+import SkeletonTable from '../../src/components/admin/SkeletonTable'; // Import SkeletonTable
 
 const AdminStaff: React.FC = () => {
     const [staff, setStaff] = useState<StaffMember[]>([]);
@@ -27,7 +28,7 @@ const AdminStaff: React.FC = () => {
     // Effect to re-fetch data when the form closes
     useEffect(() => {
         if (!formState.type && !isLoading) { // If form is closed and not initially loading
-            fetchStaff(); // Re-fetch items
+            fetchItems(); // Re-fetch items
         }
     }, [formState.type, isLoading, fetchStaff]);
 
@@ -39,7 +40,7 @@ const AdminStaff: React.FC = () => {
     const handleConfirmDelete = async () => {
         if (itemToDelete) {
             await deleteStaffMember(itemToDelete.id);
-            fetchStaff();
+            fetchItems();
         }
         setIsConfirmModalOpen(false);
         setItemToDelete(null);
@@ -59,7 +60,7 @@ const AdminStaff: React.FC = () => {
                 </button>
             </div>
 
-            {isLoading ? <p className="dark:text-gray-300">Loading staff...</p> : (
+            {isLoading ? <SkeletonTable columns={3} /> : (
                 <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
                     <table className="w-full text-left">
                         <thead>

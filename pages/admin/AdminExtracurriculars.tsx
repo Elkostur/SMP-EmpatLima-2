@@ -4,6 +4,7 @@ import { getExtracurriculars, deleteExtracurricular } from '../../src/services/s
 import ConfirmationModal from '../../components/ConfirmationModal';
 import useTitle from '../../hooks/useTitle';
 import { useAdminUI } from '../../src/hooks/useAdminUI'; // Import useAdminUI
+import SkeletonTable from '../../src/components/admin/SkeletonTable'; // Import SkeletonTable
 
 const AdminExtracurriculars: React.FC = () => {
     const [items, setItems] = useState<Extracurricular[]>([]);
@@ -60,7 +61,7 @@ const AdminExtracurriculars: React.FC = () => {
                 </button>
             </div>
 
-            {isLoading ? <p className="dark:text-gray-300">Loading items...</p> : (
+            {isLoading ? <SkeletonTable columns={3} /> : (
                 <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
                     <table className="w-full text-left">
                         <thead>

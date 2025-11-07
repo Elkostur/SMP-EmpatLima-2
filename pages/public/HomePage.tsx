@@ -14,14 +14,31 @@ import type { HeroImage } from '../../types';
 import useTitle from '../../hooks/useTitle';
 import PrincipalWelcome from './sections/PrincipalWelcome'; // Import the new component
 
+const HeroSkeleton: React.FC = () => (
+    <div className="relative w-full h-[60vh] md:h-[80vh] bg-gray-200 dark:bg-gray-800 animate-pulse flex items-center justify-center">
+        <div className="text-center text-white p-6">
+            <div className="h-12 bg-gray-300 dark:bg-gray-700 rounded w-3/4 mx-auto mb-4"></div>
+            <div className="h-6 bg-gray-300 dark:bg-gray-700 rounded w-1/2 mx-auto mb-8"></div>
+            <div className="h-12 bg-gray-300 dark:bg-gray-700 rounded-full w-40 mx-auto"></div>
+        </div>
+    </div>
+);
+
 const CarouselHeroSection: React.FC = () => {
   const [images, setImages] = React.useState<HeroImage[]>([]);
   const [currentIndex, setCurrentIndex] = React.useState(0);
+  const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
     const fetchImages = async () => {
-      const data = await getHeroImages();
-      setImages(data);
+      try {
+        const data = await getHeroImages();
+        setImages(data);
+      } catch (error) {
+        console.error("Failed to fetch hero images:", error);
+      } finally {
+        setLoading(false);
+      }
     };
     fetchImages();
   }, []);
@@ -45,11 +62,16 @@ const CarouselHeroSection: React.FC = () => {
     }
   }, [images.length, nextSlide]);
   
+  if (loading) {
+      return <HeroSkeleton />;
+  }
+
   if (images.length === 0) {
       return (
           <div className="relative w-full h-[60vh] md:h-[80vh] bg-emerald-green flex items-center justify-center text-white">
               <div className="text-center">
-                  <h1 className="text-4xl md:text-6xl font-extrabold">Loading...</h1>
+                  <h1 className="text-4xl md:text-6xl font-extrabold">Selamat Datang!</h1>
+                  <p className="text-lg md:text-xl mt-4">Situs web kami sedang dalam pengembangan. Silakan kembali lagi nanti.</p>
               </div>
           </div>
       );

@@ -116,7 +116,48 @@ const AdminAboutPage: React.FC = () => {
     };
 
     if (isLoading) {
-        return <p className="dark:text-gray-300">Loading page content...</p>;
+        return (
+            <div className="animate-pulse bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md space-y-8">
+                <div className="border-b dark:border-gray-700 pb-8">
+                    <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-1/2 mb-4"></div>
+                    <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-1/4 mb-2"></div>
+                    <div className="h-10 bg-gray-200 dark:bg-gray-700 rounded w-full"></div>
+                    <div className="mt-4 h-6 bg-gray-200 dark:bg-gray-700 rounded w-1/4 mb-2"></div>
+                    <div className="h-20 bg-gray-200 dark:bg-gray-700 rounded w-full"></div>
+                </div>
+                <div className="border-b dark:border-gray-700 pb-8">
+                    <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-1/2 mb-4"></div>
+                    <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-1/4 mb-2"></div>
+                    <div className="h-10 bg-gray-200 dark:bg-gray-700 rounded w-full"></div>
+                    <div className="mt-4 h-6 bg-gray-200 dark:bg-gray-700 rounded w-1/4 mb-2"></div>
+                    <div className="h-10 bg-gray-200 dark:bg-gray-700 rounded w-full"></div>
+                    <div className="mt-4 h-6 bg-gray-200 dark:bg-gray-700 rounded w-1/4 mb-2"></div>
+                    <div className="h-20 bg-gray-200 dark:bg-gray-700 rounded w-full"></div>
+                    <div className="mt-4 h-6 bg-gray-200 dark:bg-gray-700 rounded w-1/4 mb-2"></div>
+                    <div className="h-24 w-24 bg-gray-200 dark:bg-gray-700 rounded-full mt-4"></div>
+                </div>
+                <div className="border-b dark:border-gray-700 pb-8">
+                    <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-1/2 mb-4"></div>
+                    <div className="space-y-4">
+                        <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-md border dark:border-gray-600 flex flex-col md:flex-row gap-4">
+                            <div className="flex-1 h-10 bg-gray-200 dark:bg-gray-600 rounded"></div>
+                            <div className="flex-1 h-20 bg-gray-200 dark:bg-gray-600 rounded"></div>
+                            <div className="w-20 h-10 bg-red-200 dark:bg-red-700 rounded"></div>
+                        </div>
+                        <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-md border dark:border-gray-600 flex flex-col md:flex-row gap-4">
+                            <div className="flex-1 h-10 bg-gray-200 dark:bg-gray-600 rounded"></div>
+                            <div className="flex-1 h-20 bg-gray-200 dark:bg-gray-600 rounded"></div>
+                            <div className="w-20 h-10 bg-red-200 dark:bg-red-700 rounded"></div>
+                        </div>
+                    </div>
+                    <div className="mt-4 h-10 bg-blue-200 dark:bg-blue-700 rounded w-32"></div>
+                </div>
+                <div className="flex justify-end items-center gap-4">
+                    <div className="flex-grow h-2.5 bg-gray-200 dark:bg-gray-600 rounded-full"></div>
+                    <div className="h-12 bg-emerald-200 dark:bg-emerald-700 rounded w-40"></div>
+                </div>
+            </div>
+        );
     }
     
     // Formulir akan selalu dirender sekarang, bahkan jika content awalnya null

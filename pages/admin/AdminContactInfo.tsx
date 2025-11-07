@@ -77,7 +77,33 @@ const AdminContactInfo: React.FC = () => {
     };
 
     if (isLoading) {
-        return <p className="dark:text-gray-300">Loading contact info...</p>;
+        return (
+            <div className="animate-pulse bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md space-y-6">
+                <div>
+                    <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-1/4 mb-2"></div>
+                    <div className="h-24 bg-gray-200 dark:bg-gray-700 rounded w-full"></div>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-1/3 mb-2"></div>
+                        <div className="h-10 bg-gray-200 dark:bg-gray-700 rounded w-full"></div>
+                    </div>
+                    <div>
+                        <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-1/3 mb-2"></div>
+                        <div className="h-10 bg-gray-200 dark:bg-gray-700 rounded w-full"></div>
+                    </div>
+                </div>
+                <div>
+                    <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-1/4 mb-2"></div>
+                    <div className="h-10 bg-gray-200 dark:bg-gray-700 rounded w-full"></div>
+                    <div className="mt-4 h-32 w-64 bg-gray-200 dark:bg-gray-700 rounded-md"></div>
+                </div>
+                <div className="flex justify-end items-center gap-4 pt-4 border-t dark:border-gray-700">
+                    <div className="flex-grow h-2.5 bg-gray-200 dark:bg-gray-600 rounded-full"></div>
+                    <div className="h-12 bg-emerald-200 dark:bg-emerald-700 rounded w-40"></div>
+                </div>
+            </div>
+        );
     }
     
     // Formulir akan selalu dirender sekarang, bahkan jika info awalnya null

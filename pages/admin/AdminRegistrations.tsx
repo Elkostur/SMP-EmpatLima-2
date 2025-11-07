@@ -4,6 +4,7 @@ import { getRegistrations, deleteRegistration } from '../../src/services/supabas
 import ConfirmationModal from '../../components/ConfirmationModal';
 import useTitle from '../../hooks/useTitle';
 import { exportToCsv } from '../../src/utils/exportToCsv'; // Import the export utility
+import SkeletonTable from '../../src/components/admin/SkeletonTable'; // Import SkeletonTable
 
 const AdminRegistrations: React.FC = () => {
     const [registrations, setRegistrations] = useState<Registration[]>([]);
@@ -91,7 +92,7 @@ const AdminRegistrations: React.FC = () => {
                 </button>
             </div>
 
-            {isLoading ? <p className="dark:text-gray-300">Loading registrations...</p> : (
+            {isLoading ? <SkeletonTable columns={8} /> : (
                 <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md overflow-x-auto">
                     <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                         <thead className="bg-gray-50 dark:bg-gray-700">

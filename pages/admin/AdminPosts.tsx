@@ -4,6 +4,7 @@ import { getPosts, deletePost } from '../../src/services/supabase/posts'; // Jal
 import ConfirmationModal from '../../components/ConfirmationModal';
 import useTitle from '../../hooks/useTitle';
 import { useAdminUI } from '../../src/hooks/useAdminUI'; // Import useAdminUI
+import SkeletonTable from '../../src/components/admin/SkeletonTable'; // Import SkeletonTable
 
 const AdminPosts: React.FC = () => {
     const [posts, setPosts] = useState<Post[]>([]);
@@ -77,7 +78,7 @@ const AdminPosts: React.FC = () => {
                 />
             </div>
 
-            {isLoading ? <p>Loading posts...</p> : (
+            {isLoading ? <SkeletonTable columns={3} /> : (
                 <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
                     <table className="w-full text-left">
                         <thead>

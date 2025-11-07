@@ -4,6 +4,7 @@ import { getFaqs, deleteFaq } from '../../src/services/supabase/faqs'; // Jalur 
 import ConfirmationModal from '../../components/ConfirmationModal';
 import useTitle from '../../hooks/useTitle';
 import { useAdminUI } from '../../src/hooks/useAdminUI'; // Import useAdminUI
+import SkeletonTable from '../../src/components/admin/SkeletonTable'; // Import SkeletonTable
 
 const AdminFaqs: React.FC = () => {
     const [items, setItems] = useState<FaqItem[]>([]);
@@ -59,7 +60,7 @@ const AdminFaqs: React.FC = () => {
                 </button>
             </div>
 
-            {isLoading ? <p className="dark:text-gray-300">Loading FAQs...</p> : (
+            {isLoading ? <SkeletonTable columns={3} /> : (
                 <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
                     <table className="w-full text-left">
                         <thead>

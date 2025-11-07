@@ -3,6 +3,7 @@ import type { ContactMessage } from '../../types';
 import { getContactMessages, deleteContactMessage } from '../../src/services/supabase/contactMessages'; // Jalur diperbarui
 import ConfirmationModal from '../../components/ConfirmationModal';
 import useTitle from '../../hooks/useTitle';
+import SkeletonTable from '../../src/components/admin/SkeletonTable'; // Import SkeletonTable
 
 const AdminContactMessages: React.FC = () => {
     const [messages, setMessages] = useState<ContactMessage[]>([]);
@@ -72,7 +73,7 @@ const AdminContactMessages: React.FC = () => {
         <div>
             <h1 className="text-3xl font-bold text-gray-800 dark:text-gray-100 mb-8">Contact Form Messages</h1>
 
-            {isLoading ? <p className="dark:text-gray-300">Loading messages...</p> : (
+            {isLoading ? <SkeletonTable columns={4} /> : (
                 <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md overflow-x-auto">
                     <table className="w-full text-left">
                         <thead className="whitespace-nowrap">

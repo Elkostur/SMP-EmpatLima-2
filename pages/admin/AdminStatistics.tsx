@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import type { Statistic } from '../../types';
 import { getStatistics, updateStatistics } from '../../src/services/supabase/statistics'; // Jalur diperbarui
 import useTitle from '../../hooks/useTitle';
+import SkeletonTable from '../../src/components/admin/SkeletonTable'; // Import SkeletonTable
 
 const AdminStatistics: React.FC = () => {
     const [stats, setStats] = useState<Statistic[]>([]);
@@ -65,7 +66,25 @@ const AdminStatistics: React.FC = () => {
     };
     
     if (isLoading) {
-        return <p className="dark:text-gray-300">Loading statistics...</p>;
+        return (
+            <div className="animate-pulse bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    {Array.from({ length: 3 }).map((_, index) => (
+                        <div key={index} className="bg-gray-50 dark:bg-gray-700 p-4 rounded-md border dark:border-gray-600 relative">
+                            <div className="h-6 bg-gray-200 dark:bg-gray-600 rounded w-1/3 mb-4"></div>
+                            <div className="h-4 bg-gray-200 dark:bg-gray-600 rounded w-full mb-2"></div>
+                            <div className="h-10 bg-gray-200 dark:bg-gray-600 rounded w-full"></div>
+                            <div className="mt-4 h-4 bg-gray-200 dark:bg-gray-600 rounded w-full mb-2"></div>
+                            <div className="h-10 bg-gray-200 dark:bg-gray-600 rounded w-full"></div>
+                            <div className="absolute top-2 right-2 h-6 w-6 bg-red-200 dark:bg-red-700 rounded-full"></div>
+                        </div>
+                    ))}
+                </div>
+                <div className="flex justify-end mt-8">
+                    <div className="h-12 bg-emerald-200 dark:bg-emerald-700 rounded w-40"></div>
+                </div>
+            </div>
+        );
     }
 
     return (

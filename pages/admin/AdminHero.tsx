@@ -4,6 +4,7 @@ import { getHeroImages, deleteHeroImage } from '../../src/services/supabase/hero
 import ConfirmationModal from '../../components/ConfirmationModal';
 import useTitle from '../../hooks/useTitle';
 import { useAdminUI } from '../../src/hooks/useAdminUI'; // Import useAdminUI
+import SkeletonTable from '../../src/components/admin/SkeletonTable'; // Import SkeletonTable
 
 const AdminHero: React.FC = () => {
     const [items, setItems] = useState<HeroImage[]>([]);
@@ -59,7 +60,7 @@ const AdminHero: React.FC = () => {
                 </button>
             </div>
 
-            {isLoading ? <p className="dark:text-gray-300">Loading images...</p> : (
+            {isLoading ? <SkeletonTable columns={3} /> : ( // 3 columns for image, title/subtitle, actions
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {items.map(item => (
                         <div key={item.id} className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden group">

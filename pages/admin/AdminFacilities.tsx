@@ -4,6 +4,7 @@ import { getFacilities, deleteFacility } from '../../src/services/supabase/facil
 import ConfirmationModal from '../../components/ConfirmationModal';
 import useTitle from '../../hooks/useTitle';
 import { useAdminUI } from '../../src/hooks/useAdminUI'; // Import useAdminUI
+import SkeletonTable from '../../src/components/admin/SkeletonTable'; // Import SkeletonTable
 
 const AdminFacilities: React.FC = () => {
     const [items, setItems] = useState<Facility[]>([]);
@@ -59,7 +60,7 @@ const AdminFacilities: React.FC = () => {
                 </button>
             </div>
 
-            {isLoading ? <p className="dark:text-gray-300">Loading facilities...</p> : (
+            {isLoading ? <SkeletonTable columns={4} /> : (
                 <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
                     <table className="w-full text-left">
                         <thead>
