@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import type { Registration } from '../../types';
-import { getRegistrations, deleteRegistration } from '../../src/services/supabase/registrations'; // Jalur diperbarui
+import { getRegistrations, deleteRegistration } from '../../src/services/supabase/registrations';
 import ConfirmationModal from '../../components/ConfirmationModal';
 import useTitle from '../../hooks/useTitle';
+import { exportToCsv } from '../../src/utils/exportToCsv'; // Import the new utility
 
 const AdminRegistrations: React.FC = () => {
     const [registrations, setRegistrations] = useState<Registration[]>([]);
@@ -41,10 +42,30 @@ const AdminRegistrations: React.FC = () => {
         setItemToDelete(null);
     };
 
+    const handleDownload = () => {
+        const headers = [
+            { key: 'createdAt', label: 'Tanggal Pendaftaran' },
+            { key: 'fullName', label: 'Nama Lengkap Siswa' },
+            { key: 'birthDate', label: 'Tanggal Lahir' },
+            { key: 'previousSchool', label: 'Asal Sekolah' },
+            { key: 'parentName', label: 'Nama Orang Tua/Wali' },
+            { key: 'phone', label: 'Telepon' },
+            { key: 'email', label: 'Email' },
+        ];
+        exportToCsv('PPDB_Registrations', registrations, headers);
+    };
+
     return (
         <div>
             <div className="flex justify-between items-center mb-8">
                 <h1 className="text-3xl font-bold text-gray-800 dark:text-gray-100">PPDB Registrations</h1>
+                <button 
+                    onClick={handleDownload} 
+                    className="bg-emerald-green text-white px-4 py-2 rounded-md hover:bg-emerald-600 disabled:bg-gray-400"
+                    disabled={isLoading || registrations.length === 0}
+                >
+                    Download as Excel
+                </button>
             </div>
 
             {isLoading ? <p className="dark:text-gray-300">Loading registrations...</p> : (
