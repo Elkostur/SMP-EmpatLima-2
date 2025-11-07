@@ -31,9 +31,14 @@ export const addRegistration = async (
         documentUrl = await uploadImage(documentFile); 
     }
 
+    // Periksa apakah ada pengguna yang login. Jika tidak, user_id akan null.
+    const { data: { user } } = await supabase.auth.getUser();
+
     const { data: newItem, error } = await supabase
         .from('registrations')
         .insert({
+            // Secara eksplisit mengatur user_id. Ini akan menjadi null untuk pengguna anonim.
+            user_id: user ? user.id : null,
             full_name: data.fullName,
             birth_date: data.birthDate,
             previous_school: data.previousSchool,
