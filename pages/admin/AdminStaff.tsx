@@ -28,7 +28,7 @@ const AdminStaff: React.FC = () => {
     // Effect to re-fetch data when the form closes
     useEffect(() => {
         if (!formState.type && !isLoading) { // If form is closed and not initially loading
-            fetchItems(); // Re-fetch items
+            fetchStaff(); // Re-fetch items
         }
     }, [formState.type, isLoading, fetchStaff]);
 

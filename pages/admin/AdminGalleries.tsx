@@ -4,7 +4,7 @@ import { getGalleries, deleteGalleryItem } from '../../src/services/supabase/gal
 import ConfirmationModal from '../../components/ConfirmationModal';
 import useTitle from '../../hooks/useTitle';
 import { useAdminUI } from '../../src/hooks/useAdminUI'; // Import useAdminUI
-import SkeletonTable from '../../src/components/admin/SkeletonTable'; // Import SkeletonTable
+import SkeletonCard from '../../src/components/admin/SkeletonCard'; // Import SkeletonCard
 
 const AdminGalleries: React.FC = () => {
     const [items, setItems] = useState<GalleryItem[]>([]);
@@ -60,7 +60,13 @@ const AdminGalleries: React.FC = () => {
                 </button>
             </div>
 
-            {isLoading ? <SkeletonTable columns={2} /> : ( // 2 columns for image and title/actions
+            {isLoading ? (
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                    {Array.from({ length: 4 }).map((_, index) => (
+                        <SkeletonCard key={index} />
+                    ))}
+                </div>
+            ) : (
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                     {items.map(item => (
                         <div key={item.id} className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden group">
