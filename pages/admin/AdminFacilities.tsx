@@ -11,7 +11,7 @@ const AdminFacilities: React.FC = () => {
     const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
     const [itemToDelete, setItemToDelete] = useState<Facility | null>(null);
     useTitle('Manage Facilities | Admin Panel');
-    const { openForm, closeForm } = useAdminUI(); // Use useAdminUI hook
+    const { openForm, formState } = useAdminUI(); // Use useAdminUI hook
     
     const fetchItems = useCallback(async () => {
         setIsLoading(true);
@@ -24,10 +24,12 @@ const AdminFacilities: React.FC = () => {
         fetchItems();
     }, [fetchItems]);
 
-    const handleSave = async () => {
-        await fetchItems();
-        closeForm();
-    };
+    // Effect to re-fetch data when the form closes
+    useEffect(() => {
+        if (!formState.type && !isLoading) { // If form is closed and not initially loading
+            fetchItems(); // Re-fetch items
+        }
+    }, [formState.type, isLoading, fetchItems]);
 
     const handleDeleteClick = (item: Facility) => {
         setItemToDelete(item);

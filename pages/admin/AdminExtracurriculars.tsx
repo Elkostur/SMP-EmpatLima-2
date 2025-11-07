@@ -11,7 +11,7 @@ const AdminExtracurriculars: React.FC = () => {
     const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
     const [itemToDelete, setItemToDelete] = useState<Extracurricular | null>(null);
     useTitle('Manage Extracurriculars | Admin Panel');
-    const { openForm, closeForm } = useAdminUI(); // Use useAdminUI hook
+    const { openForm, formState } = useAdminUI(); // Use useAdminUI hook
     
     const fetchItems = useCallback(async () => {
         setIsLoading(true);
@@ -24,10 +24,12 @@ const AdminExtracurriculars: React.FC = () => {
         fetchItems();
     }, [fetchItems]);
 
-    const handleSave = async () => {
-        await fetchItems();
-        closeForm();
-    };
+    // Effect to re-fetch data when the form closes
+    useEffect(() => {
+        if (!formState.type && !isLoading) { // If form is closed and not initially loading
+            fetchItems(); // Re-fetch items
+        }
+    }, [formState.type, isLoading, fetchItems]);
 
     const handleDeleteClick = (item: Extracurricular) => {
         setItemToDelete(item);

@@ -11,7 +11,7 @@ const AdminAchievements: React.FC = () => {
     const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
     const [itemToDelete, setItemToDelete] = useState<Achievement | null>(null);
     useTitle('Manage Achievements | Admin Panel');
-    const { openForm, closeForm, formState } = useAdminUI(); // Use useAdminUI hook
+    const { openForm, formState } = useAdminUI(); // Use useAdminUI hook
     
     const fetchItems = useCallback(async () => {
         setIsLoading(true);
@@ -24,11 +24,12 @@ const AdminAchievements: React.FC = () => {
         fetchItems();
     }, [fetchItems]);
 
-    // This function is passed to the form via AdminUIProvider
-    const handleSave = async () => {
-        await fetchItems(); // Re-fetch items after save
-        closeForm(); // Close the form via context
-    };
+    // Effect to re-fetch data when the form closes
+    useEffect(() => {
+        if (!formState.type && !isLoading) { // If form is closed and not initially loading
+            fetchItems(); // Re-fetch items
+        }
+    }, [formState.type, isLoading, fetchItems]);
 
     const handleDeleteClick = (item: Achievement) => {
         setItemToDelete(item);
@@ -48,17 +49,6 @@ const AdminAchievements: React.FC = () => {
         setIsConfirmModalOpen(false);
         setItemToDelete(null);
     };
-
-    // Update the onSave prop for the AchievementForm in useAdminUI.tsx
-    useEffect(() => {
-        if (formState.type === 'achievement') {
-            // This is a bit of a workaround as we can't directly modify the onSave prop
-            // of the form component rendered by AdminUIProvider from here.
-            // The form component itself will handle its save logic and then call onSave prop
-            // which will trigger a re-fetch and closeForm.
-        }
-    }, [formState.type]);
-
 
     return (
         <div>

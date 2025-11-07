@@ -12,7 +12,7 @@ const AdminPosts: React.FC = () => {
     const [itemToDelete, setItemToDelete] = useState<Post | null>(null);
     const [searchQuery, setSearchQuery] = useState(''); // Deklarasi searchQuery
     useTitle('Manage Posts | Admin Panel');
-    const { openForm, closeForm } = useAdminUI(); // Use useAdminUI hook
+    const { openForm, formState } = useAdminUI(); // Use useAdminUI hook
     
     const fetchPosts = useCallback(async () => {
         setIsLoading(true);
@@ -25,10 +25,12 @@ const AdminPosts: React.FC = () => {
         fetchPosts();
     }, [fetchPosts]);
 
-    const handleSave = async () => {
-        await fetchPosts();
-        closeForm();
-    };
+    // Effect to re-fetch data when the form closes
+    useEffect(() => {
+        if (!formState.type && !isLoading) { // If form is closed and not initially loading
+            fetchPosts(); // Re-fetch items
+        }
+    }, [formState.type, isLoading, fetchPosts]);
 
     const handleDeleteClick = (post: Post) => {
         setItemToDelete(post);
