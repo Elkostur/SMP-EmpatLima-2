@@ -1,11 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { getStaff } from '../../../src/services/supabase/staff';
 import type { StaffMember } from '../../../types'; // Jalur diperbarui
 import { Link } from 'react-router-dom';
+import useIntersectionObserver from '../../../src/hooks/useIntersectionObserver';
 
 const TeamSection: React.FC = () => {
     const [staff, setStaff] = useState<StaffMember[]>([]);
     const [loading, setLoading] = useState(true);
+    const sectionRef = useRef<HTMLDivElement>(null);
+    const isVisible = useIntersectionObserver(sectionRef);
 
     useEffect(() => {
         const fetchStaff = async () => {
@@ -22,7 +25,11 @@ const TeamSection: React.FC = () => {
     }, []);
 
     return (
-        <section id="team" className="py-16 bg-white dark:bg-gray-900">
+        <section 
+            ref={sectionRef}
+            id="team" 
+            className={`py-16 bg-white dark:bg-gray-900 transition-all duration-700 ease-out opacity-0 ${isVisible ? 'animate-fadeInUp' : ''}`}
+        >
             <div className="container mx-auto px-6">
                 <h2 className="text-3xl font-bold text-center mb-10 text-gray-800 dark:text-gray-100">Meet Our Team</h2>
                 {loading ? (

@@ -1,11 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { getGalleries } from '../../../src/services/supabase/galleries';
 import type { GalleryItem } from '../../../types'; // Jalur diperbarui
 import { Link } from 'react-router-dom';
+import useIntersectionObserver from '../../../src/hooks/useIntersectionObserver';
 
 const GallerySection: React.FC = () => {
     const [items, setItems] = useState<GalleryItem[]>([]);
     const [loading, setLoading] = useState(true);
+    const sectionRef = useRef<HTMLDivElement>(null);
+    const isVisible = useIntersectionObserver(sectionRef);
 
     useEffect(() => {
         const fetchItems = async () => {
@@ -22,7 +25,11 @@ const GallerySection: React.FC = () => {
     }, []);
 
     return (
-        <section id="gallery" className="py-16 bg-white dark:bg-gray-900">
+        <section 
+            ref={sectionRef}
+            id="gallery" 
+            className={`py-16 bg-white dark:bg-gray-900 transition-all duration-700 ease-out opacity-0 ${isVisible ? 'animate-fadeInUp' : ''}`}
+        >
             <div className="container mx-auto px-6">
                 <h2 className="text-3xl font-bold text-center mb-10 text-gray-800 dark:text-gray-100">Our Gallery</h2>
                  {loading ? (

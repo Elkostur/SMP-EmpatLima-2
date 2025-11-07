@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { getPosts } from '../../../src/services/supabase/posts';
 import type { Post } from '../../../types'; // Jalur diperbarui
 import { Link } from 'react-router-dom';
+import useIntersectionObserver from '../../../src/hooks/useIntersectionObserver';
 
 const PostCard: React.FC<{ post: Post }> = ({ post }) => (
     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
@@ -18,6 +19,8 @@ const PostCard: React.FC<{ post: Post }> = ({ post }) => (
 const LatestNews: React.FC = () => {
     const [posts, setPosts] = useState<Post[]>([]);
     const [loading, setLoading] = useState(true);
+    const sectionRef = useRef<HTMLDivElement>(null);
+    const isVisible = useIntersectionObserver(sectionRef);
 
     useEffect(() => {
         const fetchPosts = async () => {
@@ -34,7 +37,11 @@ const LatestNews: React.FC = () => {
     }, []);
 
     return (
-        <section id="news" className="py-16 bg-gray-100 dark:bg-gray-900">
+        <section 
+            ref={sectionRef}
+            id="news" 
+            className={`py-16 bg-gray-100 dark:bg-gray-900 transition-all duration-700 ease-out opacity-0 ${isVisible ? 'animate-fadeInUp' : ''}`}
+        >
             <div className="container mx-auto px-6">
                 <h2 className="text-3xl font-bold text-center mb-10">Latest News</h2>
                 {loading ? (

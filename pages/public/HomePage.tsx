@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React from 'react';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import LatestNews from './sections/LatestNews';
@@ -9,17 +9,16 @@ import FacilitiesSection from './sections/FacilitiesSection';
 import FaqSection from './sections/FaqSection';
 import LatestAchievements from './sections/LatestAchievements';
 import { Link } from 'react-router-dom';
-import { getHeroImages } from '../../src/services/supabase/heroImages'; // Jalur diperbarui
-import { getAboutPageContent } from '../../src/services/supabase/aboutPageContent'; // Jalur diperbarui
-import type { HeroImage, AboutPageContent } from '../../types';
+import { getHeroImages } from '../../src/services/supabase/heroImages';
+import type { HeroImage } from '../../types';
 import useTitle from '../../hooks/useTitle';
-
+import PrincipalWelcome from './sections/PrincipalWelcome'; // Import the new component
 
 const CarouselHeroSection: React.FC = () => {
-  const [images, setImages] = useState<HeroImage[]>([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [images, setImages] = React.useState<HeroImage[]>([]);
+  const [currentIndex, setCurrentIndex] = React.useState(0);
 
-  useEffect(() => {
+  React.useEffect(() => {
     const fetchImages = async () => {
       const data = await getHeroImages();
       setImages(data);
@@ -27,7 +26,7 @@ const CarouselHeroSection: React.FC = () => {
     fetchImages();
   }, []);
 
-  const nextSlide = useCallback(() => {
+  const nextSlide = React.useCallback(() => {
     setCurrentIndex((prevIndex) => (prevIndex === images.length - 1 ? 0 : prevIndex + 1));
   }, [images.length]);
 
@@ -39,7 +38,7 @@ const CarouselHeroSection: React.FC = () => {
       setCurrentIndex(index);
   }
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (images.length > 1) {
       const slideInterval = setInterval(nextSlide, 5000);
       return () => clearInterval(slideInterval);
@@ -90,94 +89,12 @@ const CarouselHeroSection: React.FC = () => {
   );
 };
 
-
-const PrincipalWelcome: React.FC = () => {
-  const [content, setContent] = useState<AboutPageContent['principalWelcome'] | null>(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchContent = async () => {
-      try {
-        const data = await getAboutPageContent();
-        setContent(data?.principalWelcome || null);
-      } catch (error) {
-        console.error("Failed to fetch principal's welcome content", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchContent();
-  }, []);
-
-  if (loading) {
-    return (
-        <section className="relative py-16 mt-[-10rem] md:mt-[-12rem] lg:mt-[-10rem] z-10">
-             <div className="container mx-auto px-6">
-                 <div className="bg-white dark:bg-gray-800 p-8 md:p-12 rounded-xl shadow-2xl">
-                    <div className="animate-pulse flex flex-col md:flex-row items-center gap-8">
-                        <div className="w-32 h-32 rounded-full bg-gray-300 dark:bg-gray-700 flex-shrink-0"></div>
-                        <div className="flex-1 w-full">
-                            <div className="h-6 bg-gray-300 dark:bg-gray-700 rounded w-3/4 mb-4"></div>
-                            <div className="h-4 bg-gray-300 dark:bg-gray-700 rounded w-full mb-2"></div>
-                            <div className="h-4 bg-gray-300 dark:bg-gray-700 rounded w-full mb-2"></div>
-                            <div className="h-4 bg-gray-300 dark:bg-gray-700 rounded w-5/6 mb-4"></div>
-                             <div className="h-10 bg-gray-300 dark:bg-gray-700 rounded w-32 mt-4"></div>
-                        </div>
-                    </div>
-                </div>
-             </div>
-        </section>
-    );
-  }
-
-  if (!content) {
-    return null; // Don't render the section if content fails to load
-  }
-
-  // Truncate the welcome text to show more content on the homepage
-  const fullText = content.text;
-  let truncatedText = fullText;
-  if (fullText.length > 300) {
-      // Find last space within 300 chars to avoid cutting a word
-      const lastSpaceIndex = fullText.substring(0, 300).lastIndexOf(' ');
-      truncatedText = fullText.substring(0, lastSpaceIndex) + '...';
-  }
-
-  return (
-    <section className="relative py-16 mt-[-10rem] md:mt-[-12rem] lg:mt-[-10rem] z-10">
-      <div className="container mx-auto px-6">
-        <div className="bg-white dark:bg-gray-800 p-8 md:p-12 rounded-xl shadow-2xl">
-            <div className="flex flex-col md:flex-row items-center gap-8">
-              <img 
-                src={content.imageUrl} 
-                alt={content.name}
-                className="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover ring-4 ring-offset-4 ring-emerald-green dark:ring-offset-gray-800 flex-shrink-0"
-              />
-              <div className="text-center md:text-left">
-                <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-100 mb-2">Sambutan Kepala Sekolah</h2>
-                <p className="text-gray-600 dark:text-gray-300 italic mb-4 whitespace-pre-line">{truncatedText}</p>
-                <div>
-                    <p className="font-bold text-gray-900 dark:text-gray-100 mt-2">{content.name}</p>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">{content.title}</p>
-                </div>
-                <Link to="/about" className="inline-block mt-4 text-emerald-green dark:text-emerald-400 font-semibold hover:underline">
-                    Selengkapnya &rarr;
-                </Link>
-              </div>
-            </div>
-        </div>
-      </div>
-    </section>
-  );
-};
-
-
 const HomePage: React.FC = () => {
   useTitle('Beranda | SMP "Empat Lima" 2 Kedungpring');
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
-      <main className="flex-grow animate-fadeInUp">
+      <main>
         <CarouselHeroSection />
         <PrincipalWelcome />
         <FacilitiesSection /> 

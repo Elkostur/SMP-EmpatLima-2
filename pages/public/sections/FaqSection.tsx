@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { getFaqs } from '../../../src/services/supabase/faqs';
 import type { FaqItem } from '../../../types'; // Jalur diperbarui
+import useIntersectionObserver from '../../../src/hooks/useIntersectionObserver';
 
 const AccordionItem: React.FC<{
   item: FaqItem;
@@ -33,6 +34,8 @@ const FaqSection: React.FC = () => {
     const [items, setItems] = useState<FaqItem[]>([]);
     const [loading, setLoading] = useState(true);
     const [openIndex, setOpenIndex] = useState<number | null>(0);
+    const sectionRef = useRef<HTMLDivElement>(null);
+    const isVisible = useIntersectionObserver(sectionRef);
 
     useEffect(() => {
         const fetchItems = async () => {
@@ -53,7 +56,11 @@ const FaqSection: React.FC = () => {
     };
 
     return (
-        <section id="faq" className="py-16 bg-white dark:bg-gray-900">
+        <section 
+            ref={sectionRef}
+            id="faq" 
+            className={`py-16 bg-white dark:bg-gray-900 transition-all duration-700 ease-out opacity-0 ${isVisible ? 'animate-fadeInUp' : ''}`}
+        >
             <div className="container mx-auto px-6">
                 <h2 className="text-3xl font-bold text-center mb-10 text-gray-800 dark:text-gray-100">Frequently Asked Questions</h2>
                 {loading ? (
