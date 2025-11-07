@@ -86,7 +86,7 @@ const AdminLayout: React.FC = () => {
             {/* Main content */}
             <div className="flex-1 flex flex-col">
                 {/* Mobile Header */}
-                <header className="md:hidden bg-white dark:bg-gray-800 shadow-md p-4 flex justify-between items-center sticky top-0 z-20">
+                <header className="md:hidden bg-white dark:bg-gray-900 shadow-md p-4 flex justify-between items-center sticky top-0 z-20">
                     <button 
                         onClick={() => setSidebarOpen(!sidebarOpen)}
                         className="text-gray-600 dark:text-gray-300 focus:outline-none"

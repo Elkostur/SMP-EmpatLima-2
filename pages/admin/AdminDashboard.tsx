@@ -6,12 +6,12 @@ import { getStaff } from '../../src/services/supabase/staff'; // Jalur diperbaru
 import useTitle from '../../hooks/useTitle';
 
 const StatCard: React.FC<{ title: string; value: string | number; icon: string; isLoading: boolean }> = ({ title, value, icon, isLoading }) => (
-    <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md flex items-center min-h-[100px]">
+    <div className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-md flex items-center min-h-[100px]">
         <div className="text-3xl text-emerald-green mr-4">{icon}</div>
         <div>
             <p className="text-sm text-gray-500 dark:text-gray-400">{title}</p>
             {isLoading ? (
-                <div className="h-8 w-16 bg-gray-200 dark:bg-gray-700 rounded animate-pulse mt-1"></div>
+                <div className="h-8 w-16 bg-gray-200 dark:bg-gray-800 rounded animate-pulse mt-1"></div>
             ) : (
                 <p className="text-2xl font-bold text-gray-800 dark:text-gray-100">{value}</p>
             )}
@@ -61,13 +61,13 @@ const AdminDashboard: React.FC = () => {
                 <StatCard title="Site Visits (30d)" value="1,234" icon="📈" isLoading={false} />
             </div>
 
-            <div className="mt-10 bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
+            <div className="mt-10 bg-white dark:bg-gray-900 p-6 rounded-lg shadow-md">
                 <h2 className="text-xl font-bold mb-4 text-gray-800 dark:text-gray-100">Quick Actions</h2>
                 <div className="flex flex-wrap gap-4">
                     <button className="bg-emerald-green text-white px-4 py-2 rounded-md hover:bg-emerald-600">
                         Create New Post
                     </button>
-                     <button className="bg-gray-200 text-gray-800 px-4 py-2 rounded-md hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600">
+                     <button className="bg-gray-200 text-gray-800 px-4 py-2 rounded-md hover:bg-gray-300 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700">
                         Upload Image
                     </button>
                 </div>

@@ -113,7 +113,7 @@ const PrincipalWelcome: React.FC = () => {
     return (
         <section className="relative py-16 mt-[-10rem] md:mt-[-12rem] lg:mt-[-10rem] z-10">
              <div className="container mx-auto px-6">
-                 <div className="bg-white dark:bg-gray-800 p-8 md:p-12 rounded-xl shadow-2xl">
+                 <div className="bg-white dark:bg-gray-900 p-8 md:p-12 rounded-xl shadow-2xl">
                     <div className="animate-pulse flex flex-col md:flex-row items-center gap-8">
                         <div className="w-32 h-32 rounded-full bg-gray-300 dark:bg-gray-700 flex-shrink-0"></div>
                         <div className="flex-1 w-full">
@@ -146,12 +146,12 @@ const PrincipalWelcome: React.FC = () => {
   return (
     <section className="relative py-16 mt-[-10rem] md:mt-[-12rem] lg:mt-[-10rem] z-10">
       <div className="container mx-auto px-6">
-        <div className="bg-white dark:bg-gray-800 p-8 md:p-12 rounded-xl shadow-2xl">
+        <div className="bg-white dark:bg-gray-900 p-8 md:p-12 rounded-xl shadow-2xl">
             <div className="flex flex-col md:flex-row items-center gap-8">
               <img 
                 src={content.imageUrl} 
                 alt={content.name}
-                className="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover ring-4 ring-offset-4 ring-emerald-green dark:ring-offset-gray-800 flex-shrink-0"
+                className="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover ring-4 ring-offset-4 ring-emerald-green dark:ring-offset-gray-900 flex-shrink-0"
               />
               <div className="text-center md:text-left">
                 <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-100 mb-2">Sambutan Kepala Sekolah</h2>
