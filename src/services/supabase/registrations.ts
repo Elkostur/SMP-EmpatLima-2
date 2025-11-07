@@ -1,5 +1,5 @@
 import { supabase } from '../../integrations/supabase/client';
-import { uploadDocument } from './storage'; // Menggunakan fungsi baru
+// import { uploadDocument } from './storage'; // Removed
 import type { Registration } from '../../../types';
 
 export const getRegistrations = async (): Promise<Registration[]> => {
@@ -18,19 +18,19 @@ export const getRegistrations = async (): Promise<Registration[]> => {
         phone: item.phone,
         email: item.email,
         createdAt: new Date(item.created_at),
-        documentUrl: item.document_url,
+        // documentUrl: item.document_url, // Removed
     }));
 };
 
 export const addRegistration = async (
-    data: Omit<Registration, 'id' | 'createdAt' | 'documentUrl'>,
-    documentFile?: File | null
+    data: Omit<Registration, 'id' | 'createdAt'>,
+    // documentFile?: File | null // Removed
 ): Promise<Registration> => {
-    let documentUrl: string | undefined = undefined;
-    if (documentFile) {
-        // Menggunakan fungsi uploadDocument yang baru dan lebih aman
-        documentUrl = await uploadDocument(documentFile); 
-    }
+    // let documentUrl: string | undefined = undefined;
+    // if (documentFile) {
+    //     // Menggunakan fungsi uploadDocument yang baru dan lebih aman
+    //     documentUrl = await uploadDocument(documentFile); 
+    // }
 
     const { data: { user } } = await supabase.auth.getUser();
 
@@ -44,7 +44,7 @@ export const addRegistration = async (
             parent_name: data.parentName,
             phone: data.phone,
             email: data.email,
-            document_url: documentUrl,
+            // document_url: documentUrl, // Removed
         })
         .select()
         .single();
@@ -59,7 +59,7 @@ export const addRegistration = async (
         phone: newItem.phone,
         email: newItem.email,
         createdAt: new Date(newItem.created_at),
-        documentUrl: newItem.document_url,
+        // documentUrl: newItem.document_url, // Removed
     };
 };
 

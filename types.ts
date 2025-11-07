@@ -88,7 +88,7 @@ export interface Registration {
     phone: string;
     email: string;
     createdAt: Date;
-    documentUrl?: string;
+    // documentUrl?: string; // Removed
 }
 
 export interface ContactMessage {
