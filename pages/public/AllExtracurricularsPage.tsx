@@ -35,7 +35,7 @@ const ExtracurricularDetailModal: React.FC<{ item: Extracurricular; onClose: () 
 
 
 const ExtracurricularCard: React.FC<{ item: Extracurricular; onClick: () => void; }> = ({ item, onClick }) => (
-    <div onClick={onClick} className="bg-white dark:bg-gray-900 rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 flex flex-col cursor-pointer group">
+    <div onClick={onClick} className="bg-white dark:bg-gray-800 dark:border dark:border-gray-700 rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 flex flex-col cursor-pointer group">
         <div className="relative h-56">
              <img src={item.imageUrl} alt={item.name} className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>

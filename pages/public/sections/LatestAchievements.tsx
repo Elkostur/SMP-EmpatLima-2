@@ -4,7 +4,7 @@ import type { Achievement } from '../../../types'; // Jalur diperbarui
 import { Link } from 'react-router-dom';
 
 const AchievementCard: React.FC<{ item: Achievement }> = ({ item }) => (
-    <div className="bg-white dark:bg-gray-900 rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
+    <div className="bg-white dark:bg-gray-800 dark:border dark:border-gray-700 rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
         <img src={item.imageUrl} alt={item.title} className="w-full h-48 object-cover" loading="lazy" />
         <div className="p-6">
             <h3 className="text-xl font-bold mb-2 text-gray-800 dark:text-gray-100">{item.title}</h3>
