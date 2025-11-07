@@ -45,7 +45,7 @@ const Statistics: React.FC = () => {
                 <h2 className="text-3xl font-bold text-center mb-10 text-white">Statistik Sekolah Kami</h2> {/* Added main title */}
                 <div 
                     ref={sectionRef}
-                    className={`grid grid-cols-2 md:grid-cols-4 gap-8 ${isVisible ? 'opacity-100 translate-y-0 animate-fadeInUp' : 'opacity-0 translate-y-[20px]'}`}
+                    className={`grid grid-cols-2 md:grid-cols-4 gap-8 opacity-0 translate-y-[20px] ${isVisible ? 'animate-fadeInUp' : ''}`}
                 >
                     {loading ? (
                         <>
