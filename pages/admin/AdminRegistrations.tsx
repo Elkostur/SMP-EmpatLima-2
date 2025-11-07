@@ -3,7 +3,7 @@ import type { Registration } from '../../types';
 import { getRegistrations, deleteRegistration } from '../../src/services/supabase/registrations';
 import ConfirmationModal from '../../components/ConfirmationModal';
 import useTitle from '../../hooks/useTitle';
-import { exportToExcel } from '../../src/utils/exportToExcel'; // Import the export utility
+import { exportToCsv } from '../../src/utils/exportToCsv'; // Import the export utility
 
 const AdminRegistrations: React.FC = () => {
     const [registrations, setRegistrations] = useState<Registration[]>([]);
@@ -42,7 +42,7 @@ const AdminRegistrations: React.FC = () => {
         setItemToDelete(null);
     };
 
-    const handleDownloadExcel = () => {
+    const handleDownloadCsv = () => {
         const headers = [
             'Tanggal Pendaftaran',
             'Nama Lengkap Siswa',
@@ -54,15 +54,15 @@ const AdminRegistrations: React.FC = () => {
         ];
         // Map the data to match the headers and ensure correct property names
         const dataToExport = registrations.map(reg => ({
-            createdAt: reg.createdAt, // Will be formatted in exportToExcel
+            createdAt: reg.createdAt, // Will be formatted in exportToCsv
             fullName: reg.fullName,
-            birthDate: reg.birthDate, // Will be formatted in exportToExcel
+            birthDate: reg.birthDate, // Will be formatted in exportToCsv
             previousSchool: reg.previousSchool,
             parentName: reg.parentName,
             phone: reg.phone,
             email: reg.email,
         }));
-        exportToExcel('PPDB_Registrations', dataToExport, headers);
+        exportToCsv('PPDB_Registrations', dataToExport, headers);
     };
 
     return (
@@ -70,11 +70,11 @@ const AdminRegistrations: React.FC = () => {
             <div className="flex justify-between items-center mb-8">
                 <h1 className="text-3xl font-bold text-gray-800 dark:text-gray-100">PPDB Registrations</h1>
                 <button 
-                    onClick={handleDownloadExcel} 
+                    onClick={handleDownloadCsv} 
                     className="bg-emerald-green text-white px-4 py-2 rounded-md hover:bg-emerald-600 disabled:bg-gray-400"
                     disabled={registrations.length === 0}
                 >
-                    Download as Excel
+                    Download as CSV
                 </button>
             </div>
 
