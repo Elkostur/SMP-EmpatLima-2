@@ -7,7 +7,7 @@ import type { Post } from '../../types';
 import useTitle from '../../hooks/useTitle';
 
 const PostCard: React.FC<{ post: Post }> = ({ post }) => (
-    <div className="bg-white dark:bg-gray-800 dark:border dark:border-gray-700 rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 flex flex-col">
+    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 flex flex-col">
         <img src={post.imageUrl} alt={post.title} className="w-full h-56 object-cover" loading="lazy" />
         <div className="p-6 flex flex-col flex-grow">
             <h3 className="text-xl font-bold mb-2 text-gray-800 dark:text-gray-100">{post.title}</h3>
@@ -88,7 +88,7 @@ const AllPostsPage: React.FC = () => {
         <div className="flex flex-col min-h-screen bg-gray-50 dark:bg-black">
             <Header />
             <main className="flex-grow">
-                <div className="py-16 bg-white dark:bg-gray-800">
+                <div className="py-16 bg-white dark:bg-gray-900">
                     <div className="container mx-auto px-6">
                         <h1 className="text-4xl font-bold text-center mb-12 text-emerald-green dark:text-emerald-400">Semua Berita</h1>
                         {loading ? (

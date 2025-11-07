@@ -49,7 +49,7 @@ const AllGalleriesPage: React.FC = () => {
         <div className="flex flex-col min-h-screen bg-gray-50 dark:bg-black">
             <Header />
             <main className="flex-grow">
-                 <div className="py-16 bg-white dark:bg-gray-800">
+                 <div className="py-16 bg-white dark:bg-gray-900">
                     <div className="container mx-auto px-6">
                         <h1 className="text-4xl font-bold text-center mb-12 text-emerald-green dark:text-emerald-400">Galeri Foto</h1>
                         {loading ? (

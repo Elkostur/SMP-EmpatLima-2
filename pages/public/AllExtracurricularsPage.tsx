@@ -35,7 +35,7 @@ const ExtracurricularDetailModal: React.FC<{ item: Extracurricular; onClose: () 
 
 
 const ExtracurricularCard: React.FC<{ item: Extracurricular; onClick: () => void; }> = ({ item, onClick }) => (
-    <div onClick={onClick} className="bg-white dark:bg-gray-800 dark:border dark:border-gray-700 rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 flex flex-col cursor-pointer group">
+    <div onClick={onClick} className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 flex flex-col cursor-pointer group">
         <div className="relative h-56">
              <img src={item.imageUrl} alt={item.name} className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
@@ -75,7 +75,7 @@ const AllExtracurricularsPage: React.FC = () => {
         <div className="flex flex-col min-h-screen bg-gray-50 dark:bg-black">
             <Header />
             <main className="flex-grow">
-                <div className="py-16 bg-white dark:bg-gray-800">
+                <div className="py-16 bg-white dark:bg-gray-900">
                     <div className="container mx-auto px-6">
                         <h1 className="text-4xl font-bold text-center mb-12 text-emerald-green dark:text-emerald-400">Ekstrakurikuler</h1>
                         {loading ? (
