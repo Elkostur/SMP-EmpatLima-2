@@ -73,7 +73,7 @@ const AdminContactInfo: React.FC = () => {
         await updateContactInfo(updatedInfo);
         setIsSaving(false);
         alert('Contact info updated successfully!');
-        fetchInfo(); // Ambil ulang untuk memastikan data terbaru dan hapus imageFile/previewUrl jika diperlukan
+        // No need to fetchInfo() again, as state is already updated locally
     };
 
     if (isLoading) {

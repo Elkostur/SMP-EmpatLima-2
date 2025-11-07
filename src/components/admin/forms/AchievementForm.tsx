@@ -5,7 +5,7 @@ import { uploadImage } from '../../../services/supabase/storage';
 
 interface AchievementFormProps {
     item: Achievement | null; 
-    onSave: (data: Omit<Achievement, 'id'>) => Promise<void>; 
+    onSave: (savedItem: Achievement) => void; // Changed signature
     onCancel: () => void; 
 }
 
@@ -44,15 +44,16 @@ const AchievementForm: React.FC<AchievementFormProps> = ({ item, onSave, onCance
         }
 
         const achievementData = { title, description, date, imageUrl: finalImageUrl };
+        let savedItem: Achievement;
 
         if (item) {
-            await updateAchievement(item.id, achievementData);
+            savedItem = await updateAchievement(item.id, achievementData);
         } else {
-            await addAchievement(achievementData);
+            savedItem = await addAchievement(achievementData);
         }
         
         setIsUploading(false);
-        onSave(achievementData); // Call onSave from parent
+        onSave(savedItem); // Call onSave with the actual saved item
     };
 
     return (

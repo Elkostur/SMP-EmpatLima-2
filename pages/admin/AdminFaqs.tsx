@@ -12,7 +12,7 @@ const AdminFaqs: React.FC = () => {
     const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
     const [itemToDelete, setItemToDelete] = useState<FaqItem | null>(null);
     useTitle('Manage FAQs | Admin Panel');
-    const { openForm, formState } = useAdminUI(); // Use useAdminUI hook
+    const { openForm } = useAdminUI(); // Use useAdminUI hook
     
     const fetchItems = useCallback(async () => {
         setIsLoading(true);
@@ -25,12 +25,17 @@ const AdminFaqs: React.FC = () => {
         fetchItems();
     }, [fetchItems]);
 
-    // Effect to re-fetch data when the form closes
-    useEffect(() => {
-        if (!formState.type && !isLoading) { // If form is closed and not initially loading
-            fetchItems(); // Re-fetch items
-        }
-    }, [formState.type, isLoading, fetchItems]);
+    const handleItemSaved = useCallback((savedItem: FaqItem, originalItem?: FaqItem) => {
+        setItems(prevItems => {
+            if (originalItem) {
+                // Update existing item
+                return prevItems.map(item => item.id === savedItem.id ? savedItem : item);
+            } else {
+                // Add new item
+                return [savedItem, ...prevItems];
+            }
+        });
+    }, []);
 
     const handleDeleteClick = (item: FaqItem) => {
         setItemToDelete(item);
@@ -40,7 +45,7 @@ const AdminFaqs: React.FC = () => {
     const handleConfirmDelete = async () => {
         if (itemToDelete) {
             await deleteFaq(itemToDelete.id);
-            fetchItems();
+            setItems(prevItems => prevItems.filter(item => item.id !== itemToDelete.id));
         }
         setIsConfirmModalOpen(false);
         setItemToDelete(null);
@@ -55,7 +60,7 @@ const AdminFaqs: React.FC = () => {
         <div>
             <div className="flex justify-between items-center mb-8">
                 <h1 className="text-3xl font-bold text-gray-800 dark:text-gray-100">Manage FAQs</h1>
-                <button onClick={() => openForm('faq', null)} className="bg-emerald-green text-white px-4 py-2 rounded-md hover:bg-emerald-600">
+                <button onClick={() => openForm('faq', null, handleItemSaved)} className="bg-emerald-green text-white px-4 py-2 rounded-md hover:bg-emerald-600">
                     + Create New
                 </button>
             </div>
@@ -76,7 +81,7 @@ const AdminFaqs: React.FC = () => {
                                     <td className="p-4 font-semibold text-gray-800 dark:text-gray-100">{item.question}</td>
                                     <td className="p-4 text-sm text-gray-600 dark:text-gray-400">{item.answer.substring(0, 100)}...</td>
                                     <td className="p-4 flex gap-2">
-                                        <button onClick={() => openForm('faq', item)} className="text-blue-500 hover:underline text-sm">Edit</button>
+                                        <button onClick={() => openForm('faq', item, handleItemSaved)} className="text-blue-500 hover:underline text-sm">Edit</button>
                                         <button onClick={() => handleDeleteClick(item)} className="text-red-500 hover:underline text-sm">Delete</button>
                                     </td>
                                 </tr>

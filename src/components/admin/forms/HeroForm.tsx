@@ -5,7 +5,7 @@ import { uploadImage } from '../../../services/supabase/storage';
 
 interface HeroFormProps {
     item: HeroImage | null; 
-    onSave: (data: { title: string; subtitle: string; imageUrl?: string }) => Promise<void>; 
+    onSave: (savedItem: HeroImage) => void; // Changed signature
     onCancel: () => void; 
 }
 
@@ -43,15 +43,16 @@ const HeroForm: React.FC<HeroFormProps> = ({ item, onSave, onCancel }) => {
         }
 
         const heroData = { title, subtitle, imageUrl: finalImageUrl };
+        let savedItem: HeroImage;
 
         if (item) {
-            await updateHeroImage(item.id, heroData);
+            savedItem = await updateHeroImage(item.id, heroData);
         } else {
-            await addHeroImage(heroData as Omit<HeroImage, 'id'>);
+            savedItem = await addHeroImage(heroData as Omit<HeroImage, 'id'>);
         }
         
         setIsUploading(false);
-        onSave(heroData);
+        onSave(savedItem); // Call onSave with the actual saved item
     };
 
     return (

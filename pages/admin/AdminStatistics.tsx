@@ -54,9 +54,9 @@ const AdminStatistics: React.FC = () => {
         try {
             // Filter out temporary IDs and map to the format expected by updateStatistics
             const statsToSave = stats.map(({ id, ...rest }) => rest); // Remove 'id' for insert
-            await updateStatistics(statsToSave);
+            const savedStats = await updateStatistics(statsToSave);
+            setStats(savedStats); // Update state with the actual saved items (with real IDs)
             alert('Statistics updated successfully!');
-            fetchStats(); // Re-fetch to get real IDs for newly inserted items
         } catch (error) {
             console.error("Failed to save statistics:", error);
             alert('Failed to save statistics. Please try again.');

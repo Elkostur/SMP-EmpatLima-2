@@ -12,7 +12,7 @@ const AdminStaff: React.FC = () => {
     const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
     const [itemToDelete, setItemToDelete] = useState<StaffMember | null>(null);
     useTitle('Manage Staff | Admin Panel');
-    const { openForm, formState } = useAdminUI(); // Use useAdminUI hook
+    const { openForm } = useAdminUI(); // Use useAdminUI hook
     
     const fetchStaff = useCallback(async () => {
         setIsLoading(true);
@@ -25,12 +25,17 @@ const AdminStaff: React.FC = () => {
         fetchStaff();
     }, [fetchStaff]);
 
-    // Effect to re-fetch data when the form closes
-    useEffect(() => {
-        if (!formState.type && !isLoading) { // If form is closed and not initially loading
-            fetchStaff(); // Re-fetch items
-        }
-    }, [formState.type, isLoading, fetchStaff]);
+    const handleItemSaved = useCallback((savedItem: StaffMember, originalItem?: StaffMember) => {
+        setStaff(prevStaff => {
+            if (originalItem) {
+                // Update existing item
+                return prevStaff.map(member => member.id === savedItem.id ? savedItem : member);
+            } else {
+                // Add new item
+                return [savedItem, ...prevStaff];
+            }
+        });
+    }, []);
 
     const handleDeleteClick = (member: StaffMember) => {
         setItemToDelete(member);
@@ -40,7 +45,7 @@ const AdminStaff: React.FC = () => {
     const handleConfirmDelete = async () => {
         if (itemToDelete) {
             await deleteStaffMember(itemToDelete.id);
-            fetchItems();
+            setStaff(prevStaff => prevStaff.filter(member => member.id !== itemToDelete.id));
         }
         setIsConfirmModalOpen(false);
         setItemToDelete(null);
@@ -55,7 +60,7 @@ const AdminStaff: React.FC = () => {
         <div>
             <div className="flex justify-between items-center mb-8">
                 <h1 className="text-3xl font-bold text-gray-800 dark:text-gray-100">Manage Staff</h1>
-                <button onClick={() => openForm('staff', null)} className="bg-emerald-green text-white px-4 py-2 rounded-md hover:bg-emerald-600">
+                <button onClick={() => openForm('staff', null, handleItemSaved)} className="bg-emerald-green text-white px-4 py-2 rounded-md hover:bg-emerald-600">
                     + Add New Member
                 </button>
             </div>
@@ -79,7 +84,7 @@ const AdminStaff: React.FC = () => {
                                     </td>
                                     <td className="p-4 text-gray-600 dark:text-gray-300">{member.position}</td>
                                     <td className="p-4 flex gap-2">
-                                        <button onClick={() => openForm('staff', member)} className="text-blue-500 hover:underline text-sm">Edit</button>
+                                        <button onClick={() => openForm('staff', member, handleItemSaved)} className="text-blue-500 hover:underline text-sm">Edit</button>
                                         <button onClick={() => handleDeleteClick(member)} className="text-red-500 hover:underline text-sm">Delete</button>
                                     </td>
                                 </tr>

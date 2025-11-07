@@ -5,7 +5,7 @@ import { uploadImage } from '../../../services/supabase/storage';
 
 interface ExtracurricularFormProps {
     item: Extracurricular | null; 
-    onSave: (data: { name: string; description: string; imageUrl?: string }) => Promise<void>; 
+    onSave: (savedItem: Extracurricular) => void; // Changed signature
     onCancel: () => void; 
 }
 
@@ -43,15 +43,16 @@ const ExtracurricularForm: React.FC<ExtracurricularFormProps> = ({ item, onSave,
         }
         
         const extracurricularData = { name, description, imageUrl: finalImageUrl };
+        let savedItem: Extracurricular;
 
         if (item) {
-            await updateExtracurricular(item.id, extracurricularData);
+            savedItem = await updateExtracurricular(item.id, extracurricularData);
         } else {
-            await addExtracurricular(extracurricularData as Omit<Extracurricular, 'id'>);
+            savedItem = await addExtracurricular(extracurricularData as Omit<Extracurricular, 'id'>);
         }
         
         setIsUploading(false);
-        onSave(extracurricularData);
+        onSave(savedItem); // Call onSave with the actual saved item
     };
 
     return (

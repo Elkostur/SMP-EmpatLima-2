@@ -4,7 +4,7 @@ import { addFaq, updateFaq } from '../../../services/supabase/faqs';
 
 interface FaqFormProps {
     item: FaqItem | null; 
-    onSave: (data: { question: string; answer: string }) => Promise<void>; 
+    onSave: (savedItem: FaqItem) => void; // Changed signature
     onCancel: () => void; 
 }
 
@@ -18,15 +18,16 @@ const FaqForm: React.FC<FaqFormProps> = ({ item, onSave, onCancel }) => {
         setIsSaving(true);
         
         const faqData = { question, answer };
+        let savedItem: FaqItem;
 
         if (item) {
-            await updateFaq(item.id, faqData);
+            savedItem = await updateFaq(item.id, faqData);
         } else {
-            await addFaq(faqData);
+            savedItem = await addFaq(faqData);
         }
         
         setIsSaving(false);
-        onSave(faqData);
+        onSave(savedItem); // Call onSave with the actual saved item
     };
 
     return (

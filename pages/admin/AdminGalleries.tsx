@@ -12,7 +12,7 @@ const AdminGalleries: React.FC = () => {
     const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
     const [itemToDelete, setItemToDelete] = useState<GalleryItem | null>(null);
     useTitle('Manage Galleries | Admin Panel');
-    const { openForm, formState } = useAdminUI(); // Use useAdminUI hook
+    const { openForm } = useAdminUI(); // Use useAdminUI hook
     
     const fetchItems = useCallback(async () => {
         setIsLoading(true);
@@ -25,12 +25,17 @@ const AdminGalleries: React.FC = () => {
         fetchItems();
     }, [fetchItems]);
 
-    // Effect to re-fetch data when the form closes
-    useEffect(() => {
-        if (!formState.type && !isLoading) { // If form is closed and not initially loading
-            fetchItems(); // Re-fetch items
-        }
-    }, [formState.type, isLoading, fetchItems]);
+    const handleItemSaved = useCallback((savedItem: GalleryItem, originalItem?: GalleryItem) => {
+        setItems(prevItems => {
+            if (originalItem) {
+                // Update existing item
+                return prevItems.map(item => item.id === savedItem.id ? savedItem : item);
+            } else {
+                // Add new item
+                return [savedItem, ...prevItems];
+            }
+        });
+    }, []);
 
     const handleDeleteClick = (item: GalleryItem) => {
         setItemToDelete(item);
@@ -40,7 +45,7 @@ const AdminGalleries: React.FC = () => {
     const handleConfirmDelete = async () => {
         if (itemToDelete) {
             await deleteGalleryItem(itemToDelete.id);
-            fetchItems();
+            setItems(prevItems => prevItems.filter(item => item.id !== itemToDelete.id));
         }
         setIsConfirmModalOpen(false);
         setItemToDelete(null);
@@ -55,7 +60,7 @@ const AdminGalleries: React.FC = () => {
         <div>
             <div className="flex justify-between items-center mb-8">
                 <h1 className="text-3xl font-bold text-gray-800 dark:text-gray-100">Manage Galleries</h1>
-                <button onClick={() => openForm('gallery', null)} className="bg-emerald-green text-white px-4 py-2 rounded-md hover:bg-emerald-600">
+                <button onClick={() => openForm('gallery', null, handleItemSaved)} className="bg-emerald-green text-white px-4 py-2 rounded-md hover:bg-emerald-600">
                     + Add New Item
                 </button>
             </div>
@@ -74,7 +79,7 @@ const AdminGalleries: React.FC = () => {
                            <div className="p-4">
                                 <p className="font-semibold truncate text-gray-800 dark:text-gray-100">{item.title}</p>
                                 <div className="flex gap-2 mt-2 text-sm">
-                                    <button onClick={() => openForm('gallery', item)} className="text-blue-500 hover:underline text-sm">Edit</button>
+                                    <button onClick={() => openForm('gallery', item, handleItemSaved)} className="text-blue-500 hover:underline text-sm">Edit</button>
                                     <button onClick={() => handleDeleteClick(item)} className="text-red-500 hover:underline text-sm">Delete</button>
                                 </div>
                            </div>

@@ -5,7 +5,7 @@ import { uploadImage } from '../../../services/supabase/storage';
 
 interface FacilityFormProps {
     item: Facility | null; 
-    onSave: (data: { name: string; description: string; imageUrl?: string }) => Promise<void>; 
+    onSave: (savedItem: Facility) => void; // Changed signature
     onCancel: () => void; 
 }
 
@@ -43,15 +43,16 @@ const FacilityForm: React.FC<FacilityFormProps> = ({ item, onSave, onCancel }) =
         }
         
         const facilityData = { name, description, imageUrl: finalImageUrl };
+        let savedItem: Facility;
 
         if (item) {
-            await updateFacility(item.id, facilityData);
+            savedItem = await updateFacility(item.id, facilityData);
         } else {
-            await addFacility(facilityData as Omit<Facility, 'id'>);
+            savedItem = await addFacility(facilityData as Omit<Facility, 'id'>);
         }
         
         setIsUploading(false);
-        onSave(facilityData);
+        onSave(savedItem); // Call onSave with the actual saved item
     };
 
     return (

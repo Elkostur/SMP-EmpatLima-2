@@ -5,7 +5,7 @@ import { uploadImage } from '../../../services/supabase/storage';
 
 interface StaffFormProps {
     item: StaffMember | null; 
-    onSave: (data: Omit<StaffMember, 'id'>) => Promise<void>; 
+    onSave: (savedItem: StaffMember) => void; // Changed signature
     onCancel: () => void; 
 }
 
@@ -49,15 +49,16 @@ const StaffForm: React.FC<StaffFormProps> = ({ item, onSave, onCancel }) => {
         }
 
         const staffData = { name, position, bio, nuptk, address, religion, email, phone, imageUrl: finalImageUrl || '' };
+        let savedItem: StaffMember;
 
         if (item) {
-            await updateStaffMember(item.id, staffData);
+            savedItem = await updateStaffMember(item.id, staffData);
         } else {
-            await addStaffMember(staffData);
+            savedItem = await addStaffMember(staffData);
         }
         
         setIsUploading(false);
-        onSave(staffData);
+        onSave(savedItem); // Call onSave with the actual saved item
     };
 
     return (

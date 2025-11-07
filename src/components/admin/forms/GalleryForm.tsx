@@ -5,7 +5,7 @@ import { uploadImage } from '../../../services/supabase/storage';
 
 interface GalleryFormProps {
     item: GalleryItem | null; 
-    onSave: (data: { title: string; imageUrl?: string }) => Promise<void>; 
+    onSave: (savedItem: GalleryItem) => void; // Changed signature
     onCancel: () => void; 
 }
 
@@ -42,15 +42,16 @@ const GalleryForm: React.FC<GalleryFormProps> = ({ item, onSave, onCancel }) => 
         }
 
         const galleryData = { title, imageUrl: finalImageUrl };
+        let savedItem: GalleryItem;
 
         if (item) {
-            await updateGalleryItem(item.id, galleryData);
+            savedItem = await updateGalleryItem(item.id, galleryData);
         } else {
-            await addGalleryItem(galleryData as Omit<GalleryItem, 'id' | 'createdAt'>);
+            savedItem = await addGalleryItem(galleryData as Omit<GalleryItem, 'id' | 'createdAt'>);
         }
         
         setIsUploading(false);
-        onSave(galleryData);
+        onSave(savedItem); // Call onSave with the actual saved item
     };
 
     return (

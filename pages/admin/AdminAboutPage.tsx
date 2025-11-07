@@ -112,7 +112,7 @@ const AdminAboutPage: React.FC = () => {
         await updateAboutPageContent(updatedContent);
         setIsSaving(false);
         alert('Page content updated successfully!');
-        fetchContent();
+        // No need to fetchContent() again, as state is already updated locally
     };
 
     if (isLoading) {

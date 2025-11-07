@@ -5,7 +5,7 @@ import { uploadImage } from '../../../services/supabase/storage';
 
 interface PostFormProps {
     item: Post | null; 
-    onSave: (data: { title: string; content: string; imageUrl?: string }) => Promise<void>; 
+    onSave: (savedItem: Post) => void; // Changed signature
     onCancel: () => void; 
 }
 
@@ -44,15 +44,16 @@ const PostForm: React.FC<PostFormProps> = ({ item, onSave, onCancel }) => {
         }
 
         const postData = { title, content, imageUrl: finalImageUrl };
+        let savedItem: Post;
 
         if (item) {
-            await updatePost(item.id, postData);
+            savedItem = await updatePost(item.id, postData);
         } else {
-            await addPost(postData as Omit<Post, 'id' | 'createdAt'>);
+            savedItem = await addPost(postData as Omit<Post, 'id' | 'createdAt'>);
         }
         
         setIsUploading(false);
-        onSave(postData);
+        onSave(savedItem); // Call onSave with the actual saved item
     };
 
     return (

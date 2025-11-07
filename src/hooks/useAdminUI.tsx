@@ -25,11 +25,12 @@ type FormType =
 interface FormState {
   type: FormType | null;
   data: any | null; // The actual item data to edit/add
+  onItemSaved?: (savedItem: any, originalItem?: any) => void; // Callback to update parent's state
 }
 
 interface AdminUIContextType {
   formState: FormState; // Expose formState so admin pages can react to it
-  openForm: (type: FormType, data?: any) => void;
+  openForm: (type: FormType, data?: any, onItemSavedCallback?: (savedItem: any, originalItem?: any) => void) => void;
   closeForm: () => void;
 }
 
@@ -52,6 +53,7 @@ export const AdminUIProvider: React.FC<{ children: ReactNode }> = ({ children })
         setCurrentFormState({
           type: savedState.type,
           data: savedState.data,
+          onItemSaved: undefined, // Do not restore callback from localStorage
         });
         // Ensure URL params are also set if restoring from localStorage
         const newSearchParams = new URLSearchParams(searchParams);
@@ -73,6 +75,7 @@ export const AdminUIProvider: React.FC<{ children: ReactNode }> = ({ children })
   // Effect to update localStorage and URL when currentFormState changes
   useEffect(() => {
     if (currentFormState.type) {
+      // Store only serializable data
       localStorage.setItem('adminFormState', JSON.stringify({
         type: currentFormState.type,
         data: currentFormState.data,
@@ -100,21 +103,29 @@ export const AdminUIProvider: React.FC<{ children: ReactNode }> = ({ children })
     }
   }, [currentFormState, location.pathname, searchParams, setSearchParams]); // Depend on currentFormState, path, and searchParams
 
-  const openForm = useCallback((type: FormType, data: any = null) => {
-    setCurrentFormState({ type, data });
+  const openForm = useCallback((type: FormType, data: any = null, onItemSavedCallback?: (savedItem: any, originalItem?: any) => void) => {
+    setCurrentFormState({ type, data, onItemSaved: onItemSavedCallback });
   }, []);
 
   const closeForm = useCallback(() => {
-    setCurrentFormState({ type: null, data: null });
+    setCurrentFormState({ type: null, data: null, onItemSaved: undefined });
   }, []);
 
   const renderFormModal = () => {
     if (!currentFormState.type) return null;
 
+    // This is the onSave handler that forms will call after their internal save logic
+    const handleFormSave = (savedItem: any) => {
+      if (currentFormState.onItemSaved) {
+        currentFormState.onItemSaved(savedItem, currentFormState.data); // Pass saved and original item
+      }
+      closeForm();
+    };
+
     const commonProps = {
       item: currentFormState.data,
       onCancel: closeForm,
-      onSave: closeForm, // Form components will call this after their internal save logic
+      onSave: handleFormSave,
     };
 
     switch (currentFormState.type) {

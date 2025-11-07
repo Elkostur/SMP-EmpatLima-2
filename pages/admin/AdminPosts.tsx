@@ -13,7 +13,7 @@ const AdminPosts: React.FC = () => {
     const [itemToDelete, setItemToDelete] = useState<Post | null>(null);
     const [searchQuery, setSearchQuery] = useState(''); // Deklarasi searchQuery
     useTitle('Manage Posts | Admin Panel');
-    const { openForm, formState } = useAdminUI(); // Use useAdminUI hook
+    const { openForm } = useAdminUI(); // Use useAdminUI hook
     
     const fetchPosts = useCallback(async () => {
         setIsLoading(true);
@@ -26,12 +26,17 @@ const AdminPosts: React.FC = () => {
         fetchPosts();
     }, [fetchPosts]);
 
-    // Effect to re-fetch data when the form closes
-    useEffect(() => {
-        if (!formState.type && !isLoading) { // If form is closed and not initially loading
-            fetchPosts(); // Re-fetch items
-        }
-    }, [formState.type, isLoading, fetchPosts]);
+    const handleItemSaved = useCallback((savedItem: Post, originalItem?: Post) => {
+        setPosts(prevPosts => {
+            if (originalItem) {
+                // Update existing item
+                return prevPosts.map(post => post.id === savedItem.id ? savedItem : post);
+            } else {
+                // Add new item
+                return [savedItem, ...prevPosts];
+            }
+        });
+    }, []);
 
     const handleDeleteClick = (post: Post) => {
         setItemToDelete(post);
@@ -41,7 +46,7 @@ const AdminPosts: React.FC = () => {
     const handleConfirmDelete = async () => {
         if (itemToDelete) {
             await deletePost(itemToDelete.id);
-            fetchPosts();
+            setPosts(prevPosts => prevPosts.filter(post => post.id !== itemToDelete.id));
         }
         setIsConfirmModalOpen(false);
         setItemToDelete(null);
@@ -63,7 +68,7 @@ const AdminPosts: React.FC = () => {
         <div>
             <div className="flex justify-between items-center mb-8">
                 <h1 className="text-3xl font-bold text-gray-800 dark:text-gray-100">Manage Posts</h1>
-                <button onClick={() => openForm('post', null)} className="bg-emerald-green text-white px-4 py-2 rounded-md hover:bg-emerald-600">
+                <button onClick={() => openForm('post', null, handleItemSaved)} className="bg-emerald-green text-white px-4 py-2 rounded-md hover:bg-emerald-600">
                     + Create New Post
                 </button>
             </div>
@@ -94,7 +99,7 @@ const AdminPosts: React.FC = () => {
                                     <td className="p-4">{post.title}</td>
                                     <td className="p-4">{new Date(post.createdAt).toLocaleDateString()}</td>
                                     <td className="p-4 flex gap-2">
-                                        <button onClick={() => openForm('post', post)} className="text-blue-500 hover:underline text-sm">Edit</button>
+                                        <button onClick={() => openForm('post', post, handleItemSaved)} className="text-blue-500 hover:underline text-sm">Edit</button>
                                         <button onClick={() => handleDeleteClick(post)} className="text-red-500 hover:underline text-sm">Delete</button>
                                     </td>
                                 </tr>
