@@ -19,9 +19,16 @@ const PostCard: React.FC<{ post: Post }> = ({ post }) => (
 const LatestNews: React.FC = () => {
     const [posts, setPosts] = useState<Post[]>([]);
     const [loading, setLoading] = useState(true);
+    const [hasAnimated, setHasAnimated] = useState(false); // State baru untuk mengontrol animasi
 
     const sectionRef = useRef<HTMLDivElement>(null);
     const isVisible = useIntersectionObserver(sectionRef, { threshold: 0.1, triggerOnce: true });
+
+    useEffect(() => {
+      if (isVisible && !hasAnimated) {
+        setHasAnimated(true);
+      }
+    }, [isVisible, hasAnimated]);
 
     useEffect(() => {
         const fetchPosts = async () => {
@@ -49,7 +56,7 @@ const LatestNews: React.FC = () => {
                 ) : (
                     <div 
                         ref={sectionRef}
-                        className={`grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12 transform transition-all duration-700 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-[20px]'}`}
+                        className={`grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12 transform transition-all duration-700 ease-out ${hasAnimated ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-[20px]'}`}
                     >
                         {posts.map(post => <PostCard key={post.id} post={post} />)}
                     </div>

@@ -18,9 +18,16 @@ const FacilityCard: React.FC<{ item: Facility }> = ({ item }) => (
 const FacilitiesSection: React.FC = () => {
     const [items, setItems] = useState<Facility[]>([]);
     const [loading, setLoading] = useState(true);
+    const [hasAnimated, setHasAnimated] = useState(false); // State baru untuk mengontrol animasi
 
     const sectionRef = useRef<HTMLDivElement>(null);
     const isVisible = useIntersectionObserver(sectionRef, { threshold: 0.1, triggerOnce: true });
+
+    useEffect(() => {
+      if (isVisible && !hasAnimated) {
+        setHasAnimated(true);
+      }
+    }, [isVisible, hasAnimated]);
 
     useEffect(() => {
         const fetchItems = async () => {
@@ -48,7 +55,7 @@ const FacilitiesSection: React.FC = () => {
                 ) : (
                     <div 
                         ref={sectionRef}
-                        className={`grid md:grid-cols-2 lg:grid-cols-4 gap-8 transform transition-all duration-700 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-[20px]'}`}
+                        className={`grid md:grid-cols-2 lg:grid-cols-4 gap-8 transform transition-all duration-700 ease-out ${hasAnimated ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-[20px]'}`}
                     >
                         {items.map(item => <FacilityCard key={item.id} item={item} />)}
                     </div>
