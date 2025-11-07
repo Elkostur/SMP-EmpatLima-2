@@ -14,7 +14,24 @@ const useIntersectionObserver = (
 
   useEffect(() => {
     const element = ref.current;
-    if (!element) return;
+    if (!element) {
+        return;
+    }
+
+    // Initial check for visibility on mount
+    const checkInitialVisibility = () => {
+      const rect = element.getBoundingClientRect();
+      const inViewport = (
+        rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
+        rect.left <= (window.innerWidth || document.documentElement.clientWidth) &&
+        rect.bottom >= 0 &&
+        rect.right >= 0
+      );
+      if (inViewport) {
+        setIsVisible(true);
+      }
+    };
+    checkInitialVisibility(); // Run once on mount
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -23,6 +40,8 @@ const useIntersectionObserver = (
           if (options.triggerOnce) {
             observer.unobserve(element);
           }
+        } else if (!options.triggerOnce) { // Only set to false if not triggerOnce
+          setIsVisible(false);
         }
       },
       {
@@ -31,12 +50,16 @@ const useIntersectionObserver = (
       }
     );
 
-    observer.observe(element);
+    // Only observe if not already visible (or if triggerOnce is false)
+    // This prevents re-observing if it was already visible and triggerOnce is true
+    if (!isVisible || !options.triggerOnce) {
+        observer.observe(element);
+    }
 
     return () => {
       observer.disconnect();
     };
-  }, [ref, options.threshold, options.rootMargin, options.triggerOnce]);
+  }, [ref, options.threshold, options.rootMargin, options.triggerOnce, isVisible]); // isVisible in dependencies to ensure re-evaluation if initial check changes it
 
   return isVisible;
 };

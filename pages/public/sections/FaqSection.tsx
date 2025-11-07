@@ -34,16 +34,9 @@ const FaqSection: React.FC = () => {
     const [items, setItems] = useState<FaqItem[]>([]);
     const [loading, setLoading] = useState(true);
     const [openIndex, setOpenIndex] = useState<number | null>(0);
-    const [hasAnimated, setHasAnimated] = useState(false); // State baru untuk mengontrol animasi
 
     const sectionRef = useRef<HTMLDivElement>(null);
     const isVisible = useIntersectionObserver(sectionRef, { threshold: 0.1, triggerOnce: true });
-
-    useEffect(() => {
-      if (isVisible && !hasAnimated) {
-        setHasAnimated(true);
-      }
-    }, [isVisible, hasAnimated]);
 
     useEffect(() => {
         const fetchItems = async () => {
@@ -75,7 +68,7 @@ const FaqSection: React.FC = () => {
                 ) : (
                     <div 
                         ref={sectionRef}
-                        className={`max-w-3xl mx-auto bg-white dark:bg-gray-800 rounded-lg shadow-md transform transition-all duration-700 ease-out ${hasAnimated ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-[20px]'}`}
+                        className={`max-w-3xl mx-auto bg-white dark:bg-gray-800 rounded-lg shadow-md transform transition-all duration-700 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-[20px]'}`}
                     >
                         {items.map((item, index) => (
                             <AccordionItem 

@@ -7,16 +7,9 @@ import useIntersectionObserver from '../../../src/hooks/useIntersectionObserver'
 const TeamSection: React.FC = () => {
     const [staff, setStaff] = useState<StaffMember[]>([]);
     const [loading, setLoading] = useState(true);
-    const [hasAnimated, setHasAnimated] = useState(false); // State baru untuk mengontrol animasi
 
     const sectionRef = useRef<HTMLDivElement>(null);
     const isVisible = useIntersectionObserver(sectionRef, { threshold: 0.1, triggerOnce: true });
-
-    useEffect(() => {
-      if (isVisible && !hasAnimated) {
-        setHasAnimated(true);
-      }
-    }, [isVisible, hasAnimated]);
 
     useEffect(() => {
         const fetchStaff = async () => {
@@ -44,7 +37,7 @@ const TeamSection: React.FC = () => {
                 ) : (
                     <div 
                         ref={sectionRef}
-                        className={`grid md:grid-cols-3 gap-8 mb-12 transform transition-all duration-700 ease-out ${hasAnimated ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-[20px]'}`}
+                        className={`grid md:grid-cols-3 gap-8 mb-12 transform transition-all duration-700 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-[20px]'}`}
                     >
                         {staff.map(member => (
                             <div key={member.id} className="text-center">
