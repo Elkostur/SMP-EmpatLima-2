@@ -37,7 +37,7 @@ const TeamSection: React.FC = () => {
                 ) : (
                     <div 
                         ref={sectionRef}
-                        className={`grid md:grid-cols-3 gap-8 mb-12 opacity-0 translate-y-4 ${isVisible ? 'animate-fadeInUp' : ''}`}
+                        className={`grid md:grid-cols-3 gap-8 mb-12 opacity-0 translate-y-[20px] ${isVisible ? 'animate-fadeInUp' : ''}`}
                     >
                         {staff.map(member => (
                             <div key={member.id} className="text-center">

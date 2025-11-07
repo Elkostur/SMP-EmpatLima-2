@@ -68,7 +68,7 @@ const FaqSection: React.FC = () => {
                 ) : (
                     <div 
                         ref={sectionRef}
-                        className={`max-w-3xl mx-auto bg-white dark:bg-gray-800 rounded-lg shadow-md ${isVisible ? 'animate-fadeInUp' : 'opacity-0 translate-y-4'}`}
+                        className={`max-w-3xl mx-auto bg-white dark:bg-gray-800 rounded-lg shadow-md opacity-0 translate-y-[20px] ${isVisible ? 'animate-fadeInUp' : ''}`}
                     >
                         {items.map((item, index) => (
                             <AccordionItem 
