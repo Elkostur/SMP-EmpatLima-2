@@ -7,7 +7,7 @@ import type { Post } from '../../types';
 import useTitle from '../../hooks/useTitle';
 
 const PostCard: React.FC<{ post: Post }> = ({ post }) => (
-    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 flex flex-col">
+    <div className="bg-white dark:bg-gray-900 rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 flex flex-col">
         <img src={post.imageUrl} alt={post.title} className="w-full h-56 object-cover" loading="lazy" />
         <div className="p-6 flex flex-col flex-grow">
             <h3 className="text-xl font-bold mb-2 text-gray-800 dark:text-gray-100">{post.title}</h3>
