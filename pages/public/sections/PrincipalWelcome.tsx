@@ -60,7 +60,7 @@ const PrincipalWelcome: React.FC = () => {
   return (
     <section 
       ref={sectionRef}
-      className={`relative py-16 mt-[-10rem] md:mt-[-12rem] lg:mt-[-10rem] z-10 transform transition-all duration-1700 ease-out ${isVisible ? 'opacity-0 translate-y-0' : 'opacity-100 translate-y-[20px]'}`}
+      className={`relative py-16 mt-[-10rem] md:mt-[-12rem] lg:mt-[-10rem] z-10 transform transition-all duration-1700 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-[20px]'}`}
     >
       <div className="container mx-auto px-6">
         <div className="bg-white dark:bg-gray-800 p-8 md:p-12 rounded-xl shadow-2xl">
