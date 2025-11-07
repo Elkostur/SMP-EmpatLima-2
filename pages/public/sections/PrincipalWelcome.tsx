@@ -7,16 +7,9 @@ import useIntersectionObserver from '../../../src/hooks/useIntersectionObserver'
 const PrincipalWelcome: React.FC = () => {
   const [content, setContent] = useState<AboutPageContent['principalWelcome'] | null>(null);
   const [loading, setLoading] = useState(true);
-  const [hasEnteredViewport, setHasEnteredViewport] = useState(false); // State baru untuk mengontrol animasi
 
   const sectionRef = useRef<HTMLDivElement>(null);
   const isIntersecting = useIntersectionObserver(sectionRef, { threshold: 0.1, triggerOnce: true });
-
-  useEffect(() => {
-    if (isIntersecting && !hasEnteredViewport) {
-      setHasEnteredViewport(true);
-    }
-  }, [isIntersecting, hasEnteredViewport]);
 
   useEffect(() => {
     const fetchContent = async () => {
@@ -71,7 +64,7 @@ const PrincipalWelcome: React.FC = () => {
       <div className="container mx-auto px-6">
         <div 
           ref={sectionRef}
-          className={`bg-white dark:bg-gray-800 p-8 md:p-12 rounded-xl shadow-2xl transform transition-all duration-700 ease-out ${hasEnteredViewport ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-[20px]'}`}
+          className={`bg-white dark:bg-gray-800 p-8 md:p-12 rounded-xl shadow-2xl transform transition-all duration-700 ease-out ${isIntersecting ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-[20px]'}`}
         >
             <div className="flex flex-col md:flex-row items-center gap-8">
               <img 
