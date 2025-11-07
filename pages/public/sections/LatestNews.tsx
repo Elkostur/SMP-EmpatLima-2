@@ -4,15 +4,18 @@ import type { Post } from '../../../types';
 import { Link } from 'react-router-dom';
 
 const PostCard: React.FC<{ post: Post }> = ({ post }) => (
-    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 active:scale-[0.98] active:shadow-2xl transition-transform duration-300">
+    <Link 
+        to={`/posts/${post.id}`} // Seluruh card menjadi tautan
+        className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 active:scale-[0.98] active:shadow-2xl transition-transform duration-300 flex flex-col group"
+    >
         <img src={post.imageUrl} alt={post.title} className="w-full h-48 object-cover" loading="lazy" />
         <div className="p-6">
             <h3 className="text-xl font-bold mb-2 text-gray-800 dark:text-gray-100">{post.title}</h3>
             <p className="text-gray-600 dark:text-gray-400 text-sm mb-4">{new Date(post.createdAt).toLocaleDateString()}</p>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed">{post.content.substring(0, 100)}...</p>
-            <Link to={`/posts/${post.id}`} className="text-emerald-green dark:text-emerald-400 font-semibold mt-4 inline-block hover:underline">Baca Selengkapnya &rarr;</Link>
+            <span className="text-emerald-green dark:text-emerald-400 font-semibold mt-4 inline-block group-hover:underline">Baca Selengkapnya &rarr;</span>
         </div>
-    </div>
+    </Link>
 );
 
 const LatestNews: React.FC = () => {
