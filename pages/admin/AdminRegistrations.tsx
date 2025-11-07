@@ -3,7 +3,7 @@ import type { Registration } from '../../types';
 import { getRegistrations, deleteRegistration } from '../../src/services/supabase/registrations';
 import ConfirmationModal from '../../components/ConfirmationModal';
 import useTitle from '../../hooks/useTitle';
-import { exportToCsv } from '../../src/utils/exportToCsv'; // Import the new utility
+import { exportToExcel } from '../../src/utils/exportToExcel'; // Import the new utility
 
 const AdminRegistrations: React.FC = () => {
     const [registrations, setRegistrations] = useState<Registration[]>([]);
@@ -52,7 +52,7 @@ const AdminRegistrations: React.FC = () => {
             { key: 'phone', label: 'Telepon' },
             { key: 'email', label: 'Email' },
         ];
-        exportToCsv('PPDB_Registrations', registrations, headers);
+        exportToExcel('PPDB_Registrations', registrations, headers);
     };
 
     return (
@@ -61,7 +61,7 @@ const AdminRegistrations: React.FC = () => {
                 <h1 className="text-3xl font-bold text-gray-800 dark:text-gray-100">PPDB Registrations</h1>
                 <button 
                     onClick={handleDownload} 
-                    className="bg-emerald-green text-white px-4 py-2 rounded-md hover:bg-emerald-600 disabled:bg-gray-400"
+                    className="bg-emerald-green text-white px-4 py-2 rounded-md hover:bg-emerald-600 disabled:bg-gray-400 font-bold transition-colors"
                     disabled={isLoading || registrations.length === 0}
                 >
                     Download as Excel
@@ -70,38 +70,38 @@ const AdminRegistrations: React.FC = () => {
 
             {isLoading ? <p className="dark:text-gray-300">Loading registrations...</p> : (
                 <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md overflow-x-auto">
-                    <table className="w-full text-left">
-                        <thead className="whitespace-nowrap">
-                            <tr className="border-b dark:border-gray-700">
-                                <th className="p-4 text-gray-600 dark:text-gray-300">Date</th>
-                                <th className="p-4 text-gray-600 dark:text-gray-300">Full Name</th>
-                                <th className="p-4 text-gray-600 dark:text-gray-300">Birth Date</th>
-                                <th className="p-4 text-gray-600 dark:text-gray-300">Previous School</th>
-                                <th className="p-4 text-gray-600 dark:text-gray-300">Parent Name</th>
-                                <th className="p-4 text-gray-600 dark:text-gray-300">Phone</th>
-                                <th className="p-4 text-gray-600 dark:text-gray-300">Email</th>
-                                <th className="p-4 text-gray-600 dark:text-gray-300">Actions</th>
+                    <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                        <thead className="bg-gray-50 dark:bg-gray-700">
+                            <tr>
+                                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Tanggal Pendaftaran</th>
+                                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Nama Lengkap Siswa</th>
+                                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Tanggal Lahir</th>
+                                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Asal Sekolah</th>
+                                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Nama Orang Tua/Wali</th>
+                                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Telepon</th>
+                                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Email</th>
+                                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Aksi</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
                             {registrations.map(item => (
-                                <tr key={item.id} className="border-b dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700">
-                                    <td className="p-4 text-sm text-gray-600 dark:text-gray-400">{new Date(item.createdAt).toLocaleDateString()}</td>
-                                    <td className="p-4 font-semibold text-gray-800 dark:text-gray-100">{item.fullName}</td>
-                                    <td className="p-4 text-sm text-gray-600 dark:text-gray-400">{item.birthDate}</td>
-                                    <td className="p-4 text-sm text-gray-600 dark:text-gray-400">{item.previousSchool}</td>
-                                    <td className="p-4 text-sm text-gray-600 dark:text-gray-400">{item.parentName}</td>
-                                    <td className="p-4 text-sm text-gray-600 dark:text-gray-400">{item.phone}</td>
-                                    <td className="p-4 text-sm text-gray-600 dark:text-gray-400">{item.email}</td>
-                                    <td className="p-4">
-                                        <button onClick={() => handleDeleteClick(item)} className="text-red-500 hover:underline text-sm">Delete</button>
+                                <tr key={item.id} className="hover:bg-gray-50 dark:hover:bg-gray-700">
+                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-400">{new Date(item.createdAt).toLocaleDateString()}</td>
+                                    <td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900 dark:text-gray-100">{item.fullName}</td>
+                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-400">{item.birthDate}</td>
+                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-400">{item.previousSchool}</td>
+                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-400">{item.parentName}</td>
+                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-400">{item.phone}</td>
+                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-400">{item.email}</td>
+                                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                        <button onClick={() => handleDeleteClick(item)} className="text-red-600 hover:text-red-900 dark:text-red-500 dark:hover:text-red-400">Hapus</button>
                                     </td>
                                 </tr>
                             ))}
                         </tbody>
                     </table>
                      {registrations.length === 0 && (
-                        <p className="text-center text-gray-500 py-8">No registrations found.</p>
+                        <p className="text-center text-gray-500 py-8">Tidak ada pendaftaran ditemukan.</p>
                     )}
                 </div>
             )}
@@ -110,8 +110,8 @@ const AdminRegistrations: React.FC = () => {
                 isOpen={isConfirmModalOpen}
                 onClose={handleCloseModal}
                 onConfirm={handleConfirmDelete}
-                title="Confirm Deletion"
-                message={`Are you sure you want to delete the registration for "${itemToDelete?.fullName}"? This action cannot be undone.`}
+                title="Konfirmasi Penghapusan"
+                message={`Apakah Anda yakin ingin menghapus pendaftaran untuk "${itemToDelete?.fullName}"? Tindakan ini tidak dapat dibatalkan.`}
             />
         </div>
     );
