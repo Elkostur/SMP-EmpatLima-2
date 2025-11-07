@@ -38,6 +38,7 @@ const Statistics: React.FC = () => {
     return (
         <section id="stats" className="bg-emerald-green py-16">
             <div className="container mx-auto px-6">
+                <h2 className="text-3xl font-bold text-center mb-10 text-white">Statistik Sekolah Kami</h2> {/* Added main title */}
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
                     {loading ? (
                         <>

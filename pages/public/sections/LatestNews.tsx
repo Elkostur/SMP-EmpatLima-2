@@ -10,7 +10,7 @@ const PostCard: React.FC<{ post: Post }> = ({ post }) => (
             <h3 className="text-xl font-bold mb-2 text-gray-800 dark:text-gray-100">{post.title}</h3>
             <p className="text-gray-600 dark:text-gray-400 text-sm mb-4">{new Date(post.createdAt).toLocaleDateString()}</p>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed">{post.content.substring(0, 100)}...</p>
-            <Link to={`/posts/${post.id}`} className="text-emerald-green dark:text-emerald-400 font-semibold mt-4 inline-block hover:underline">Read More &rarr;</Link>
+            <Link to={`/posts/${post.id}`} className="text-emerald-green dark:text-emerald-400 font-semibold mt-4 inline-block hover:underline">Baca Selengkapnya &rarr;</Link>
         </div>
     </div>
 );
@@ -39,9 +39,9 @@ const LatestNews: React.FC = () => {
             className="py-16 bg-gray-100 dark:bg-gray-900"
         >
             <div className="container mx-auto px-6">
-                <h2 className="text-3xl font-bold text-center mb-10">Latest News</h2>
+                <h2 className="text-3xl font-bold text-center mb-10 text-gray-800 dark:text-gray-100">Berita Terbaru</h2>
                 {loading ? (
-                    <p className="text-center">Loading news...</p>
+                    <p className="text-center dark:text-gray-300">Memuat berita...</p>
                 ) : (
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
                         {posts.map(post => <PostCard key={post.id} post={post} />)}
@@ -49,7 +49,7 @@ const LatestNews: React.FC = () => {
                 )}
                  <div className="text-center">
                     <Link to="/posts" className="bg-emerald-green text-white font-bold py-3 px-8 rounded-full hover:bg-emerald-600 transition-colors duration-300">
-                        View All News
+                        Lihat Semua Berita
                     </Link>
                 </div>
             </div>

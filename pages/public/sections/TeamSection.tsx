@@ -27,9 +27,9 @@ const TeamSection: React.FC = () => {
             className="py-16 bg-white dark:bg-gray-900"
         >
             <div className="container mx-auto px-6">
-                <h2 className="text-3xl font-bold text-center mb-10 text-gray-800 dark:text-gray-100">Meet Our Teacher</h2>
+                <h2 className="text-3xl font-bold text-center mb-10 text-gray-800 dark:text-gray-100">Temui Guru Kami</h2>
                 {loading ? (
-                    <p className="text-center">Loading team...</p>
+                    <p className="text-center">Memuat tim...</p>
                 ) : (
                     <div className="grid md:grid-cols-3 gap-8 mb-12">
                         {staff.map(member => (
@@ -43,7 +43,7 @@ const TeamSection: React.FC = () => {
                 )}
                  <div className="text-center">
                     <Link to="/staff" className="bg-emerald-green text-white font-bold py-3 px-8 rounded-full hover:bg-emerald-600 transition-colors duration-300">
-                        View All Staff
+                        Lihat Semua Guru
                     </Link>
                 </div>
             </div>

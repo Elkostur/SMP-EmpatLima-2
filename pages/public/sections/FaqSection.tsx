@@ -58,9 +58,9 @@ const FaqSection: React.FC = () => {
             className="py-16 bg-white dark:bg-gray-900"
         >
             <div className="container mx-auto px-6">
-                <h2 className="text-3xl font-bold text-center mb-10 text-gray-800 dark:text-gray-100">Frequently Asked Questions</h2>
+                <h2 className="text-3xl font-bold text-center mb-10 text-gray-800 dark:text-gray-100">Pertanyaan yang Sering Diajukan</h2>
                 {loading ? (
-                    <p className="text-center dark:text-gray-300">Loading FAQs...</p>
+                    <p className="text-center dark:text-gray-300">Memuat FAQ...</p>
                 ) : (
                     <div className="max-w-3xl mx-auto bg-white dark:bg-gray-800 rounded-lg shadow-md">
                         {items.map((item, index) => (

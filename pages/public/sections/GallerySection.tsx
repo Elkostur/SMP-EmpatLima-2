@@ -27,9 +27,9 @@ const GallerySection: React.FC = () => {
             className="py-16 bg-white dark:bg-gray-900"
         >
             <div className="container mx-auto px-6">
-                <h2 className="text-3xl font-bold text-center mb-10 text-gray-800 dark:text-gray-100">Our Gallery</h2>
+                <h2 className="text-3xl font-bold text-center mb-10 text-gray-800 dark:text-gray-100">Galeri Kami</h2>
                  {loading ? (
-                    <p className="text-center">Loading gallery...</p>
+                    <p className="text-center dark:text-gray-300">Memuat galeri...</p>
                 ) : (
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-12">
                     {items.map((item, index) => (
@@ -41,7 +41,7 @@ const GallerySection: React.FC = () => {
                  )}
                  <div className="text-center">
                     <Link to="/galleries" className="bg-emerald-green text-white font-bold py-3 px-8 rounded-full hover:bg-emerald-600 transition-colors duration-300">
-                        View Full Gallery
+                        Lihat Galeri Lengkap
                     </Link>
                 </div>
             </div>
