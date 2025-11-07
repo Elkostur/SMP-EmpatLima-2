@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { getFacilities } from '../../../src/services/supabase/facilities';
 import type { Facility } from '../../../types'; // Jalur diperbarui
-import useIntersectionObserver from '../../../src/hooks/useIntersectionObserver'; // Import hook
 
 const FacilityCard: React.FC<{ item: Facility }> = ({ item }) => (
     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 flex flex-col">
@@ -18,9 +17,6 @@ const FacilityCard: React.FC<{ item: Facility }> = ({ item }) => (
 const FacilitiesSection: React.FC = () => {
     const [items, setItems] = useState<Facility[]>([]);
     const [loading, setLoading] = useState(true);
-
-    const sectionRef = useRef<HTMLDivElement>(null);
-    const isIntersecting = useIntersectionObserver(sectionRef, { threshold: 0.1, triggerOnce: true });
 
     useEffect(() => {
         const fetchItems = async () => {
@@ -47,8 +43,7 @@ const FacilitiesSection: React.FC = () => {
                     <p className="text-center dark:text-gray-300">Loading facilities...</p>
                 ) : (
                     <div 
-                        ref={sectionRef}
-                        className={`grid md:grid-cols-2 lg:grid-cols-4 gap-8 transform transition-all duration-700 ease-out ${isIntersecting ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-[20px]'}`}
+                        className="grid md:grid-cols-2 lg:grid-cols-4 gap-8"
                     >
                         {items.map(item => <FacilityCard key={item.id} item={item} />)}
                     </div>

@@ -53,7 +53,7 @@ const AboutPage: React.FC = () => {
   return (
     <div className="flex flex-col min-h-screen bg-gray-50 dark:bg-black">
       <Header />
-      <main className="flex-grow animate-fadeInUp">
+      <main className="flex-grow">
         <div className="relative bg-emerald-green text-white py-20 text-center">
           <div className="container mx-auto px-6 relative z-10">
             <h1 className="text-5xl font-extrabold">Tentang SMP "Empat Lima" 2 Kedungpring</h1>

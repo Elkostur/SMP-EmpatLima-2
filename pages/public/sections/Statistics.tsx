@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { getStatistics } from '../../../src/services/supabase/statistics';
 import type { Statistic } from '../../../types'; // Jalur diperbarui
-import useIntersectionObserver from '../../../src/hooks/useIntersectionObserver'; // Import hook
 
 const StatItem: React.FC<{ value: string; label: string }> = ({ value, label }) => (
     <div className="text-center">
@@ -20,9 +19,6 @@ const LoadingStatItem: React.FC = () => (
 const Statistics: React.FC = () => {
     const [stats, setStats] = useState<Statistic[]>([]);
     const [loading, setLoading] = useState(true);
-
-    const sectionRef = useRef<HTMLDivElement>(null);
-    const isIntersecting = useIntersectionObserver(sectionRef, { threshold: 0.1, triggerOnce: true });
 
     useEffect(() => {
         const fetchStats = async () => {
@@ -44,8 +40,7 @@ const Statistics: React.FC = () => {
             <div className="container mx-auto px-6">
                 <h2 className="text-3xl font-bold text-center mb-10 text-white">Statistik Sekolah Kami</h2> {/* Added main title */}
                 <div 
-                    ref={sectionRef}
-                    className={`grid grid-cols-2 md:grid-cols-4 gap-8 transform transition-all duration-700 ease-out ${isIntersecting ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-[20px]'}`}
+                    className="grid grid-cols-2 md:grid-cols-4 gap-8"
                 >
                     {loading ? (
                         <>

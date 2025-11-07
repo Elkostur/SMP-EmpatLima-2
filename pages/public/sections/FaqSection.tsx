@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { getFaqs } from '../../../src/services/supabase/faqs';
 import type { FaqItem } from '../../../types'; // Jalur diperbarui
-import useIntersectionObserver from '../../../src/hooks/useIntersectionObserver'; // Import hook
 
 const AccordionItem: React.FC<{
   item: FaqItem;
@@ -35,9 +34,6 @@ const FaqSection: React.FC = () => {
     const [loading, setLoading] = useState(true);
     const [openIndex, setOpenIndex] = useState<number | null>(0);
 
-    const sectionRef = useRef<HTMLDivElement>(null);
-    const isIntersecting = useIntersectionObserver(sectionRef, { threshold: 0.1, triggerOnce: true });
-
     useEffect(() => {
         const fetchItems = async () => {
             try {
@@ -67,8 +63,7 @@ const FaqSection: React.FC = () => {
                     <p className="text-center dark:text-gray-300">Memuat FAQ...</p>
                 ) : (
                     <div 
-                        ref={sectionRef}
-                        className={`max-w-3xl mx-auto bg-white dark:bg-gray-800 rounded-lg shadow-md transform transition-all duration-700 ease-out ${isIntersecting ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-[20px]'}`}
+                        className="max-w-3xl mx-auto bg-white dark:bg-gray-800 rounded-lg shadow-md"
                     >
                         {items.map((item, index) => (
                             <AccordionItem 

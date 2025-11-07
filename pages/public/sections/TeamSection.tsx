@@ -2,14 +2,10 @@ import React, { useState, useEffect, useRef } from 'react';
 import { getStaff } from '../../../src/services/supabase/staff';
 import type { StaffMember } from '../../../types'; // Jalur diperbarui
 import { Link } from 'react-router-dom';
-import useIntersectionObserver from '../../../src/hooks/useIntersectionObserver'; // Import hook
 
 const TeamSection: React.FC = () => {
     const [staff, setStaff] = useState<StaffMember[]>([]);
     const [loading, setLoading] = useState(true);
-
-    const sectionRef = useRef<HTMLDivElement>(null);
-    const isIntersecting = useIntersectionObserver(sectionRef, { threshold: 0.1, triggerOnce: true });
 
     useEffect(() => {
         const fetchStaff = async () => {
@@ -36,8 +32,7 @@ const TeamSection: React.FC = () => {
                     <p className="text-center">Memuat tim...</p>
                 ) : (
                     <div 
-                        ref={sectionRef}
-                        className={`grid md:grid-cols-3 gap-8 mb-12 transform transition-all duration-700 ease-out ${isIntersecting ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-[20px]'}`}
+                        className="grid md:grid-cols-3 gap-8 mb-12"
                     >
                         {staff.map(member => (
                             <div key={member.id} className="text-center">

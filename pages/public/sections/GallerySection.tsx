@@ -2,14 +2,10 @@ import React, { useState, useEffect, useRef } from 'react';
 import { getGalleries } from '../../../src/services/supabase/galleries';
 import type { GalleryItem } from '../../../types'; // Jalur diperbarui
 import { Link } from 'react-router-dom';
-import useIntersectionObserver from '../../../src/hooks/useIntersectionObserver'; // Import hook
 
 const GallerySection: React.FC = () => {
     const [items, setItems] = useState<GalleryItem[]>([]);
     const [loading, setLoading] = useState(true);
-
-    const sectionRef = useRef<HTMLDivElement>(null);
-    const isIntersecting = useIntersectionObserver(sectionRef, { threshold: 0.1, triggerOnce: true });
 
     useEffect(() => {
         const fetchItems = async () => {
@@ -36,8 +32,7 @@ const GallerySection: React.FC = () => {
                     <p className="text-center dark:text-gray-300">Memuat galeri...</p>
                 ) : (
                 <div 
-                    ref={sectionRef}
-                    className={`grid grid-cols-2 md:grid-cols-3 gap-4 mb-12 transform transition-all duration-700 ease-out ${isIntersecting ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-[20px]'}`}
+                    className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-12"
                 >
                     {items.map((item, index) => (
                         <div key={item.id} className={`overflow-hidden rounded-lg shadow-md ${index === 0 ? 'col-span-2 row-span-2' : ''}`}>
