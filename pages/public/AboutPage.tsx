@@ -62,9 +62,9 @@ const AboutPage: React.FC = () => {
         </div>
 
         {/* Principal Welcome Section */}
-        <section className="py-16 bg-white dark:bg-gray-800">
+        <section className="py-16 bg-white dark:bg-gray-900">
           <div className="container mx-auto px-6">
-            <div className="flex flex-col md:flex-row items-center gap-12 bg-gray-50 dark:bg-gray-900 p-8 rounded-xl shadow-lg">
+            <div className="flex flex-col md:flex-row items-center gap-12 bg-gray-50 dark:bg-gray-800 p-8 rounded-xl shadow-lg">
               <img 
                 src={principalWelcome.imageUrl} 
                 alt={principalWelcome.name}

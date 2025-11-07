@@ -135,16 +135,18 @@ const ContactPage: React.FC = () => {
         <div className="flex flex-col min-h-screen bg-gray-50 dark:bg-black">
             <Header />
             <main className="flex-grow">
-                <div className="container mx-auto px-6 py-16">
-                    <h1 className="text-4xl font-bold text-center mb-4 text-emerald-green dark:text-emerald-400">Hubungi Kami</h1>
-                    <p className="text-center text-gray-600 dark:text-gray-300 mb-12 max-w-2xl mx-auto">Kami siap membantu Anda. Silakan hubungi kami melalui informasi di bawah ini atau kirimkan pesan melalui formulir.</p>
-                    
-                    <div className="grid lg:grid-cols-5 gap-12">
-                        <ContactInfoSection />
+                <div className="py-16 bg-white dark:bg-gray-900">
+                    <div className="container mx-auto px-6">
+                        <h1 className="text-4xl font-bold text-center mb-4 text-emerald-green dark:text-emerald-400">Hubungi Kami</h1>
+                        <p className="text-center text-gray-600 dark:text-gray-300 mb-12 max-w-2xl mx-auto">Kami siap membantu Anda. Silakan hubungi kami melalui informasi di bawah ini atau kirimkan pesan melalui formulir.</p>
+                        
+                        <div className="grid lg:grid-cols-5 gap-12">
+                            <ContactInfoSection />
 
-                        <div className="lg:col-span-3 bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md">
-                            <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6 border-b-2 border-emerald-green dark:border-emerald-500 pb-2">Kirim Pesan</h2>
-                            <ContactForm />
+                            <div className="lg:col-span-3 bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md">
+                                <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6 border-b-2 border-emerald-green dark:border-emerald-500 pb-2">Kirim Pesan</h2>
+                                <ContactForm />
+                            </div>
                         </div>
                     </div>
                 </div>
