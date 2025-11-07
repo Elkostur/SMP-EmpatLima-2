@@ -53,14 +53,14 @@ const HeroForm: React.FC<HeroFormProps> = ({ item, onSave, onCancel, onDataChang
 
         if (imageFile) {
             finalImageUrl = await uploadImage(imageFile, setUploadProgress);
-        } else if (!item?.id) { // Changed condition: check for item.id
+        } else if (!item?.id) { // Jika ini item baru dan tidak ada gambar yang diunggah, gunakan placeholder
             finalImageUrl = `https://picsum.photos/seed/${Date.now()}/1920/1080`;
         }
 
         const heroData = { title, subtitle, imageUrl: finalImageUrl };
         let savedItem: HeroImage;
 
-        if (item && item.id) { // Changed condition: check for item.id
+        if (item && item.id) { // Periksa secara eksplisit item.id untuk update
             savedItem = await updateHeroImage(item.id, heroData);
         } else {
             savedItem = await addHeroImage(heroData as Omit<HeroImage, 'id'>);

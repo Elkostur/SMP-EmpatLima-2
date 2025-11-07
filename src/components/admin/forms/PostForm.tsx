@@ -53,15 +53,14 @@ const PostForm: React.FC<PostFormProps> = ({ item, onSave, onCancel, onDataChang
 
         if (imageFile) {
             finalImageUrl = await uploadImage(imageFile, setUploadProgress);
-        } else if (!item?.id) { // Changed condition: check for item.id
-            // Jika ini adalah postingan baru dan tidak ada gambar yang diunggah, gunakan placeholder
+        } else if (!item?.id) { // Jika ini item baru dan tidak ada gambar yang diunggah, gunakan placeholder
             finalImageUrl = `https://picsum.photos/seed/${Date.now()}/800/600`;
         }
 
         const postData = { title, content, imageUrl: finalImageUrl };
         let savedItem: Post;
 
-        if (item && item.id) { // Changed condition: check for item.id
+        if (item && item.id) { // Periksa secara eksplisit item.id untuk update
             savedItem = await updatePost(item.id, postData);
         } else {
             savedItem = await addPost(postData as Omit<Post, 'id' | 'createdAt'>);

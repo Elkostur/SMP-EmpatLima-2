@@ -53,14 +53,14 @@ const FacilityForm: React.FC<FacilityFormProps> = ({ item, onSave, onCancel, onD
 
         if (imageFile) {
             finalImageUrl = await uploadImage(imageFile, setUploadProgress);
-        } else if (!item?.id) { // Changed condition: check for item.id
+        } else if (!item?.id) { // Jika ini item baru dan tidak ada gambar yang diunggah, gunakan placeholder
             finalImageUrl = `https://picsum.photos/seed/${Date.now()}/600/400`;
         }
         
         const facilityData = { name, description, imageUrl: finalImageUrl };
         let savedItem: Facility;
 
-        if (item && item.id) { // Changed condition: check for item.id
+        if (item && item.id) { // Periksa secara eksplisit item.id untuk update
             savedItem = await updateFacility(item.id, facilityData);
         } else {
             savedItem = await addFacility(facilityData as Omit<Facility, 'id'>);

@@ -60,14 +60,14 @@ const AchievementForm: React.FC<AchievementFormProps> = ({ item, onSave, onCance
 
         if (imageFile) {
             finalImageUrl = await uploadImage(imageFile, setUploadProgress);
-        } else if (!item?.id) { // Changed condition: check for item.id
+        } else if (!item?.id) { // Jika ini item baru dan tidak ada gambar yang diunggah, gunakan placeholder
             finalImageUrl = `https://picsum.photos/seed/${Date.now()}/800/600`;
         }
 
         const achievementData = { title, description, date, imageUrl: finalImageUrl };
         let savedItem: Achievement;
 
-        if (item && item.id) { // Changed condition: check for item.id
+        if (item && item.id) { // Periksa secara eksplisit item.id untuk update
             savedItem = await updateAchievement(item.id, achievementData);
         } else {
             savedItem = await addAchievement(achievementData);

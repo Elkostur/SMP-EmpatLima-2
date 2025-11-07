@@ -53,14 +53,14 @@ const ExtracurricularForm: React.FC<ExtracurricularFormProps> = ({ item, onSave,
 
         if (imageFile) {
             finalImageUrl = await uploadImage(imageFile, setUploadProgress);
-        } else if (!item?.id) { // Changed condition: check for item.id
+        } else if (!item?.id) { // Jika ini item baru dan tidak ada gambar yang diunggah, gunakan placeholder
             finalImageUrl = `https://picsum.photos/seed/${Date.now()}/800/600`;
         }
         
         const extracurricularData = { name, description, imageUrl: finalImageUrl };
         let savedItem: Extracurricular;
 
-        if (item && item.id) { // Changed condition: check for item.id
+        if (item && item.id) { // Periksa secara eksplisit item.id untuk update
             savedItem = await updateExtracurricular(item.id, extracurricularData);
         } else {
             savedItem = await addExtracurricular(extracurricularData as Omit<Extracurricular, 'id'>);

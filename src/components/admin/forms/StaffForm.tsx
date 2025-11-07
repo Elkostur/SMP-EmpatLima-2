@@ -95,14 +95,14 @@ const StaffForm: React.FC<StaffFormProps> = ({ item, onSave, onCancel, onDataCha
 
         if (imageFile) {
             finalImageUrl = await uploadImage(imageFile, setUploadProgress);
-        } else if (!item?.id) { // Changed condition: check for item.id
+        } else if (!item?.id) { // Jika ini item baru dan tidak ada gambar yang diunggah, gunakan placeholder
             finalImageUrl = `https://picsum.photos/seed/${Date.now()}/400/400`;
         }
 
         const staffData = { name, position, bio, nuptk, address, religion, email, phone, imageUrl: finalImageUrl || '' };
         let savedItem: StaffMember;
 
-        if (item && item.id) { // Changed condition: check for item.id
+        if (item && item.id) { // Periksa secara eksplisit item.id untuk update
             savedItem = await updateStaffMember(item.id, staffData);
         } else {
             savedItem = await addStaffMember(staffData);

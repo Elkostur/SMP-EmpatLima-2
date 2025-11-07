@@ -34,7 +34,7 @@ const FaqForm: React.FC<FaqFormProps> = ({ item, onSave, onCancel, onDataChange 
         const faqData = { question, answer };
         let savedItem: FaqItem;
 
-        if (item && item.id) { // Changed condition: check for item.id
+        if (item && item.id) { // Periksa secara eksplisit item.id untuk update
             savedItem = await updateFaq(item.id, faqData);
         } else {
             savedItem = await addFaq(faqData);
