@@ -61,7 +61,7 @@ const PrincipalWelcome: React.FC = () => {
       ref={sectionRef}
       className="relative py-16 mt-[-10rem] md:mt-[-12rem] lg:mt-[-10rem] z-10"
     >
-      <div className={`container mx-auto px-6 transition-all duration-700 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
+      <div className={`container mx-auto px-6 transition-all duration-700 ease-out opacity-0 translate-y-5 ${isVisible ? 'opacity-100 translate-y-0' : ''}`}>
         <div className="bg-white dark:bg-gray-800 p-8 md:p-12 rounded-xl shadow-2xl">
             <div className="flex flex-col md:flex-row items-center gap-8">
               <img 
