@@ -59,7 +59,6 @@ const AdminRegistrations: React.FC = () => {
                                 <th className="p-4 text-gray-600 dark:text-gray-300">Parent Name</th>
                                 <th className="p-4 text-gray-600 dark:text-gray-300">Phone</th>
                                 <th className="p-4 text-gray-600 dark:text-gray-300">Email</th>
-                                <th className="p-4 text-gray-600 dark:text-gray-300">Document</th>
                                 <th className="p-4 text-gray-600 dark:text-gray-300">Actions</th>
                             </tr>
                         </thead>
@@ -73,15 +72,6 @@ const AdminRegistrations: React.FC = () => {
                                     <td className="p-4 text-sm text-gray-600 dark:text-gray-400">{item.parentName}</td>
                                     <td className="p-4 text-sm text-gray-600 dark:text-gray-400">{item.phone}</td>
                                     <td className="p-4 text-sm text-gray-600 dark:text-gray-400">{item.email}</td>
-                                    <td className="p-4 text-sm">
-                                        {item.documentUrl ? (
-                                            <a href={item.documentUrl} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">
-                                                View
-                                            </a>
-                                        ) : (
-                                            <span className="text-gray-400">-</span>
-                                        )}
-                                    </td>
                                     <td className="p-4">
                                         <button onClick={() => handleDeleteClick(item)} className="text-red-500 hover:underline text-sm">Delete</button>
                                     </td>
