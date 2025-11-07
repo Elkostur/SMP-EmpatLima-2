@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { getGalleries } from '../../../src/services/supabase/galleries';
+import { getGalleries } = from '../../../src/services/supabase/galleries';
 import type { GalleryItem } from '../../../types'; // Jalur diperbarui
 import { Link } from 'react-router-dom';
 import useIntersectionObserver from '../../../src/hooks/useIntersectionObserver'; // Import hook
@@ -37,7 +37,7 @@ const GallerySection: React.FC = () => {
                 ) : (
                 <div 
                     ref={sectionRef}
-                    className={`grid grid-cols-2 md:grid-cols-3 gap-4 mb-12 transition-all duration-700 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-[20px]'}`}
+                    className={`grid grid-cols-2 md:grid-cols-3 gap-4 mb-12 transform transition-all duration-700 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-[20px]'}`}
                 >
                     {items.map((item, index) => (
                         <div key={item.id} className={`overflow-hidden rounded-lg shadow-md ${index === 0 ? 'col-span-2 row-span-2' : ''}`}>
