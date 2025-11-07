@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { getPosts } from '../../../src/services/supabase/posts';
 import type { Post } from '../../../types'; // Jalur diperbarui
 import { Link } from 'react-router-dom';
+import useIntersectionObserver from '../../../src/hooks/useIntersectionObserver'; // Import hook
 
 const PostCard: React.FC<{ post: Post }> = ({ post }) => (
     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
@@ -18,6 +19,9 @@ const PostCard: React.FC<{ post: Post }> = ({ post }) => (
 const LatestNews: React.FC = () => {
     const [posts, setPosts] = useState<Post[]>([]);
     const [loading, setLoading] = useState(true);
+
+    const sectionRef = useRef<HTMLDivElement>(null);
+    const isVisible = useIntersectionObserver(sectionRef, { threshold: 0.1, triggerOnce: true });
 
     useEffect(() => {
         const fetchPosts = async () => {
@@ -43,7 +47,10 @@ const LatestNews: React.FC = () => {
                 {loading ? (
                     <p className="text-center dark:text-gray-300">Memuat berita...</p>
                 ) : (
-                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+                    <div 
+                        ref={sectionRef}
+                        className={`grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12 transition-all duration-700 ${isVisible ? 'animate-fadeInUp' : 'opacity-0 translate-y-4'}`}
+                    >
                         {posts.map(post => <PostCard key={post.id} post={post} />)}
                     </div>
                 )}

@@ -1,11 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { getStaff } from '../../../src/services/supabase/staff';
 import type { StaffMember } from '../../../types'; // Jalur diperbarui
 import { Link } from 'react-router-dom';
+import useIntersectionObserver from '../../../src/hooks/useIntersectionObserver'; // Import hook
 
 const TeamSection: React.FC = () => {
     const [staff, setStaff] = useState<StaffMember[]>([]);
     const [loading, setLoading] = useState(true);
+
+    const sectionRef = useRef<HTMLDivElement>(null);
+    const isVisible = useIntersectionObserver(sectionRef, { threshold: 0.1, triggerOnce: true });
 
     useEffect(() => {
         const fetchStaff = async () => {
@@ -31,7 +35,10 @@ const TeamSection: React.FC = () => {
                 {loading ? (
                     <p className="text-center">Memuat tim...</p>
                 ) : (
-                    <div className="grid md:grid-cols-3 gap-8 mb-12">
+                    <div 
+                        ref={sectionRef}
+                        className={`grid md:grid-cols-3 gap-8 mb-12 transition-all duration-700 ${isVisible ? 'animate-fadeInUp' : 'opacity-0 translate-y-4'}`}
+                    >
                         {staff.map(member => (
                             <div key={member.id} className="text-center">
                                 <img src={member.imageUrl} alt={member.name} className="w-32 h-32 rounded-full mx-auto mb-4 object-cover ring-4 ring-emerald-200 dark:ring-emerald-700" />

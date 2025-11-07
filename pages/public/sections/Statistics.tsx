@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { getStatistics } from '../../../src/services/supabase/statistics';
 import type { Statistic } from '../../../types'; // Jalur diperbarui
+import useIntersectionObserver from '../../../src/hooks/useIntersectionObserver'; // Import hook
 
 const StatItem: React.FC<{ value: string; label: string }> = ({ value, label }) => (
     <div className="text-center">
@@ -19,6 +20,9 @@ const LoadingStatItem: React.FC = () => (
 const Statistics: React.FC = () => {
     const [stats, setStats] = useState<Statistic[]>([]);
     const [loading, setLoading] = useState(true);
+
+    const sectionRef = useRef<HTMLDivElement>(null);
+    const isVisible = useIntersectionObserver(sectionRef, { threshold: 0.1, triggerOnce: true });
 
     useEffect(() => {
         const fetchStats = async () => {
@@ -39,7 +43,10 @@ const Statistics: React.FC = () => {
         <section id="stats" className="bg-emerald-green py-16">
             <div className="container mx-auto px-6">
                 <h2 className="text-3xl font-bold text-center mb-10 text-white">Statistik Sekolah Kami</h2> {/* Added main title */}
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div 
+                    ref={sectionRef}
+                    className={`grid grid-cols-2 md:grid-cols-4 gap-8 transition-all duration-700 ${isVisible ? 'animate-fadeInUp' : 'opacity-0 translate-y-4'}`}
+                >
                     {loading ? (
                         <>
                            <LoadingStatItem />

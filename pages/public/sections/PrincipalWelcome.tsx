@@ -1,11 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { getAboutPageContent } from '../../../src/services/supabase/aboutPageContent';
 import type { AboutPageContent } from '../../../types';
+import useIntersectionObserver from '../../../src/hooks/useIntersectionObserver'; // Import hook
 
 const PrincipalWelcome: React.FC = () => {
   const [content, setContent] = useState<AboutPageContent['principalWelcome'] | null>(null);
   const [loading, setLoading] = useState(true);
+
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const isVisible = useIntersectionObserver(sectionRef, { threshold: 0.1, triggerOnce: true });
 
   useEffect(() => {
     const fetchContent = async () => {
@@ -55,7 +59,8 @@ const PrincipalWelcome: React.FC = () => {
 
   return (
     <section 
-      className="relative py-16 mt-[-10rem] md:mt-[-12rem] lg:mt-[-10rem] z-10"
+      ref={sectionRef}
+      className={`relative py-16 mt-[-10rem] md:mt-[-12rem] lg:mt-[-10rem] z-10 transition-all duration-700 ${isVisible ? 'animate-fadeInUp' : 'opacity-0 translate-y-4'}`}
     >
       <div className="container mx-auto px-6">
         <div className="bg-white dark:bg-gray-800 p-8 md:p-12 rounded-xl shadow-2xl">

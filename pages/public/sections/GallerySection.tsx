@@ -1,11 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { getGalleries } from '../../../src/services/supabase/galleries';
 import type { GalleryItem } from '../../../types'; // Jalur diperbarui
 import { Link } from 'react-router-dom';
+import useIntersectionObserver from '../../../src/hooks/useIntersectionObserver'; // Import hook
 
 const GallerySection: React.FC = () => {
     const [items, setItems] = useState<GalleryItem[]>([]);
     const [loading, setLoading] = useState(true);
+
+    const sectionRef = useRef<HTMLDivElement>(null);
+    const isVisible = useIntersectionObserver(sectionRef, { threshold: 0.1, triggerOnce: true });
 
     useEffect(() => {
         const fetchItems = async () => {
@@ -31,7 +35,10 @@ const GallerySection: React.FC = () => {
                  {loading ? (
                     <p className="text-center dark:text-gray-300">Memuat galeri...</p>
                 ) : (
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-12">
+                <div 
+                    ref={sectionRef}
+                    className={`grid grid-cols-2 md:grid-cols-3 gap-4 mb-12 transition-all duration-700 ${isVisible ? 'animate-fadeInUp' : 'opacity-0 translate-y-4'}`}
+                >
                     {items.map((item, index) => (
                         <div key={item.id} className={`overflow-hidden rounded-lg shadow-md ${index === 0 ? 'col-span-2 row-span-2' : ''}`}>
                             <img src={item.imageUrl} alt={item.title} className="w-full h-full object-cover transform hover:scale-110 transition-transform duration-500" />

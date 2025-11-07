@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { getFaqs } from '../../../src/services/supabase/faqs';
 import type { FaqItem } from '../../../types'; // Jalur diperbarui
+import useIntersectionObserver from '../../../src/hooks/useIntersectionObserver'; // Import hook
 
 const AccordionItem: React.FC<{
   item: FaqItem;
@@ -34,6 +35,9 @@ const FaqSection: React.FC = () => {
     const [loading, setLoading] = useState(true);
     const [openIndex, setOpenIndex] = useState<number | null>(0);
 
+    const sectionRef = useRef<HTMLDivElement>(null);
+    const isVisible = useIntersectionObserver(sectionRef, { threshold: 0.1, triggerOnce: true });
+
     useEffect(() => {
         const fetchItems = async () => {
             try {
@@ -62,7 +66,10 @@ const FaqSection: React.FC = () => {
                 {loading ? (
                     <p className="text-center dark:text-gray-300">Memuat FAQ...</p>
                 ) : (
-                    <div className="max-w-3xl mx-auto bg-white dark:bg-gray-800 rounded-lg shadow-md">
+                    <div 
+                        ref={sectionRef}
+                        className={`max-w-3xl mx-auto bg-white dark:bg-gray-800 rounded-lg shadow-md transition-all duration-700 ${isVisible ? 'animate-fadeInUp' : 'opacity-0 translate-y-4'}`}
+                    >
                         {items.map((item, index) => (
                             <AccordionItem 
                                 key={item.id}

@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { getAchievements } from '../../../src/services/supabase/achievements';
 import type { Achievement } from '../../../types'; // Jalur diperbarui
 import { Link } from 'react-router-dom';
+import useIntersectionObserver from '../../../src/hooks/useIntersectionObserver'; // Import hook
 
 const AchievementCard: React.FC<{ item: Achievement }> = ({ item }) => (
     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
@@ -20,6 +21,9 @@ const AchievementCard: React.FC<{ item: Achievement }> = ({ item }) => (
 const LatestAchievements: React.FC = () => {
     const [items, setItems] = useState<Achievement[]>([]);
     const [loading, setLoading] = useState(true);
+
+    const sectionRef = useRef<HTMLDivElement>(null);
+    const isVisible = useIntersectionObserver(sectionRef, { threshold: 0.1, triggerOnce: true });
 
     useEffect(() => {
         const fetchItems = async () => {
@@ -47,7 +51,10 @@ const LatestAchievements: React.FC = () => {
                 {loading ? (
                     <p className="text-center dark:text-gray-300">Loading achievements...</p>
                 ) : (
-                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+                    <div 
+                        ref={sectionRef}
+                        className={`grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12 transition-all duration-700 ${isVisible ? 'animate-fadeInUp' : 'opacity-0 translate-y-4'}`}
+                    >
                         {items.map(item => <AchievementCard key={item.id} item={item} />)}
                     </div>
                 )}
