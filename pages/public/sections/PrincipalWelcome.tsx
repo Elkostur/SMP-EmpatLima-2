@@ -23,7 +23,7 @@ const PrincipalWelcome: React.FC = () => {
 
   if (loading) {
     return (
-        <section className="relative py-16 mt-[-10rem] md:mt-[-12rem] lg:mt-[-10rem] z-10">
+        <section className="relative py-16 mt-8 md:mt-[-12rem] lg:mt-[-10rem] z-10"> {/* Adjusted mt- for mobile */}
              <div className="container mx-auto px-6">
                  <div className="bg-white dark:bg-gray-800 p-8 md:p-12 rounded-xl shadow-2xl">
                     <div className="animate-pulse flex flex-col md:flex-row items-center gap-8">
@@ -55,7 +55,7 @@ const PrincipalWelcome: React.FC = () => {
 
   return (
     <section 
-      className="relative py-16 mt-[-10rem] md:mt-[-12rem] lg:mt-[-10rem] z-10"
+      className="relative py-16 mt-8 md:mt-[-12rem] lg:mt-[-10rem] z-10" // Adjusted mt- for mobile
     >
       <div className="container mx-auto px-6">
         <div 
