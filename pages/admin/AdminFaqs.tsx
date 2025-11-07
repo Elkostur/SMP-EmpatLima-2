@@ -26,16 +26,9 @@ const AdminFaqs: React.FC = () => {
     }, [fetchItems]);
 
     const handleItemSaved = useCallback((savedItem: FaqItem, originalItem?: FaqItem) => {
-        setItems(prevItems => {
-            if (originalItem) {
-                // Update existing item
-                return prevItems.map(item => item.id === savedItem.id ? savedItem : item);
-            } else {
-                // Add new item
-                return [savedItem, ...prevItems];
-            }
-        });
-    }, []);
+        // Instead of directly manipulating state, re-fetch all items to ensure consistency
+        fetchItems();
+    }, [fetchItems]);
 
     const handleDeleteClick = (item: FaqItem) => {
         setItemToDelete(item);
@@ -45,7 +38,7 @@ const AdminFaqs: React.FC = () => {
     const handleConfirmDelete = async () => {
         if (itemToDelete) {
             await deleteFaq(itemToDelete.id);
-            setItems(prevItems => prevItems.filter(item => item.id !== itemToDelete.id));
+            fetchItems(); // Re-fetch after deletion
         }
         setIsConfirmModalOpen(false);
         setItemToDelete(null);

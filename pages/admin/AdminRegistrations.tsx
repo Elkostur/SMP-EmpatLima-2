@@ -32,7 +32,7 @@ const AdminRegistrations: React.FC = () => {
     const handleConfirmDelete = async () => {
         if (itemToDelete) {
             await deleteRegistration(itemToDelete.id);
-            fetchItems();
+            fetchItems(); // Re-fetch after deletion
         }
         setIsConfirmModalOpen(false);
         setItemToDelete(null);

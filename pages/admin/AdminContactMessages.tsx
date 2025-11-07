@@ -32,7 +32,7 @@ const AdminContactMessages: React.FC = () => {
     const handleConfirmDelete = async () => {
         if (itemToDelete) {
             await deleteContactMessage(itemToDelete.id);
-            fetchItems();
+            fetchItems(); // Re-fetch after deletion
             if (selectedMessage?.id === itemToDelete.id) {
                 setSelectedMessage(null);
             }

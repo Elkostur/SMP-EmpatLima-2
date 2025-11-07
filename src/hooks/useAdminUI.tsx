@@ -55,16 +55,6 @@ export const AdminUIProvider: React.FC<{ children: ReactNode }> = ({ children })
           data: savedState.data, // This is where the form's data will be restored from
           onItemSaved: undefined, // Do not restore callback from localStorage
         });
-        // Ensure URL params are also set if restoring from localStorage
-        const newSearchParams = new URLSearchParams(searchParams);
-        newSearchParams.set('formType', savedState.type);
-        if (savedState.data && savedState.data.id) {
-            newSearchParams.set('itemId', savedState.data.id);
-        } else if (savedState.data) { // For new items, if data is provided (e.g., default values)
-            newSearchParams.set('itemData', encodeURIComponent(JSON.stringify(savedState.data)));
-            newSearchParams.set('itemId', 'new'); // Indicate it's a new item
-        }
-        setSearchParams(newSearchParams, { replace: true });
       } else {
         // If saved state is for a different path, clear it
         localStorage.removeItem('adminFormState');
@@ -72,7 +62,7 @@ export const AdminUIProvider: React.FC<{ children: ReactNode }> = ({ children })
     }
   }, [location.pathname]); // Only run on initial mount or path change
 
-  // Effect to update localStorage and URL when currentFormState changes
+  // Effect to update localStorage when currentFormState changes
   useEffect(() => {
     if (currentFormState.type) {
       // Store only serializable data
@@ -81,35 +71,34 @@ export const AdminUIProvider: React.FC<{ children: ReactNode }> = ({ children })
         data: currentFormState.data,
         path: location.pathname,
       }));
-      const newSearchParams = new URLSearchParams(searchParams);
-      newSearchParams.set('formType', currentFormState.type);
-      if (currentFormState.data && currentFormState.data.id) {
-        newSearchParams.set('itemId', currentFormState.data.id);
-      } else if (currentFormState.data) {
-        newSearchParams.set('itemData', encodeURIComponent(JSON.stringify(currentFormState.data)));
-        newSearchParams.set('itemId', 'new');
-      } else {
-        newSearchParams.delete('itemId');
-        newSearchParams.delete('itemData');
-      }
-      setSearchParams(newSearchParams, { replace: true });
     } else {
       localStorage.removeItem('adminFormState');
-      const newSearchParams = new URLSearchParams(searchParams);
-      newSearchParams.delete('formType');
-      newSearchParams.delete('itemId');
-      newSearchParams.delete('itemData');
-      setSearchParams(newSearchParams, { replace: true });
     }
-  }, [currentFormState, location.pathname, searchParams, setSearchParams]); // Depend on currentFormState, path, and searchParams
+  }, [currentFormState, location.pathname]); // Depend on currentFormState and path
 
   const openForm = useCallback((type: FormType, data: any = null, onItemSavedCallback?: (savedItem: any, originalItem?: any) => void) => {
     setCurrentFormState({ type, data, onItemSaved: onItemSavedCallback });
-  }, []);
+    // Update URL search params when opening the form
+    const newSearchParams = new URLSearchParams(searchParams);
+    newSearchParams.set('formType', type);
+    if (data && data.id) {
+      newSearchParams.set('itemId', data.id);
+    } else {
+      newSearchParams.delete('itemId');
+    }
+    newSearchParams.delete('itemData'); // Clear itemData from URL as it's now in localStorage
+    setSearchParams(newSearchParams, { replace: true });
+  }, [searchParams, setSearchParams]);
 
   const closeForm = useCallback(() => {
     setCurrentFormState({ type: null, data: null, onItemSaved: undefined });
-  }, []);
+    // Clear URL search params when closing the form
+    const newSearchParams = new URLSearchParams(searchParams);
+    newSearchParams.delete('formType');
+    newSearchParams.delete('itemId');
+    newSearchParams.delete('itemData');
+    setSearchParams(newSearchParams, { replace: true });
+  }, [searchParams, setSearchParams]);
 
   // New handler to update form data in currentFormState
   const handleFormContentChange = useCallback((newData: any) => {

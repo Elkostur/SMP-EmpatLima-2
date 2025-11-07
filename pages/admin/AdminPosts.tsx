@@ -27,16 +27,9 @@ const AdminPosts: React.FC = () => {
     }, [fetchPosts]);
 
     const handleItemSaved = useCallback((savedItem: Post, originalItem?: Post) => {
-        setPosts(prevPosts => {
-            if (originalItem) {
-                // Update existing item
-                return prevPosts.map(post => post.id === savedItem.id ? savedItem : post);
-            } else {
-                // Add new item
-                return [savedItem, ...prevPosts];
-            }
-        });
-    }, []);
+        // Instead of directly manipulating state, re-fetch all items to ensure consistency
+        fetchPosts();
+    }, [fetchPosts]);
 
     const handleDeleteClick = (post: Post) => {
         setItemToDelete(post);
@@ -46,7 +39,7 @@ const AdminPosts: React.FC = () => {
     const handleConfirmDelete = async () => {
         if (itemToDelete) {
             await deletePost(itemToDelete.id);
-            setPosts(prevPosts => prevPosts.filter(post => post.id !== itemToDelete.id));
+            fetchPosts(); // Re-fetch after deletion
         }
         setIsConfirmModalOpen(false);
         setItemToDelete(null);

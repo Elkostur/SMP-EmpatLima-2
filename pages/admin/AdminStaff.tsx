@@ -26,16 +26,9 @@ const AdminStaff: React.FC = () => {
     }, [fetchStaff]);
 
     const handleItemSaved = useCallback((savedItem: StaffMember, originalItem?: StaffMember) => {
-        setStaff(prevStaff => {
-            if (originalItem) {
-                // Update existing item
-                return prevStaff.map(member => member.id === savedItem.id ? savedItem : member);
-            } else {
-                // Add new item
-                return [savedItem, ...prevStaff];
-            }
-        });
-    }, []);
+        // Instead of directly manipulating state, re-fetch all items to ensure consistency
+        fetchStaff();
+    }, [fetchStaff]);
 
     const handleDeleteClick = (member: StaffMember) => {
         setItemToDelete(member);
@@ -45,7 +38,7 @@ const AdminStaff: React.FC = () => {
     const handleConfirmDelete = async () => {
         if (itemToDelete) {
             await deleteStaffMember(itemToDelete.id);
-            setStaff(prevStaff => prevStaff.filter(member => member.id !== itemToDelete.id));
+            fetchStaff(); // Re-fetch after deletion
         }
         setIsConfirmModalOpen(false);
         setItemToDelete(null);
