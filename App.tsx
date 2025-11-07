@@ -28,13 +28,15 @@ import AdminContactMessages from './pages/admin/AdminContactMessages';
 import AllAchievementsPage from './pages/public/AllAchievementsPage';
 import AdminAchievements from './pages/admin/AdminAchievements';
 import AdminContactInfo from './pages/admin/AdminContactInfo';
-import AdminAddUser from './pages/admin/AdminAddUser'; // Import the new component
+import AdminAddUser from './pages/admin/AdminAddUser';
+import ScrollToTop from './src/components/ScrollToTop'; // Import the new component
 
 function App() {
   return (
     <ThemeProvider>
       <AuthProvider>
         <HashRouter>
+          <ScrollToTop /> {/* Add ScrollToTop component here */}
           <Routes>
             {/* Public Routes */}
             <Route path="/" element={<HomePage />} />
@@ -65,7 +67,7 @@ function App() {
               <Route path="registrations" element={<AdminRegistrations />} />
               <Route path="messages" element={<AdminContactMessages />} />
               <Route path="contact-info" element={<AdminContactInfo />} />
-              <Route path="add-user" element={<AdminAddUser />} /> {/* New route for adding admin users */}
+              <Route path="add-user" element={<AdminAddUser />} />
             </Route>
           </Routes>
         </HashRouter>
