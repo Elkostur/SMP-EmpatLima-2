@@ -25,7 +25,7 @@ const Footer: React.FC = () => {
   return (
     <footer className="bg-gray-800 dark:bg-black text-white py-12">
       <div className="container mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 border-b border-gray-700 dark:border-gray-700 pb-8 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 border-b border-gray-700 dark:border-gray-800 pb-8 mb-8">
           {/* Section 1: School Name / Branding */}
           <div>
             <h3 className="text-xl font-bold text-emerald-green dark:text-emerald-400 mb-4">

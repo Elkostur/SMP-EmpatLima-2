@@ -50,19 +50,19 @@ const ContactForm: React.FC = () => {
         <form onSubmit={handleSubmit} className="space-y-6">
             <div>
                 <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Nama Lengkap</label>
-                <input type="text" name="name" id="name" value={formData.name} onChange={handleInputChange} required className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 bg-white text-gray-900 dark:bg-gray-700 dark:border-gray-600" />
+                <input type="text" name="name" id="name" value={formData.name} onChange={handleInputChange} required className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 bg-white text-gray-900 dark:bg-gray-800 dark:border-gray-700" />
             </div>
             <div>
                 <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Alamat Email</label>
-                <input type="email" name="email" id="email" value={formData.email} onChange={handleInputChange} required className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 bg-white text-gray-900 dark:bg-gray-700 dark:border-gray-600" />
+                <input type="email" name="email" id="email" value={formData.email} onChange={handleInputChange} required className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 bg-white text-gray-900 dark:bg-gray-800 dark:border-gray-700" />
             </div>
             <div>
                 <label htmlFor="subject" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Subjek</label>
-                <input type="text" name="subject" id="subject" value={formData.subject} onChange={handleInputChange} required className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 bg-white text-gray-900 dark:bg-gray-700 dark:border-gray-600" />
+                <input type="text" name="subject" id="subject" value={formData.subject} onChange={handleInputChange} required className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 bg-white text-gray-900 dark:bg-gray-800 dark:border-gray-700" />
             </div>
             <div>
                 <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Pesan</label>
-                <textarea name="message" id="message" rows={4} value={formData.message} onChange={handleInputChange} required className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 bg-white text-gray-900 dark:bg-gray-700 dark:border-gray-600"></textarea>
+                <textarea name="message" id="message" rows={4} value={formData.message} onChange={handleInputChange} required className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 bg-white text-gray-900 dark:bg-gray-800 dark:border-gray-700"></textarea>
             </div>
             {error && <p className="text-red-500 text-sm text-center">{error}</p>}
             <div className="text-left">
@@ -95,13 +95,13 @@ const ContactInfoSection: React.FC = () => {
     if (loading) {
         return (
              <div className="lg:col-span-2 space-y-8">
-                <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md animate-pulse">
+                <div className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-md animate-pulse">
                     <div className="h-6 w-3/4 bg-gray-200 dark:bg-gray-700 rounded mb-4"></div>
                     <div className="h-4 w-full bg-gray-200 dark:bg-gray-700 rounded mb-2"></div>
                     <div className="h-4 w-5/6 bg-gray-200 dark:bg-gray-700 rounded mb-2"></div>
                     <div className="h-4 w-full bg-gray-200 dark:bg-gray-700 rounded"></div>
                 </div>
-                 <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden animate-pulse">
+                 <div className="bg-white dark:bg-gray-900 rounded-lg shadow-md overflow-hidden animate-pulse">
                     <div className="h-6 w-1/2 bg-gray-200 dark:bg-gray-700 rounded p-6"></div>
                     <div className="w-full h-64 bg-gray-200 dark:bg-gray-700"></div>
                  </div>
@@ -113,7 +113,7 @@ const ContactInfoSection: React.FC = () => {
 
     return (
         <div className="lg:col-span-2 space-y-8">
-            <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
+            <div className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-md">
                 <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">Informasi Kontak</h2>
                 <div className="space-y-4 text-gray-700 dark:text-gray-300">
                     <p><strong>Alamat:</strong> {info.address}</p>
@@ -121,7 +121,7 @@ const ContactInfoSection: React.FC = () => {
                     <p><strong>Email:</strong> {info.email}</p>
                 </div>
             </div>
-             <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
+             <div className="bg-white dark:bg-gray-900 rounded-lg shadow-md overflow-hidden">
                 <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 p-6">Peta Lokasi</h2>
                 <img src={info.mapImageUrl} alt="Peta Lokasi Sekolah" className="w-full h-64 object-cover" />
              </div>
@@ -142,7 +142,7 @@ const ContactPage: React.FC = () => {
                     <div className="grid lg:grid-cols-5 gap-12">
                         <ContactInfoSection />
 
-                        <div className="lg:col-span-3 bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md">
+                        <div className="lg:col-span-3 bg-white dark:bg-gray-900 p-8 rounded-lg shadow-md">
                             <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6 border-b-2 border-emerald-green dark:border-emerald-500 pb-2">Kirim Pesan</h2>
                             <ContactForm />
                         </div>

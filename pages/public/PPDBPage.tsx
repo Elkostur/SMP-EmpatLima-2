@@ -81,27 +81,27 @@ const RegistrationForm: React.FC = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
           <label htmlFor="fullName" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Nama Lengkap Siswa</label>
-          <input type="text" name="fullName" id="fullName" value={formData.fullName} onChange={handleInputChange} required className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 bg-white text-gray-900 dark:bg-gray-700 dark:border-gray-600" />
+          <input type="text" name="fullName" id="fullName" value={formData.fullName} onChange={handleInputChange} required className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 bg-white text-gray-900 dark:bg-gray-800 dark:border-gray-700" />
         </div>
         <div>
           <label htmlFor="birthDate" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Tanggal Lahir</label>
-          <input type="date" name="birthDate" id="birthDate" value={formData.birthDate} onChange={handleInputChange} required className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 bg-white text-gray-900 dark:bg-gray-700 dark:border-gray-600" />
+          <input type="date" name="birthDate" id="birthDate" value={formData.birthDate} onChange={handleInputChange} required className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 bg-white text-gray-900 dark:bg-gray-800 dark:border-gray-700" />
         </div>
         <div>
           <label htmlFor="previousSchool" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Asal Sekolah (SD/MI)</label>
-          <input type="text" name="previousSchool" id="previousSchool" value={formData.previousSchool} onChange={handleInputChange} required className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 bg-white text-gray-900 dark:bg-gray-700 dark:border-gray-600" />
+          <input type="text" name="previousSchool" id="previousSchool" value={formData.previousSchool} onChange={handleInputChange} required className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 bg-white text-gray-900 dark:bg-gray-800 dark:border-gray-700" />
         </div>
         <div>
           <label htmlFor="parentName" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Nama Orang Tua/Wali</label>
-          <input type="text" name="parentName" id="parentName" value={formData.parentName} onChange={handleInputChange} required className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 bg-white text-gray-900 dark:bg-gray-700 dark:border-gray-600" />
+          <input type="text" name="parentName" id="parentName" value={formData.parentName} onChange={handleInputChange} required className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 bg-white text-gray-900 dark:bg-gray-800 dark:border-gray-700" />
         </div>
         <div>
           <label htmlFor="phone" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Nomor Telepon/WA</label>
-          <input type="tel" name="phone" id="phone" value={formData.phone} onChange={handleInputChange} required className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 bg-white text-gray-900 dark:bg-gray-700 dark:border-gray-600" />
+          <input type="tel" name="phone" id="phone" value={formData.phone} onChange={handleInputChange} required className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 bg-white text-gray-900 dark:bg-gray-800 dark:border-gray-700" />
         </div>
         <div>
           <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Alamat Email</label>
-          <input type="email" name="email" id="email" value={formData.email} onChange={handleInputChange} required className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 bg-white text-gray-900 dark:bg-gray-700 dark:border-gray-600" />
+          <input type="email" name="email" id="email" value={formData.email} onChange={handleInputChange} required className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 bg-white text-gray-900 dark:bg-gray-800 dark:border-gray-700" />
         </div>
       </div>
       <div>
@@ -130,13 +130,13 @@ const PPDBPage: React.FC = () => {
           <p className="text-center text-gray-600 dark:text-gray-300 mb-12 max-w-2xl mx-auto">Bergabunglah dengan komunitas kami dan mulailah perjalanan belajar Anda. Silakan isi formulir di bawah ini untuk mendaftar.</p>
           
           <div className="grid lg:grid-cols-3 gap-12">
-            <div className="lg:col-span-2 bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md">
+            <div className="lg:col-span-2 bg-white dark:bg-gray-900 p-8 rounded-lg shadow-md">
                 <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6 border-b-2 border-emerald-green dark:border-emerald-500 pb-2">Formulir Pendaftaran</h2>
                 <RegistrationForm />
             </div>
 
             <div className="space-y-8">
-              <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
+              <div className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-md">
                 <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">Jadwal Penting</h2>
                 <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300 text-sm">
                   <li><strong>Pendaftaran Online:</strong> 1 Juni - 30 Juni</li>
@@ -145,7 +145,7 @@ const PPDBPage: React.FC = () => {
                   <li><strong>Daftar Ulang:</strong> 11 Juli - 15 Juli</li>
                 </ul>
               </div>
-              <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
+              <div className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-md">
                 <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">Syarat Pendaftaran</h2>
                 <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300 text-sm">
                   <li>Scan Ijazah Terakhir</li>

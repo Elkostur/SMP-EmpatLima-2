@@ -4,7 +4,7 @@ import type { Achievement } from '../../../types'; // Jalur diperbarui
 import { Link } from 'react-router-dom';
 
 const AchievementCard: React.FC<{ item: Achievement }> = ({ item }) => (
-    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
+    <div className="bg-white dark:bg-gray-900 rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
         <img src={item.imageUrl} alt={item.title} className="w-full h-48 object-cover" loading="lazy" />
         <div className="p-6">
             <h3 className="text-xl font-bold mb-2 text-gray-800 dark:text-gray-100">{item.title}</h3>
@@ -38,7 +38,7 @@ const LatestAchievements: React.FC = () => {
     if (items.length === 0 && !loading) return null;
 
     return (
-        <section id="achievements" className="py-16 bg-white dark:bg-gray-800">
+        <section id="achievements" className="py-16 bg-white dark:bg-black">
             <div className="container mx-auto px-6">
                 <h2 className="text-3xl font-bold text-center mb-10 text-gray-800 dark:text-gray-100">Prestasi Terbaru</h2>
                 {loading ? (

@@ -50,7 +50,7 @@ const PostDetailPage: React.FC = () => {
         }
 
         return (
-            <article className="max-w-4xl mx-auto bg-white dark:bg-gray-800 rounded-lg shadow-xl overflow-hidden">
+            <article className="max-w-4xl mx-auto bg-white dark:bg-gray-900 rounded-lg shadow-xl overflow-hidden">
                 <img src={post.imageUrl} alt={post.title} className="w-full h-64 md:h-96 object-cover" />
                 <div className="p-6 md:p-10">
                     <h1 className="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-gray-100 mb-3">{post.title}</h1>
@@ -62,7 +62,7 @@ const PostDetailPage: React.FC = () => {
                             <p key={index}>{paragraph}</p>
                         ))}
                     </div>
-                     <div className="mt-10 border-t dark:border-gray-700 pt-6">
+                     <div className="mt-10 border-t dark:border-gray-800 pt-6">
                         <Link to="/posts" className="text-emerald-green dark:text-emerald-400 font-semibold hover:underline">
                             &larr; Back to All News
                         </Link>

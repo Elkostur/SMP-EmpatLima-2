@@ -22,7 +22,7 @@ const GallerySection: React.FC = () => {
     }, []);
 
     return (
-        <section id="gallery" className="py-16 bg-white dark:bg-gray-800">
+        <section id="gallery" className="py-16 bg-white dark:bg-black">
             <div className="container mx-auto px-6">
                 <h2 className="text-3xl font-bold text-center mb-10 text-gray-800 dark:text-gray-100">Our Gallery</h2>
                  {loading ? (

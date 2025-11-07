@@ -62,9 +62,9 @@ const AboutPage: React.FC = () => {
         </div>
 
         {/* Principal Welcome Section */}
-        <section className="py-16 bg-white dark:bg-gray-800">
+        <section className="py-16 bg-white dark:bg-gray-900">
           <div className="container mx-auto px-6">
-            <div className="flex flex-col md:flex-row items-center gap-12 bg-gray-50 dark:bg-gray-900 p-8 rounded-xl shadow-lg">
+            <div className="flex flex-col md:flex-row items-center gap-12 bg-gray-50 dark:bg-black p-8 rounded-xl shadow-lg">
               <img 
                 src={principalWelcome.imageUrl} 
                 alt={principalWelcome.name}
@@ -94,12 +94,12 @@ const AboutPage: React.FC = () => {
         </section>
 
         {/* Core Values Section */}
-        <section className="py-16 bg-gray-100 dark:bg-gray-900">
+        <section className="py-16 bg-gray-100 dark:bg-black">
             <div className="container mx-auto px-6">
                 <h2 className="text-3xl font-bold text-center mb-10 text-gray-800 dark:text-gray-100">Nilai-Nilai Inti Kami</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {coreValues.map(value => (
-                        <div key={value.title} className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
+                        <div key={value.title} className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-md">
                             <h3 className="text-xl font-bold text-emerald-green dark:text-emerald-400 mb-2">{value.title}</h3>
                             <p className="text-gray-600 dark:text-gray-300">{value.description}</p>
                         </div>
