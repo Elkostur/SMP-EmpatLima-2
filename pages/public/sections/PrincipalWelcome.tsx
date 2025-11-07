@@ -60,7 +60,7 @@ const PrincipalWelcome: React.FC = () => {
   return (
     <section 
       ref={sectionRef}
-      className={`relative py-16 mt-[-10rem] md:mt-[-12rem] lg:mt-[-10rem] z-10 opacity-0 translate-y-4 ${isVisible ? 'animate-fadeInUp' : ''}`}
+      className={`relative py-16 mt-[-10rem] md:mt-[-12rem] lg:mt-[-10rem] z-10 ${isVisible ? 'animate-fadeInUp' : 'opacity-0 translate-y-4'}`}
     >
       <div className="container mx-auto px-6">
         <div className="bg-white dark:bg-gray-800 p-8 md:p-12 rounded-xl shadow-2xl">

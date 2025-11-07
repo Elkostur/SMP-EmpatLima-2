@@ -37,7 +37,7 @@ const GallerySection: React.FC = () => {
                 ) : (
                 <div 
                     ref={sectionRef}
-                    className={`grid grid-cols-2 md:grid-cols-3 gap-4 mb-12 opacity-0 translate-y-4 ${isVisible ? 'animate-fadeInUp' : ''}`}
+                    className={`grid grid-cols-2 md:grid-cols-3 gap-4 mb-12 ${isVisible ? 'animate-fadeInUp' : 'opacity-0 translate-y-4'}`}
                 >
                     {items.map((item, index) => (
                         <div key={item.id} className={`overflow-hidden rounded-lg shadow-md ${index === 0 ? 'col-span-2 row-span-2' : ''}`}>
