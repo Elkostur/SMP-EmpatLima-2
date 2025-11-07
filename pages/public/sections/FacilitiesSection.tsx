@@ -48,7 +48,7 @@ const FacilitiesSection: React.FC = () => {
                 ) : (
                     <div 
                         ref={sectionRef}
-                        className={`grid md:grid-cols-2 lg:grid-cols-4 gap-8 opacity-0 translate-y-[20px] ${isVisible ? 'animate-fadeInUp' : ''}`}
+                        className={`grid md:grid-cols-2 lg:grid-cols-4 gap-8 ${isVisible ? 'opacity-100 translate-y-0 animate-fadeInUp' : 'opacity-0 translate-y-[20px]'}`}
                     >
                         {items.map(item => <FacilityCard key={item.id} item={item} />)}
                     </div>

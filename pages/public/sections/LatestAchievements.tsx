@@ -53,7 +53,7 @@ const LatestAchievements: React.FC = () => {
                 ) : (
                     <div 
                         ref={sectionRef}
-                        className={`grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12 opacity-0 translate-y-[20px] ${isVisible ? 'animate-fadeInUp' : ''}`}
+                        className={`grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12 ${isVisible ? 'opacity-100 translate-y-0 animate-fadeInUp' : 'opacity-0 translate-y-[20px]'}`}
                     >
                         {items.map(item => <AchievementCard key={item.id} item={item} />)}
                     </div>
