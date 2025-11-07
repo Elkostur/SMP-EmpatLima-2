@@ -5,8 +5,7 @@ import useTitle from '../../hooks/useTitle';
 import { addContactMessage } from '../../src/services/supabase/contactMessages'; // Jalur diperbarui
 import { getContactInfo } from '../../src/services/supabase/contactInfo'; // Jalur diperbarui
 import type { ContactInfo } from '../../types';
-
-// Komponen ContactForm telah dihapus sesuai permintaan.
+import ContactForm from '../../src/components/ContactForm'; // Mengimpor komponen formulir kontak yang baru
 
 const ContactInfoSection: React.FC = () => {
     const [info, setInfo] = useState<ContactInfo | null>(null);
@@ -77,10 +76,9 @@ const ContactPage: React.FC = () => {
                         <div className="grid lg:grid-cols-5 gap-12">
                             <ContactInfoSection />
 
-                            <div className="lg:col-span-3 bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md flex items-center justify-center">
-                                <p className="text-gray-600 dark:text-gray-300 text-lg text-center">
-                                    Formulir kontak telah dihapus. Silakan hubungi kami melalui informasi di samping.
-                                </p>
+                            <div className="lg:col-span-3 bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md">
+                                <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6 border-b-2 border-emerald-green dark:border-emerald-500 pb-2">Kirim Pesan</h2>
+                                <ContactForm />
                             </div>
                         </div>
                     </div>
