@@ -1,8 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { getAchievements } from '../../../src/services/supabase/achievements';
 import type { Achievement } from '../../../types'; // Jalur diperbarui
 import { Link } from 'react-router-dom';
-import useIntersectionObserver from '../../../src/hooks/useIntersectionObserver';
 
 const AchievementCard: React.FC<{ item: Achievement }> = ({ item }) => (
     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
@@ -21,8 +20,6 @@ const AchievementCard: React.FC<{ item: Achievement }> = ({ item }) => (
 const LatestAchievements: React.FC = () => {
     const [items, setItems] = useState<Achievement[]>([]);
     const [loading, setLoading] = useState(true);
-    const sectionRef = useRef<HTMLDivElement>(null);
-    const isVisible = useIntersectionObserver(sectionRef);
 
     useEffect(() => {
         const fetchItems = async () => {
@@ -42,9 +39,8 @@ const LatestAchievements: React.FC = () => {
 
     return (
         <section 
-            ref={sectionRef}
             id="achievements" 
-            className={`py-16 bg-white dark:bg-gray-900 transition-all duration-700 ease-out opacity-0 translate-y-5 ${isVisible ? 'opacity-100 translate-y-0' : ''}`}
+            className="py-16 bg-white dark:bg-gray-900"
         >
             <div className="container mx-auto px-6">
                 <h2 className="text-3xl font-bold text-center mb-10 text-gray-800 dark:text-gray-100">Prestasi Terbaru</h2>

@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { getFacilities } from '../../../src/services/supabase/facilities';
 import type { Facility } from '../../../types'; // Jalur diperbarui
-import useIntersectionObserver from '../../../src/hooks/useIntersectionObserver';
 
 const FacilityCard: React.FC<{ item: Facility }> = ({ item }) => (
     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 flex flex-col">
@@ -18,8 +17,6 @@ const FacilityCard: React.FC<{ item: Facility }> = ({ item }) => (
 const FacilitiesSection: React.FC = () => {
     const [items, setItems] = useState<Facility[]>([]);
     const [loading, setLoading] = useState(true);
-    const sectionRef = useRef<HTMLDivElement>(null);
-    const isVisible = useIntersectionObserver(sectionRef);
 
     useEffect(() => {
         const fetchItems = async () => {
@@ -37,9 +34,8 @@ const FacilitiesSection: React.FC = () => {
 
     return (
         <section 
-            ref={sectionRef}
             id="facilities" 
-            className={`py-16 bg-gray-100 dark:bg-gray-900 transition-all duration-700 ease-out opacity-0 translate-y-5 ${isVisible ? 'opacity-100 translate-y-0' : ''}`}
+            className="py-16 bg-gray-100 dark:bg-gray-900"
         >
             <div className="container mx-auto px-6">
                 <h2 className="text-3xl font-bold text-center mb-10 text-gray-800 dark:text-gray-100">Fasilitas Sekolah</h2>
