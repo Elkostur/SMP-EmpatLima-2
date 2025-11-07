@@ -5,16 +5,24 @@ import { uploadImage } from '../../../services/supabase/storage';
 
 interface GalleryFormProps {
     item: GalleryItem | null; 
-    onSave: (savedItem: GalleryItem) => void; // Changed signature
+    onSave: (savedItem: GalleryItem) => void;
     onCancel: () => void; 
+    onDataChange: (newData: Partial<GalleryItem>) => void; // New prop
 }
 
-const GalleryForm: React.FC<GalleryFormProps> = ({ item, onSave, onCancel }) => {
+const GalleryForm: React.FC<GalleryFormProps> = ({ item, onSave, onCancel, onDataChange }) => {
     const [title, setTitle] = useState(item?.title || '');
     const [imageFile, setImageFile] = useState<File | null>(null);
     const [previewUrl, setPreviewUrl] = useState<string | null>(item?.imageUrl || null);
     const [isUploading, setIsUploading] = useState(false);
     const [uploadProgress, setUploadProgress] = useState(0);
+
+    // Update local state and notify parent on change
+    const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value;
+        setTitle(value);
+        onDataChange({ title: value });
+    };
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files[0]) {
@@ -23,6 +31,7 @@ const GalleryForm: React.FC<GalleryFormProps> = ({ item, onSave, onCancel }) => 
             const reader = new FileReader();
             reader.onloadend = () => {
                 setPreviewUrl(reader.result as string);
+                onDataChange({ imageUrl: reader.result as string }); // Update preview URL in parent state
             };
             reader.readAsDataURL(file);
         }
@@ -61,7 +70,7 @@ const GalleryForm: React.FC<GalleryFormProps> = ({ item, onSave, onCancel }) => 
                 <form onSubmit={handleSubmit}>
                     <div className="mb-4">
                         <label className="block text-gray-700 dark:text-gray-200 font-bold mb-2">Title</label>
-                        <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} className="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white" required />
+                        <input type="text" value={title} onChange={handleTitleChange} className="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white" required />
                     </div>
                     <div className="mb-6">
                         <label className="block text-gray-700 dark:text-gray-200 font-bold mb-2">Image</label>

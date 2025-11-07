@@ -5,11 +5,12 @@ import { uploadImage } from '../../../services/supabase/storage';
 
 interface AchievementFormProps {
     item: Achievement | null; 
-    onSave: (savedItem: Achievement) => void; // Changed signature
+    onSave: (savedItem: Achievement) => void;
     onCancel: () => void; 
+    onDataChange: (newData: Partial<Achievement>) => void; // New prop
 }
 
-const AchievementForm: React.FC<AchievementFormProps> = ({ item, onSave, onCancel }) => {
+const AchievementForm: React.FC<AchievementFormProps> = ({ item, onSave, onCancel, onDataChange }) => {
     const [title, setTitle] = useState(item?.title || '');
     const [description, setDescription] = useState(item?.description || '');
     const [date, setDate] = useState(item?.date || '');
@@ -18,6 +19,25 @@ const AchievementForm: React.FC<AchievementFormProps> = ({ item, onSave, onCance
     const [isUploading, setIsUploading] = useState(false);
     const [uploadProgress, setUploadProgress] = useState(0);
 
+    // Update local state and notify parent on change
+    const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value;
+        setTitle(value);
+        onDataChange({ title: value });
+    };
+
+    const handleDescriptionChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+        const value = e.target.value;
+        setDescription(value);
+        onDataChange({ description: value });
+    };
+
+    const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value;
+        setDate(value);
+        onDataChange({ date: value });
+    };
+
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files[0]) {
             const file = e.target.files[0];
@@ -25,6 +45,7 @@ const AchievementForm: React.FC<AchievementFormProps> = ({ item, onSave, onCance
             const reader = new FileReader();
             reader.onloadend = () => {
                 setPreviewUrl(reader.result as string);
+                onDataChange({ imageUrl: reader.result as string }); // Update preview URL in parent state
             };
             reader.readAsDataURL(file);
         }
@@ -64,15 +85,15 @@ const AchievementForm: React.FC<AchievementFormProps> = ({ item, onSave, onCance
                     <div className="space-y-4">
                         <div>
                             <label className="block text-gray-700 dark:text-gray-200 font-bold mb-2">Title</label>
-                            <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} className="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white" required />
+                            <input type="text" value={title} onChange={handleTitleChange} className="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white" required />
                         </div>
                         <div>
                             <label className="block text-gray-700 dark:text-gray-200 font-bold mb-2">Date</label>
-                            <input type="date" value={date} onChange={(e) => setDate(e.target.value)} className="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white" required />
+                            <input type="date" value={date} onChange={handleDateChange} className="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white" required />
                         </div>
                         <div>
                             <label className="block text-gray-700 dark:text-gray-200 font-bold mb-2">Description</label>
-                            <textarea value={description} onChange={(e) => setDescription(e.target.value)} className="w-full p-2 border rounded h-40 bg-white text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white" required></textarea>
+                            <textarea value={description} onChange={handleDescriptionChange} className="w-full p-2 border rounded h-40 bg-white text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white" required></textarea>
                         </div>
                         <div>
                             <label className="block text-gray-700 dark:text-gray-200 font-bold mb-2">Image</label>

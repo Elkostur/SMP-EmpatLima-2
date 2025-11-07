@@ -52,7 +52,7 @@ export const AdminUIProvider: React.FC<{ children: ReactNode }> = ({ children })
       if (savedState.path === location.pathname) {
         setCurrentFormState({
           type: savedState.type,
-          data: savedState.data,
+          data: savedState.data, // This is where the form's data will be restored from
           onItemSaved: undefined, // Do not restore callback from localStorage
         });
         // Ensure URL params are also set if restoring from localStorage
@@ -111,6 +111,14 @@ export const AdminUIProvider: React.FC<{ children: ReactNode }> = ({ children })
     setCurrentFormState({ type: null, data: null, onItemSaved: undefined });
   }, []);
 
+  // New handler to update form data in currentFormState
+  const handleFormContentChange = useCallback((newData: any) => {
+    setCurrentFormState(prevState => ({
+      ...prevState,
+      data: { ...prevState.data, ...newData }
+    }));
+  }, []);
+
   const renderFormModal = () => {
     if (!currentFormState.type) return null;
 
@@ -126,6 +134,7 @@ export const AdminUIProvider: React.FC<{ children: ReactNode }> = ({ children })
       item: currentFormState.data,
       onCancel: closeForm,
       onSave: handleFormSave,
+      onDataChange: handleFormContentChange, // Pass the new handler
     };
 
     switch (currentFormState.type) {

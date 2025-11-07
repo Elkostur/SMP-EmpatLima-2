@@ -5,11 +5,12 @@ import { uploadImage } from '../../../services/supabase/storage';
 
 interface StaffFormProps {
     item: StaffMember | null; 
-    onSave: (savedItem: StaffMember) => void; // Changed signature
+    onSave: (savedItem: StaffMember) => void;
     onCancel: () => void; 
+    onDataChange: (newData: Partial<StaffMember>) => void; // New prop
 }
 
-const StaffForm: React.FC<StaffFormProps> = ({ item, onSave, onCancel }) => {
+const StaffForm: React.FC<StaffFormProps> = ({ item, onSave, onCancel, onDataChange }) => {
     const [name, setName] = useState(item?.name || '');
     const [position, setPosition] = useState(item?.position || '');
     const [bio, setBio] = useState(item?.bio || '');
@@ -23,6 +24,55 @@ const StaffForm: React.FC<StaffFormProps> = ({ item, onSave, onCancel }) => {
     const [isUploading, setIsUploading] = useState(false);
     const [uploadProgress, setUploadProgress] = useState(0);
 
+    // Update local state and notify parent on change
+    const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value;
+        setName(value);
+        onDataChange({ name: value });
+    };
+
+    const handlePositionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value;
+        setPosition(value);
+        onDataChange({ position: value });
+    };
+
+    const handleBioChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+        const value = e.target.value;
+        setBio(value);
+        onDataChange({ bio: value });
+    };
+
+    const handleNuptkChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value;
+        setNuptk(value);
+        onDataChange({ nuptk: value });
+    };
+
+    const handleAddressChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value;
+        setAddress(value);
+        onDataChange({ address: value });
+    };
+
+    const handleReligionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value;
+        setReligion(value);
+        onDataChange({ religion: value });
+    };
+
+    const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value;
+        setEmail(value);
+        onDataChange({ email: value });
+    };
+
+    const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value;
+        setPhone(value);
+        onDataChange({ phone: value });
+    };
+
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files[0]) {
             const file = e.target.files[0];
@@ -30,6 +80,7 @@ const StaffForm: React.FC<StaffFormProps> = ({ item, onSave, onCancel }) => {
             const reader = new FileReader();
             reader.onloadend = () => {
                 setPreviewUrl(reader.result as string);
+                onDataChange({ imageUrl: reader.result as string }); // Update preview URL in parent state
             };
             reader.readAsDataURL(file);
         }
@@ -70,38 +121,38 @@ const StaffForm: React.FC<StaffFormProps> = ({ item, onSave, onCancel }) => {
                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <label className="block text-gray-700 dark:text-gray-200 font-bold mb-2">Full Name</label>
-                                <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white" required />
+                                <input type="text" value={name} onChange={handleNameChange} className="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white" required />
                             </div>
                             <div>
                                 <label className="block text-gray-700 dark:text-gray-200 font-bold mb-2">Position</label>
-                                <input type="text" value={position} onChange={(e) => setPosition(e.target.value)} className="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white" required />
+                                <input type="text" value={position} onChange={handlePositionChange} className="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white" required />
                             </div>
                          </div>
                         <div>
                             <label className="block text-gray-700 dark:text-gray-200 font-bold mb-2">Bio</label>
-                            <textarea value={bio} onChange={(e) => setBio(e.target.value)} className="w-full p-2 border rounded h-24 bg-white text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white" required></textarea>
+                            <textarea value={bio} onChange={handleBioChange} className="w-full p-2 border rounded h-24 bg-white text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white" required></textarea>
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                              <div>
                                 <label className="block text-gray-700 dark:text-gray-200 font-bold mb-2">NUPTK</label>
-                                <input type="text" value={nuptk} onChange={(e) => setNuptk(e.target.value)} className="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white" />
+                                <input type="text" value={nuptk} onChange={handleNuptkChange} className="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white" />
                             </div>
                             <div>
                                 <label className="block text-gray-700 dark:text-gray-200 font-bold mb-2">Agama</label>
-                                <input type="text" value={religion} onChange={(e) => setReligion(e.target.value)} className="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white" />
+                                <input type="text" value={religion} onChange={handleReligionChange} className="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white" />
                             </div>
                              <div>
                                 <label className="block text-gray-700 dark:text-gray-200 font-bold mb-2">Email</label>
-                                <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white" />
+                                <input type="email" value={email} onChange={handleEmailChange} className="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white" />
                             </div>
                              <div>
                                 <label className="block text-gray-700 dark:text-gray-200 font-bold mb-2">Telepon</label>
-                                <input type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} className="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white" />
+                                <input type="tel" value={phone} onChange={handlePhoneChange} className="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white" />
                             </div>
                         </div>
                          <div>
                             <label className="block text-gray-700 dark:text-gray-200 font-bold mb-2">Alamat</label>
-                            <input type="text" value={address} onChange={(e) => setAddress(e.target.value)} className="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white" />
+                            <input type="text" value={address} onChange={handleAddressChange} className="w-full p-2 border rounded bg-white text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white" />
                         </div>
                         <div>
                             <label className="block text-gray-700 dark:text-gray-200 font-bold mb-2">Image</label>
