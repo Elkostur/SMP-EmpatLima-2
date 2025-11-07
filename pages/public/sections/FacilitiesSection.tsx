@@ -3,7 +3,7 @@ import { getFacilities } from '../../../src/services/supabase/facilities';
 import type { Facility } from '../../../types'; // Jalur diperbarui
 
 const FacilityCard: React.FC<{ item: Facility }> = ({ item }) => (
-    <div className="bg-white dark:bg-gray-900 rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 flex flex-col">
+    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 flex flex-col">
         <div className="relative h-56">
             <img src={item.imageUrl} alt={item.name} className="w-full h-full object-cover" />
         </div>
@@ -33,7 +33,7 @@ const FacilitiesSection: React.FC = () => {
     }, []);
 
     return (
-        <section id="facilities" className="py-16 bg-gray-100 dark:bg-black">
+        <section id="facilities" className="py-16 bg-gray-100 dark:bg-gray-900">
             <div className="container mx-auto px-6">
                 <h2 className="text-3xl font-bold text-center mb-10 text-gray-800 dark:text-gray-100">Fasilitas Sekolah</h2>
                 {loading ? (

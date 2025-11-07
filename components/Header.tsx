@@ -8,11 +8,11 @@ const Header: React.FC = () => {
   const desktopNavLinkClass = "pb-1 text-gray-600 dark:text-gray-300 transition-colors duration-200 border-b-2 border-transparent hover:text-emerald-green hover:border-emerald-green dark:hover:text-emerald-400 dark:hover:border-emerald-400";
   const desktopActiveNavLinkClass = "text-emerald-green border-emerald-green dark:text-emerald-400 dark:border-emerald-400";
   
-  const mobileNavLinkClass = "block py-2 px-3 rounded-md text-base font-medium text-gray-700 dark:text-gray-200 hover:bg-emerald-50 hover:text-emerald-green dark:hover:bg-gray-800 dark:hover:text-emerald-400";
-  const mobileActiveNavLinkClass = "bg-emerald-100 text-emerald-green dark:bg-gray-800 dark:text-emerald-400";
+  const mobileNavLinkClass = "block py-2 px-3 rounded-md text-base font-medium text-gray-700 dark:text-gray-200 hover:bg-emerald-50 hover:text-emerald-green dark:hover:bg-gray-700 dark:hover:text-emerald-400";
+  const mobileActiveNavLinkClass = "bg-emerald-100 text-emerald-green dark:bg-gray-700 dark:text-emerald-400";
 
   return (
-    <header className="bg-white dark:bg-black shadow-md sticky top-0 z-50 dark:border-b dark:border-gray-800">
+    <header className="bg-white dark:bg-gray-800 shadow-md sticky top-0 z-50">
       <nav className="container mx-auto px-6 py-4">
         <div className="flex justify-between items-center">
           <Link to="/" className="text-xl font-bold text-emerald-green dark:text-emerald-400" onClick={() => setIsMobileMenuOpen(false)}>
