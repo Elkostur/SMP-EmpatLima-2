@@ -7,9 +7,16 @@ import useIntersectionObserver from '../../../src/hooks/useIntersectionObserver'
 const GallerySection: React.FC = () => {
     const [items, setItems] = useState<GalleryItem[]>([]);
     const [loading, setLoading] = useState(true);
+    const [hasEnteredViewport, setHasEnteredViewport] = useState(false); // State baru untuk mengontrol animasi
 
     const sectionRef = useRef<HTMLDivElement>(null);
-    const isVisible = useIntersectionObserver(sectionRef, { threshold: 0.1, triggerOnce: true });
+    const isIntersecting = useIntersectionObserver(sectionRef, { threshold: 0.1, triggerOnce: true });
+
+    useEffect(() => {
+      if (isIntersecting && !hasEnteredViewport) {
+        setHasEnteredViewport(true);
+      }
+    }, [isIntersecting, hasEnteredViewport]);
 
     useEffect(() => {
         const fetchItems = async () => {
@@ -37,7 +44,7 @@ const GallerySection: React.FC = () => {
                 ) : (
                 <div 
                     ref={sectionRef}
-                    className={`grid grid-cols-2 md:grid-cols-3 gap-4 mb-12 transform transition-all duration-700 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-[20px]'}`}
+                    className={`grid grid-cols-2 md:grid-cols-3 gap-4 mb-12 transform transition-all duration-700 ease-out ${hasEnteredViewport ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-[20px]'}`}
                 >
                     {items.map((item, index) => (
                         <div key={item.id} className={`overflow-hidden rounded-lg shadow-md ${index === 0 ? 'col-span-2 row-span-2' : ''}`}>
