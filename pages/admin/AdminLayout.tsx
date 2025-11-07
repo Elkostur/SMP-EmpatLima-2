@@ -101,7 +101,7 @@ const AdminLayout: React.FC = () => {
                 </header>
                 
                 <div className="flex-1 flex flex-col">
-                    <main className="flex-1 p-4 md:p-8 overflow-y-auto">
+                    <main className="flex-1 p-4 md:p-8 overflow-y-auto animate-fadeInUp">
                         <Outlet />
                     </main>
                     <footer className="bg-gray-100 dark:bg-black p-4 text-center text-sm text-gray-500 dark:text-gray-400">

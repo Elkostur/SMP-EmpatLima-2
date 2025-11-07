@@ -134,7 +134,7 @@ const ContactPage: React.FC = () => {
     return (
         <div className="flex flex-col min-h-screen bg-gray-50 dark:bg-black">
             <Header />
-            <main className="flex-grow">
+            <main className="flex-grow animate-fadeInUp">
                 <div className="py-16 bg-white dark:bg-gray-900">
                     <div className="container mx-auto px-6">
                         <h1 className="text-4xl font-bold text-center mb-4 text-emerald-green dark:text-emerald-400">Hubungi Kami</h1>
