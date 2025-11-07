@@ -21,13 +21,9 @@ export const uploadImage = async (file: File, onProgress?: (progress: number) =>
     // Use the converted file for upload
     const filePath = `public/${Date.now()}-${sanitizedFileName}`;
     
-    // Note: Supabase Storage upload API does not natively support progress tracking 
-    // in the browser environment without custom implementation (e.g., using XHR/fetch directly).
-    // We will simulate progress completion for consistency if a callback is provided.
-
     const { data, error } = await supabase.storage
-        .from('images') // Ganti dengan nama bucket Supabase Storage Anda
-        .upload(filePath, webpFile, { // Use webpFile here
+        .from('images') // Bucket untuk admin
+        .upload(filePath, webpFile, {
             cacheControl: '3600',
             upsert: false,
         });
@@ -42,6 +38,37 @@ export const uploadImage = async (file: File, onProgress?: (progress: number) =>
 
     if (!publicUrlData || !publicUrlData.publicUrl) {
         throw new Error('Failed to get public URL for uploaded image.');
+    }
+
+    if (onProgress) {
+        onProgress(100);
+    }
+
+    return publicUrlData.publicUrl;
+};
+
+// Fungsi baru khusus untuk unggahan dokumen publik (PPDB)
+export const uploadDocument = async (file: File, onProgress?: (progress: number) => void): Promise<string> => {
+    const sanitizedFileName = sanitizeFileName(file.name);
+    const filePath = `public/${Date.now()}-${sanitizedFileName}`;
+
+    const { data, error } = await supabase.storage
+        .from('documents') // Bucket baru untuk dokumen publik
+        .upload(filePath, file, {
+            cacheControl: '3600',
+            upsert: false,
+        });
+
+    if (error) {
+        throw new Error(`Failed to upload document: ${error.message}`);
+    }
+
+    const { data: publicUrlData } = supabase.storage
+        .from('documents')
+        .getPublicUrl(filePath);
+
+    if (!publicUrlData || !publicUrlData.publicUrl) {
+        throw new Error('Failed to get public URL for uploaded document.');
     }
 
     if (onProgress) {

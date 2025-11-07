@@ -1,6 +1,6 @@
 import { supabase } from '../../integrations/supabase/client';
-import { uploadImage } from './storage';
-import type { Registration } from '../../../types'; // Jalur diperbarui
+import { uploadDocument } from './storage'; // Menggunakan fungsi baru
+import type { Registration } from '../../../types';
 
 export const getRegistrations = async (): Promise<Registration[]> => {
     const { data, error } = await supabase
@@ -28,16 +28,15 @@ export const addRegistration = async (
 ): Promise<Registration> => {
     let documentUrl: string | undefined = undefined;
     if (documentFile) {
-        documentUrl = await uploadImage(documentFile); 
+        // Menggunakan fungsi uploadDocument yang baru dan lebih aman
+        documentUrl = await uploadDocument(documentFile); 
     }
 
-    // Periksa apakah ada pengguna yang login. Jika tidak, user_id akan null.
     const { data: { user } } = await supabase.auth.getUser();
 
     const { data: newItem, error } = await supabase
         .from('registrations')
         .insert({
-            // Secara eksplisit mengatur user_id. Ini akan menjadi null untuk pengguna anonim.
             user_id: user ? user.id : null,
             full_name: data.fullName,
             birth_date: data.birthDate,
