@@ -1,4 +1,4 @@
-import { useState, useEffect, RefObject } from 'react';
+import { useState, useEffect, RefObject, useCallback } from 'react';
 
 interface ObserverOptions {
   threshold?: number;
@@ -10,7 +10,19 @@ const useIntersectionObserver = (
   ref: RefObject<HTMLElement>,
   options: ObserverOptions = { threshold: 0.1, triggerOnce: true }
 ): boolean => {
-  const [isVisible, setIsVisible] = useState(false);
+  // Calculate initial visibility once
+  const getInitialVisibility = useCallback(() => {
+    if (!ref.current) return false;
+    const rect = ref.current.getBoundingClientRect();
+    return (
+      rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
+      rect.left <= (window.innerWidth || document.documentElement.clientWidth) &&
+      rect.bottom >= 0 &&
+      rect.right >= 0
+    );
+  }, [ref]);
+
+  const [isVisible, setIsVisible] = useState(getInitialVisibility);
 
   useEffect(() => {
     const element = ref.current;
@@ -18,29 +30,15 @@ const useIntersectionObserver = (
         return;
     }
 
-    // Initial check for visibility on mount
-    const checkInitialVisibility = () => {
-      const rect = element.getBoundingClientRect();
-      const inViewport = (
-        rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
-        rect.left <= (window.innerWidth || document.documentElement.clientWidth) &&
-        rect.bottom >= 0 &&
-        rect.right >= 0
-      );
-      if (inViewport) {
-        setIsVisible(true);
-      }
-    };
-    checkInitialVisibility(); // Run once on mount
-
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
+        // Only update if the state actually changes to avoid unnecessary re-renders
+        if (entry.isIntersecting && !isVisible) { // If it becomes visible and wasn't before
           setIsVisible(true);
           if (options.triggerOnce) {
             observer.unobserve(element);
           }
-        } else if (!options.triggerOnce) { // Only set to false if not triggerOnce
+        } else if (!entry.isIntersecting && isVisible && !options.triggerOnce) { // If it leaves view and we want to re-animate
           setIsVisible(false);
         }
       },
@@ -50,16 +48,17 @@ const useIntersectionObserver = (
       }
     );
 
-    // Only observe if not already visible (or if triggerOnce is false)
-    // This prevents re-observing if it was already visible and triggerOnce is true
-    if (!isVisible || !options.triggerOnce) {
-        observer.observe(element);
+    // If triggerOnce is true and it's already visible, no need to observe
+    if (options.triggerOnce && isVisible) {
+        return;
     }
+
+    observer.observe(element);
 
     return () => {
       observer.disconnect();
     };
-  }, [ref, options.threshold, options.rootMargin, options.triggerOnce, isVisible]); // isVisible in dependencies to ensure re-evaluation if initial check changes it
+  }, [ref, options.threshold, options.rootMargin, options.triggerOnce, isVisible]);
 
   return isVisible;
 };
