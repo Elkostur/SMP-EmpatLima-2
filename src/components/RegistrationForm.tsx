@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { addRegistration } from '../src/services/supabase/registrations';
+import { addRegistration } from '@/src/services/supabase/registrations'; // Jalur impor diperbaiki
 import type { Registration } from '../types';
 
 type RegistrationFormData = Omit<Registration, 'id' | 'createdAt'>;
